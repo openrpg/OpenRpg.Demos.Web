@@ -17,6 +17,7 @@ namespace OpenRpg.Demos.Web
 
             builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
             builder.Services.AddModule<OpenRpgModule>();
+            builder.Services.AddModule<OpenRpgDataModule>();
 
             await builder.Build().RunAsync();
         }

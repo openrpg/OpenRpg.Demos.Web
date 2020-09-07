@@ -1,0 +1,132 @@
+﻿@page "/characters/premade-character"
+@using OpenRpg.Genres.Fantasy.Characters
+@using OpenRpg.Genres.Fantasy.Defaults
+@using OpenRpg.Core.Defaults
+@using OpenRpg.Genres.Fantasy.Extensions
+@inject CharacterBuilder CharacterBuilder;
+
+<Markdown>
+    ## Pre-made Character Classes
+    As we have seen so far, there is no notion of a `Character` in the `Core` library.
+
+    However when we reach the `OpenRpg.Fantasy` library we kinda know what sort of character you would have in mind and
+    have an `ICharacter` which is seen as the most bare bones character interface available.
+
+    This character interface can be implemented yourself, or you can just use the `DefaultCharacter` object as shown below.
+
+    ```csharp
+    ICharacter character = new DefaultCharacter();
+    ```
+</Markdown>
+
+<br />
+<div class="columns">
+    <div class="column is-half">
+        <Markdown>
+            ## Populating Character
+            You can set whatever parts of it you want just like the previous character classes we made ourselves,
+            so lets hardcode stuff to see it working.
+
+            ```csharp
+            character.NameLocaleId = "John Doe";
+            character.Race = new DefaultRaceTemplate { NameLocaleId = "Human" };
+            character.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter" });
+            character.Stats = new DefaultEntityStats();
+            character.Stats.MaxHealth(100);
+            character.Stats.Health(50);
+            character.Stats.MaxMagic(10);
+            character.Stats.Magic(7);
+            character.Stats.Strength(11);
+            character.Stats.Dexterity(12);
+            character.Stats.Intelligence(12);
+            character.Stats.Wisdom(18);
+            character.Stats.Charisma(14);
+            character.Stats.PureDamage(10);
+            character.Stats.PureDefense(8);
+            character.Stats.DarkDamage(1);
+            character.Stats.DarkDefense(25);
+            ```
+
+            So as you can see we now have a character, although a bit hardcoded.
+        </Markdown>
+    </div>
+    <div class="column is-half">
+        <BasicCharacter Character="@_manualCharacter"></BasicCharacter>
+    </div>
+</div>
+
+<br />
+<div class="columns">
+    <div class="column is-half">
+        <Markdown>
+            ## Generating Characters (Randomly/Builders)
+            In most real world scenarios you will want something slightly nicer than having to hard code everything, and as we mentioned earlier
+            we ideally want to be using effects to drive the underlying stat values.
+
+            So to achieve this you probably want to come up with a `CharacterBuilder` of sorts, there is something primitive for this in the `infrastructure`
+            section of this project, but as each scenario is different and each data set is different (i.e your races/classes/stats available) its hard to provide
+            an out the box version, but feel free to copy ours if needed.
+
+            With this you would do something like:
+
+            ```csharp
+            var myRandomCharacter = CharacterBuilder.CreateNew().Build(); // Generate Random
+
+            var mySpecificCharacter = CharacterBuilder.CreateNew()
+            .WithName("Fighter McFight Face")
+            .WithRaceId(1) // 1 is human here
+            .WithClassId(1) // 1 is fighter here
+            .WithClassLevels(2) // 2 levels in fighter
+            .AsMale()
+            .Build();
+            ```
+
+            You can mess around and generate your own random character if you want.
+        </Markdown>
+    </div>
+    <div class="column is-half">
+        <a class="button is-info" @onclick="RandomizeCharacter">Generate Random Character</a>
+        <BasicCharacter Character="@_randomCharacter"></BasicCharacter>
+    </div>
+</div>
+
+
+@code {
+    private DefaultCharacter _manualCharacter, _randomCharacter;
+
+    protected override void OnInitialized()
+    {
+        _manualCharacter = new DefaultCharacter();
+        _manualCharacter.NameLocaleId = "John Doe";
+        _manualCharacter.Race = new DefaultRaceTemplate { NameLocaleId = "Human" };
+        _manualCharacter.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter" });
+
+        _manualCharacter.Stats = new DefaultEntityStats();
+        _manualCharacter.Stats.MaxHealth(100);
+        _manualCharacter.Stats.Health(50);
+        _manualCharacter.Stats.MaxMagic(10);
+        _manualCharacter.Stats.Magic(7);
+
+        _manualCharacter.Stats.Strength(11);
+        _manualCharacter.Stats.Dexterity(12);
+        _manualCharacter.Stats.Intelligence(12);
+        _manualCharacter.Stats.Wisdom(18);
+        _manualCharacter.Stats.Charisma(14);
+
+        _manualCharacter.Stats.PureDamage(10);
+        _manualCharacter.Stats.PureDefense(8);
+        _manualCharacter.Stats.DarkDamage(1);
+        _manualCharacter.Stats.DarkDefense(25);
+
+        RandomizeCharacter();
+
+        base.OnInitialized();
+    }
+
+    public void RandomizeCharacter()
+    {
+        _randomCharacter = CharacterBuilder.CreateNew().Build();
+        this.StateHasChanged();
+    }
+
+}

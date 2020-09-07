@@ -5,9 +5,11 @@
         <div class="container">
           @if (Character != null)
           {
-              <CharacterDetails Name="@Character.NameLocaleId" Class="Character.Class" RaceTemplate="Character.Race"></CharacterDetails>
-              <h3 class="title is-4 has-text-dark">Stats</h3>
-              <CharacterStats Stats="@Character.Stats"></CharacterStats>
+              <CharacterDetails Name="@Character.NameLocaleId" RaceTemplate="@Character.Race" Class="@Character.Class" />
+              <br/>
+              <CharacterVitals Stats="@Character.Stats" />
+              <br/>
+              <CharacterStats Stats="@Character.Stats" />
           }
         </div>
     </div>

@@ -1,9 +1,14 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using OpenRpg.Combat.Processors;
+using OpenRpg.Core.Defaults;
+using OpenRpg.Core.Races;
 using OpenRpg.Core.Stats;
 using OpenRpg.Core.Utils;
+using OpenRpg.Data.Defaults;
+using OpenRpg.Data.Repositories;
 using OpenRpg.Demos.Web.Infrastructure.DI;
+using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Data;
 using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Random;
 using OpenRpg.Genres.Fantasy.Combat;
 using OpenRpg.Genres.Fantasy.Defaults;
