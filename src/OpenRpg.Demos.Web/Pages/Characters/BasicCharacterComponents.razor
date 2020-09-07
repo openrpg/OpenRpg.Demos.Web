@@ -1,0 +1,142 @@
+﻿@page "/characters/basic-components"
+@using OpenRpg.Core.Defaults
+@using OpenRpg.Core.Common
+@using OpenRpg.Core.Classes
+@using OpenRpg.Core.Races
+
+ <Markdown>
+   ## Basic Character Components
+   So by default in `OpenRpg.Core` there is no notion of a character, we just have the notion of classes, races, effects etc.
+   
+   So it is generally left up to you to build your character however you see fit, but lets look at the core parts which
+   make up a character and then we can look at how to use them together, or even use existing `ICharacter` types from
+   extension libraries (i.e `OpenRpg.Fantasy`)
+ </Markdown>
+
+<br/>
+<div class="columns">
+  <div class="column is-half">
+    <Markdown>
+      ### A Simple Character
+      If we want to make a simple character all we need to do is think about what makes a character.
+      
+      They would need a name, a race and a class at minimum, so lets go ahead and make a simple character class
+      using the pre-made components within OpenRpg.
+
+      ```csharp
+      class SimpleCharacter : IHasLocaleDescription, IHasClass
+      {
+      public string NameLocaleId { get; set; }
+      public string DescriptionLocaleId { get; set; }
+      public IRaceTemplate Race { get; set; }
+      public IClass Class { get; set; }
+      }
+      ```
+      This is a bit barebones but lets create one of these and see what it looks like using the built in default class/race objects.
+      ```csharp
+      new SimpleCharacter 
+      {
+      NameLocaleId = "Frodo Baggins", // This should ideally be a locale id
+      Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" }, // A hobbit?
+      Class = new DefaultCharacterClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" }) // Closest class I can think of
+      }
+      ```
+    </Markdown>
+  </div>
+  <div class="column is-half">
+    <div class="card with-rounding">
+      <div class="card-content">
+        <CharacterDetails Name="@SimpleExample.NameLocaleId" RaceTemplate="@SimpleExample.Race" Class="@SimpleExample.Class"></CharacterDetails>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="columns">
+  <div class="column is-half">
+    <Markdown>
+      ### BUT I NEED MORE CLASSES?!?!
+      You may have noticed that the level is associated with class and not character. This may seem a bit odd but this 
+      is to account for those scenarios where you may have multi-class scenarios or want to be able to sub class etc.
+      
+      So lets assume our buddy Frodo has got a prestige class of some kind known as *Ring Bearer* and hes leveled up a bit
+      how would our character change to reflect this?
+
+      ```csharp
+      class MultiClassCharacter : IHasLocaleDescription, IHasMultiClass
+      {
+        public string NameLocaleId { get; set; }
+        public string DescriptionLocaleId { get; set; }
+        public IRaceTemplate Race { get; set; }
+        public IEnumerable&lt;IClass&gt; Classes { get; set; }
+      }
+      ```
+      So lets make one of these and see how Frodo has developed
+      ```csharp
+      new MultiClassCharacter 
+      {
+        NameLocaleId = "Frodo Baggins", // This should ideally be a locale id
+        Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" }, // A hobbit?
+        Classes = new[]
+        {
+          new DefaultCharacterClass(2, new DefaultClassTemplate {NameLocaleId = "Fighter"}), // Leveled Up
+          new DefaultCharacterClass(1, new DefaultClassTemplate {NameLocaleId = "Wraith"}), // oh noes
+          new DefaultCharacterClass(4, new DefaultClassTemplate {NameLocaleId = "Ring Bearer"}) // Multi classed
+        }
+      }
+      ```
+      
+      Boom and there we go, we can now see that he has multiple classes assigned.
+      
+      Move onto the stats page for more information on characters.
+    </Markdown>
+  </div>
+  <div class="column is-half">
+    <div class="card with-rounding">
+      <div class="card-content">
+          <CharacterDetails Name="@MultiClassExample.NameLocaleId" RaceTemplate="@MultiClassExample.Race" Classes="@MultiClassExample.Classes"></CharacterDetails>
+      </div>
+    </div>
+  </div>
+</div>
+
+@code {
+
+  public class SimpleCharacter : IHasLocaleDescription, IHasClass
+  {
+    public string NameLocaleId { get; set; }
+    public string DescriptionLocaleId { get; set; }
+    public IRaceTemplate Race { get; set; }
+    public IClass Class { get; set; }
+  }
+  
+  private SimpleCharacter SimpleExample = new SimpleCharacter();
+  
+  public class MultiClassCharacter : IHasLocaleDescription, IHasMultiClass
+  {
+    public string NameLocaleId { get; set; }
+    public string DescriptionLocaleId { get; set; }
+    public IRaceTemplate Race { get; set; }
+    public IEnumerable<IClass> Classes { get; set; }
+  }
+  
+  private MultiClassCharacter MultiClassExample = new MultiClassCharacter();
+
+  protected override void OnInitialized()
+  {
+    SimpleExample.NameLocaleId = "Frodo Baggins";
+    SimpleExample.Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
+    SimpleExample.Class = new DefaultCharacterClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" });
+    
+    MultiClassExample.NameLocaleId = "Frodo Baggins";
+    MultiClassExample.Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
+    MultiClassExample.Classes = new[]
+    {
+      new DefaultCharacterClass(2, new DefaultClassTemplate {NameLocaleId = "Fighter"}),
+      new DefaultCharacterClass(1, new DefaultClassTemplate {NameLocaleId = "Wraith"}),
+      new DefaultCharacterClass(4, new DefaultClassTemplate {NameLocaleId = "Ring Bearer"}),
+    };
+
+    base.OnInitialized();
+  }
+
+}

@@ -1,0 +1,19 @@
+@using OpenRpg.Genres.Fantasy.Characters
+
+<div class="card has-background-light with-rounding">
+    <div class="card-content">
+        <div class="container">
+          @if (Character != null)
+          {
+              <CharacterDetails Name="@Character.NameLocaleId" Class="Character.Class" RaceTemplate="Character.Race"></CharacterDetails>
+              <h3 class="title is-4 has-text-dark">Stats</h3>
+              <CharacterStats Stats="@Character.Stats"></CharacterStats>
+          }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public ICharacter Character { get; set; }
+}

@@ -1,0 +1,19 @@
+.with-rounding
+{
+    border-radius: 0.25em;
+}
+
+.with-shadow
+{
+    box-shadow: #363636 0 2px 0 0;
+}
+
+.content blockquote
+{
+    color: #363636;
+}
+
+section .documentation
+{
+    border-radius: 1em;
+}

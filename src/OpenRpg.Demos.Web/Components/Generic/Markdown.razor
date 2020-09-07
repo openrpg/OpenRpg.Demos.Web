@@ -1,0 +1,19 @@
+@inject IJSRuntime JSRuntime
+
+<div class="card has-background-light with-rounding">
+    <div class="card-content content" @ref="MyContentRef"><textarea>@ChildContent</textarea></div>
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+    ElementReference MyContentRef;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("toMarkdown", MyContentRef);
+        }
+    }
+}
