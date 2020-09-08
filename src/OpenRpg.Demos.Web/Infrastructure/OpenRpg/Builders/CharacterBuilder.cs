@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using OpenRpg.Core.Classes;
 using OpenRpg.Core.Defaults;
+using OpenRpg.Core.Extensions;
 using OpenRpg.Core.Races;
 using OpenRpg.Core.Stats;
 using OpenRpg.Core.Utils;
@@ -82,9 +83,9 @@ namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Builders
 
         public DefaultCharacter Build()
         {
-            if (_raceId == 0) { _raceId = Randomizer.TakeRandomFromEx(RaceRepository.Data).Id; }
-            if (_classId == 0) { _classId = Randomizer.TakeRandomFromEx(ClassRepository.Data).Id; }
-            if (_genderId == 0) { _genderId = Randomizer.Random(1,3); }
+            if (_raceId == 0) { _raceId = Randomizer.TakeRandomFrom(RaceRepository.Data).Id; }
+            if (_classId == 0) { _classId = Randomizer.TakeRandomFrom(ClassRepository.Data).Id; }
+            if (_genderId == 0) { _genderId = Randomizer.Random(1,2); }
             if (_classLevels == 0) { _classLevels = Randomizer.Random(1,5); }
             
             if (string.IsNullOrEmpty(_name))

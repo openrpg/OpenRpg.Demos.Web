@@ -1,4 +1,4 @@
-﻿@page "/characters/premade-character"
+﻿@page "/characters/default-character"
 @using OpenRpg.Genres.Fantasy.Characters
 @using OpenRpg.Genres.Fantasy.Defaults
 @using OpenRpg.Core.Defaults
@@ -6,24 +6,43 @@
 @inject CharacterBuilder CharacterBuilder;
 
 <Markdown>
-    ## Pre-made Character Classes
+    ## Default Character Classes
     As we have seen so far, there is no notion of a `Character` in the `Core` library.
 
     However when we reach the `OpenRpg.Fantasy` library we kinda know what sort of character you would have in mind and
     have an `ICharacter` which is seen as the most bare bones character interface available.
 
-    This character interface can be implemented yourself, or you can just use the `DefaultCharacter` object as shown below.
+    This character interface can be implemented yourself, or you can just use the `DefaultCharacter` class as the basis for
+    your own character like shown below.
 
     ```csharp
     ICharacter character = new DefaultCharacter();
     ```
+
+    This is a fine starting point, but in reality you will also need to factor in things like:
+
+    - Does your character have an inventory?
+    - How does your character level up?
+    - Do you need to track active effects/buffs on a character?
+    - Does your character need anything else special tracked?
+    
+    ### More complex scenarios
+
+    It may seem a trivial thing to solve some of these issues, but if we take leveling up for example, when you level up should
+    your character get some arbitrary improvement points based on their class? should they get to pick what stats they want to improve?
+
+    This can quickly start making it difficult to have a one size fits all approach to characters, which is why we generally advocate that
+    the `ICharacter` be seen as the starting point and you just add your concerns on top of that.
+
+    These extra concerns will in most cases just expose more `Effect` instances that need to be calculated with the stats calculator, so
+    however you go about it, just try to keep it simple.
 </Markdown>
 
 <br />
 <div class="columns">
     <div class="column is-half">
         <Markdown>
-            ## Populating Character
+            ## Populating Default Character
             You can set whatever parts of it you want just like the previous character classes we made ourselves,
             so lets hardcode stuff to see it working.
 
@@ -84,11 +103,39 @@
             You can mess around and generate your own random character if you want.
         </Markdown>
     </div>
-    <div class="column is-half">
+    <div class="column is-half has-text-centered">
         <a class="button is-info" @onclick="RandomizeCharacter">Generate Random Character</a>
+        <br />
         <BasicCharacter Character="@_randomCharacter"></BasicCharacter>
     </div>
 </div>
+
+<br />
+
+<Markdown>
+    ## Extending Character Classes
+    As mentioned it's best to extend the interface and build your extra concerns on top.
+
+    Here is an example from a game in (slow) progress which builds on top of this concept to allow for the player to
+    pick what stats should be improved each level up.
+
+    ```c#
+    public interface IGameCharacter : ICharacter, IHasActiveEffects
+    {
+    ICollection&lt;Effect&gt; LevelUpEffects { get; set; }
+    ICollection&lt;ActiveEffect&gt; ActiveEffects {get;set;}
+    }
+    ```
+
+    As you can see there is a `LevelUpEffects` which is a custom property we add to track level up changes, which would be
+    controlled by some in game UI/rules then an `ActiveEffect` class which wraps up the notion of an `Effect` that only lasts 
+    a certain amount of time, such as someone putting a poison or regen effect on which may tick at a frequency, or just a buff
+    that increases a stat for a given duration.
+
+    Behind the scenes it's actually a `TimedEffect` which contains the info on frequency and duration, then the `ActiveEffect` 
+    class wraps that and tracks how long its been active etc. You can find more out about this in the `OpenRpg.Combat` library.
+</Markdown>
+
 
 
 @code {

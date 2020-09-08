@@ -12,7 +12,7 @@ namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Random
         }
 
         public int Random(int min, int max)
-        { return _random.Next(min, max); }
+        { return _random.Next(min, max+1); }
 
         public float Random(float min, float max)
         { return (float)_random.NextDouble() * (max - min) + min; }
