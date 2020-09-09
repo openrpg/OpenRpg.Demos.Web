@@ -14,13 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenRpg.Combat" Version="0.9.42" />
-    <PackageReference Include="OpenRpg.Core" Version="0.9.42" />
-    <PackageReference Include="OpenRpg.Data" Version="0.9.42" />
+    <PackageReference Include="OpenRpg.Combat" Version="0.9.45" />
+    <PackageReference Include="OpenRpg.Core" Version="0.9.45" />
+    <PackageReference Include="OpenRpg.Data" Version="0.9.45" />
     <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.9.24" />
-    <PackageReference Include="OpenRpg.Items" Version="0.9.42" />
-    <PackageReference Include="OpenRpg.Localization" Version="0.9.42" />
-    <PackageReference Include="OpenRpg.Quests" Version="0.9.42" />
+    <PackageReference Include="OpenRpg.Items" Version="0.9.45" />
+    <PackageReference Include="OpenRpg.Localization" Version="0.9.45" />
+    <PackageReference Include="OpenRpg.Quests" Version="0.9.45" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infrastructure\OpenRpg\Locale\" />
   </ItemGroup>
 
 </Project>

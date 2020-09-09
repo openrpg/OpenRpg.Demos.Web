@@ -26,19 +26,19 @@
       ```csharp
       class SimpleCharacter : IHasLocaleDescription, IHasClass
       {
-      public string NameLocaleId { get; set; }
-      public string DescriptionLocaleId { get; set; }
-      public IRaceTemplate Race { get; set; }
-      public IClass Class { get; set; }
+          public string NameLocaleId { get; set; }
+          public string DescriptionLocaleId { get; set; }
+          public IRaceTemplate Race { get; set; }
+          public IClass Class { get; set; }
       }
       ```
       This is a bit barebones but lets create one of these and see what it looks like using the built in default class/race objects.
       ```csharp
       new SimpleCharacter 
       {
-      NameLocaleId = "Frodo Baggins", // This should ideally be a locale id
-      Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" }, // A hobbit?
-      Class = new DefaultCharacterClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" }) // Closest class I can think of
+          NameLocaleId = "Frodo Baggins", // This should ideally be a locale id
+          Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" }, // A hobbit?
+          Class = new DefaultCharacterClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" }) // Closest class I can think of
       }
       ```
     </Markdown>

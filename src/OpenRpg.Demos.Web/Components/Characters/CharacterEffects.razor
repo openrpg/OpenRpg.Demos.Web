@@ -1,0 +1,57 @@
+@using OpenRpg.Core.Stats
+@using OpenRpg.Genres.Fantasy.Extensions
+@using OpenRpg.Core.Effects
+@using OpenRpg.Genres.Fantasy.Types
+@using System.Reflection
+@using OpenRpg.Demos.Web.Extensions
+
+@if (Effects != null && Effects.Count > 0)
+{
+    <ul class="content">
+        @foreach (var effect in Effects)
+        {
+            <li class="is-small">@(effect.Potency > 0 ? "+" : "-") @(effect.Potency) @GetEffectText(effect.EffectType)</li>
+        }
+    </ul>
+}
+
+@code {
+    [Parameter]
+    public IReadOnlyCollection<Effect> Effects { get; set; }
+
+    private int[] _percentageEffectTypeCache;
+    private IDictionary<int, string> _effectTypeTextCache;
+    private static readonly string[] _wordRemovals = new[] { "BonusAmount", "Percentage" };
+
+    protected override void OnInitialized()
+    {
+        // You could easily add other types in if you had custom ones
+        _percentageEffectTypeCache = GetAllPercentageEffectTypeIds(typeof(EffectTypes));
+        _effectTypeTextCache = GetAllEffectTypeText(typeof(EffectTypes));
+        base.OnInitialized();
+    }
+
+    private int[] GetAllPercentageEffectTypeIds(Type effectTypes)
+    {
+        return effectTypes
+            .GetProperties(BindingFlags.Public | BindingFlags.Static)
+            .Where(x => x.Name.Contains("Percentage"))
+            .Select(x => (int)x.GetValue(null))
+            .ToArray();
+    }
+
+    private IDictionary<int, string> GetAllEffectTypeText(Type effectTypes)
+    {
+
+        return effectTypes
+            .GetProperties(BindingFlags.Public | BindingFlags.Static)
+            .ToDictionary(x => (int)x.GetValue(null), x => x.Name.ReplaceAll(_wordRemovals, "").UnPascalCase());
+    }
+
+    public bool IsPercentageEffect(int effectType)
+    { return _percentageEffectTypeCache.Contains(effectType); }
+
+    public string GetEffectText(int effectType)
+    { return _effectTypeTextCache[effectType]; }
+
+}

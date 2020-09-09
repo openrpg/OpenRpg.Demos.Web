@@ -1,8 +1,14 @@
-const markdownRegex = new RegExp("^\\s*", "gm");
+const indentationFinderRegex = new RegExp("^(?:[\\n])([ ]+){1}");
 
 window.toMarkdown = function (element) {
-    const converter = new showdown.Converter({extensions: ['highlight']});
-    const text = element.firstChild.value.replace(markdownRegex, "");    
+    const converter = new showdown.Converter({ extensions: ['highlight'] });
+    const unprocessedText = element.firstChild.value;
+
+    const matches = unprocessedText.match(indentationFinderRegex);
+    const firstLineIndentationAmount = matches[1].length;
+
+    const indentationRemovalRegex = new RegExp(`^[ ]{${firstLineIndentationAmount}}`, "gm");
+    const text = element.firstChild.value.replace(indentationRemovalRegex, "");
     const html = converter.makeHtml(text);
     element.innerHTML = html;
 }
