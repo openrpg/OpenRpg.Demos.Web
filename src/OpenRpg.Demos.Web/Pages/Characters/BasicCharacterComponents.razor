@@ -44,11 +44,9 @@
     </Markdown>
   </div>
   <div class="column is-half">
-    <div class="card with-rounding">
-      <div class="card-content">
-        <CharacterDetails Name="@SimpleExample.NameLocaleId" RaceTemplate="@SimpleExample.Race" Class="@SimpleExample.Class"></CharacterDetails>
-      </div>
-    </div>
+      <CardSection>
+          <CharacterDetails Name="@SimpleExample.NameLocaleId" RaceTemplate="@SimpleExample.Race" Class="@SimpleExample.Class"></CharacterDetails>
+      </CardSection>
   </div>
 </div>
 <div class="columns">
@@ -90,13 +88,11 @@
       Move onto the stats page for more information on characters.
     </Markdown>
   </div>
-  <div class="column is-half">
-    <div class="card with-rounding">
-      <div class="card-content">
-          <CharacterDetails Name="@MultiClassExample.NameLocaleId" RaceTemplate="@MultiClassExample.Race" Classes="@MultiClassExample.Classes"></CharacterDetails>
-      </div>
+    <div class="column is-half">
+        <CardSection>
+            <CharacterDetails Name="@MultiClassExample.NameLocaleId" RaceTemplate="@MultiClassExample.Race" Classes="@MultiClassExample.Classes"></CharacterDetails>
+        </CardSection>
     </div>
-  </div>
 </div>
 
 @code {

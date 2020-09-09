@@ -55,15 +55,13 @@
         </Markdown>
     </div>
     <div class="column is-half">
-        <div class="card with-rounding">
-            <div class="card-content">
-                <CharacterDetails Name="@ManualStatsExample.NameLocaleId" RaceTemplate="@ManualStatsExample.Race" Class="@ManualStatsExample.Class" />
-                <br />
-                <CharacterVitals Stats="@ManualStatsExample.Stats" />
-                <br />
-                <CharacterStats Stats="@ManualStatsExample.Stats" />
-            </div>
-        </div>
+        <CardSection>
+            <CharacterDetails Name="@ManualStatsExample.NameLocaleId" RaceTemplate="@ManualStatsExample.Race" Class="@ManualStatsExample.Class" />
+            <br />
+            <CharacterVitals Stats="@ManualStatsExample.Stats" />
+            <br />
+            <CharacterStats Stats="@ManualStatsExample.Stats" />
+        </CardSection>
     </div>
 </div>
 
@@ -187,55 +185,51 @@
         </Markdown>
     </div>
     <div class="column is-half">
-        <div class="card with-rounding">
-            <div class="card-content">
-                <CharacterDetails Name="@AutoStatsExample.NameLocaleId" RaceTemplate="@AutoStatsExample.Race" Class="@AutoStatsExample.Class" />
-                <br />
-                <CharacterVitals Stats="@AutoStatsExample.Stats" />
-                <br />
-                <CharacterStats Stats="@AutoStatsExample.Stats" />
-                <br />
-                <div class="columns">
-                    <div class="column has-text-centered">
-                        <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
-                        <CharacterEffects Effects="@AutoStatsExample.Race.Effects.ToArray()" />
-                    </div>
-                    <div class="column has-text-centered">
-                        <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
-                        <CharacterEffects Effects="@AutoStatsExample.Class.ClassTemplate.Effects.ToArray()" />
-                    </div>
-                    <div class="column has-text-centered">
-                        <h4 class="subtitle mb-2 has-text-dark">Character Effects</h4>
-                        <CharacterEffects Effects="@AutoStatsExample.CustomEffects.ToArray()" />
-                    </div>
+        <CardSection>
+            <CharacterDetails Name="@AutoStatsExample.NameLocaleId" RaceTemplate="@AutoStatsExample.Race" Class="@AutoStatsExample.Class" />
+            <br />
+            <CharacterVitals Stats="@AutoStatsExample.Stats" />
+            <br />
+            <CharacterStats Stats="@AutoStatsExample.Stats" />
+            <br />
+            <div class="columns">
+                <div class="column has-text-centered">
+                    <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
+                    <CharacterEffects Effects="@AutoStatsExample.Race.Effects.ToArray()" />
+                </div>
+                <div class="column has-text-centered">
+                    <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
+                    <CharacterEffects Effects="@AutoStatsExample.Class.ClassTemplate.Effects.ToArray()" />
+                </div>
+                <div class="column has-text-centered">
+                    <h4 class="subtitle mb-2 has-text-dark">Character Effects</h4>
+                    <CharacterEffects Effects="@AutoStatsExample.CustomEffects.ToArray()" />
                 </div>
             </div>
-        </div>
+        </CardSection>
         <br />
-        <div class="card with-rounding">
-            <div class="card-content">
-                <CharacterDetails Name="@AutoStatsExample2.NameLocaleId" RaceTemplate="@AutoStatsExample2.Race" Class="@AutoStatsExample2.Class" />
-                <br />
-                <CharacterVitals Stats="@AutoStatsExample2.Stats" />
-                <br />
-                <CharacterStats Stats="@AutoStatsExample2.Stats" />
-                <br />
-                <div class="columns">
-                    <div class="column has-text-centered">
-                        <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
-                        <CharacterEffects Effects="@AutoStatsExample2.Race.Effects.ToArray()" />
-                    </div>
-                    <div class="column has-text-centered">
-                        <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
-                        <CharacterEffects Effects="@AutoStatsExample2.Class.ClassTemplate.Effects.ToArray()" />
-                    </div>
-                    <div class="column has-text-centered">
-                        <h4 class="subtitle mb-2 has-text-dark">Character Effects</h4>
-                        <CharacterEffects Effects="@AutoStatsExample2.CustomEffects.ToArray()" />
-                    </div>
+        <CardSection>
+            <CharacterDetails Name="@AutoStatsExample2.NameLocaleId" RaceTemplate="@AutoStatsExample2.Race" Class="@AutoStatsExample2.Class" />
+            <br />
+            <CharacterVitals Stats="@AutoStatsExample2.Stats" />
+            <br />
+            <CharacterStats Stats="@AutoStatsExample2.Stats" />
+            <br />
+            <div class="columns">
+                <div class="column has-text-centered">
+                    <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
+                    <CharacterEffects Effects="@AutoStatsExample2.Race.Effects.ToArray()" />
+                </div>
+                <div class="column has-text-centered">
+                    <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
+                    <CharacterEffects Effects="@AutoStatsExample2.Class.ClassTemplate.Effects.ToArray()" />
+                </div>
+                <div class="column has-text-centered">
+                    <h4 class="subtitle mb-2 has-text-dark">Character Effects</h4>
+                    <CharacterEffects Effects="@AutoStatsExample2.CustomEffects.ToArray()" />
                 </div>
             </div>
-        </div>
+        </CardSection>
     </div>
 </div>
 

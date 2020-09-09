@@ -78,35 +78,38 @@
 <br />
 <div class="columns">
     <div class="column is-half">
-        <Markdown>
-            ## Generating Characters (Randomly/Builders)
-            In most real world scenarios you will want something slightly nicer than having to hard code everything, and as we mentioned earlier
-            we ideally want to be using effects to drive the underlying stat values.
+        <CardSection>
+            <Markdown Containerless="true">
+                ## Generating Characters (Randomly/Builders)
+                In most real world scenarios you will want something slightly nicer than having to hard code everything, and as we mentioned earlier
+                we ideally want to be using effects to drive the underlying stat values.
 
-            So to achieve this you probably want to come up with a `CharacterBuilder` of sorts, there is something primitive for this in the `infrastructure`
-            section of this project, but as each scenario is different and each data set is different (i.e your races/classes/stats available) its hard to provide
-            an out the box version, but feel free to copy ours if needed.
+                So to achieve this you probably want to come up with a `CharacterBuilder` of sorts, there is something primitive for this in the `infrastructure`
+                section of this project, but as each scenario is different and each data set is different (i.e your races/classes/stats available) its hard to provide
+                an out the box version, but feel free to copy ours if needed.
 
-            With this you would do something like:
+                With this you would do something like:
 
-            ```csharp
-            var myRandomCharacter = CharacterBuilder.CreateNew().Build(); // Generate Random
+                ```csharp
+                var myRandomCharacter = CharacterBuilder.CreateNew().Build(); // Generate Random
 
-            var mySpecificCharacter = CharacterBuilder.CreateNew()
-            .WithName("Fighter McFight Face")
-            .WithRaceId(1) // 1 is human here
-            .WithClassId(1) // 1 is fighter here
-            .WithClassLevels(2) // 2 levels in fighter
-            .AsMale()
-            .Build();
-            ```
+                var mySpecificCharacter = CharacterBuilder.CreateNew()
+                .WithName("Fighter McFight Face")
+                .WithRaceId(1) // 1 is human here
+                .WithClassId(1) // 1 is fighter here
+                .WithClassLevels(2) // 2 levels in fighter
+                .AsMale()
+                .Build();
+                ```
 
-            You can mess around and generate your own random character if you want using the button above the character component.
-        </Markdown>
+                You can mess around and generate your own random character if you want using the button below.
+            </Markdown>
+            <div class="has-text-centered">
+                <a class="button is-info mt-3" @onclick="RandomizeCharacter">Generate Random Character</a>
+            </div>
+        </CardSection>
     </div>
     <div class="column is-half has-text-centered">
-        <a class="button is-info mb-3" @onclick="RandomizeCharacter">Generate Random Character</a>
-        <br />
         <BasicCharacter Character="@_randomCharacter"></BasicCharacter>
     </div>
 </div>

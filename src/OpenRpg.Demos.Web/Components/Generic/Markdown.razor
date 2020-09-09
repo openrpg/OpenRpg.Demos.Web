@@ -1,12 +1,23 @@
 @inject IJSRuntime JSRuntime
 
-<div class="card has-background-light with-rounding">
-    <div class="card-content content" @ref="MyContentRef"><textarea>@ChildContent</textarea></div>
-</div>
+@if (Containerless)
+{
+    <div @ref="MyContentRef"><textarea>@ChildContent</textarea></div>
+}
+else
+{
+    <CardSection>
+        <div @ref="MyContentRef"><textarea>@ChildContent</textarea></div>
+    </CardSection>
+}
 
 @code {
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public bool Containerless { get; set; }
+
     ElementReference MyContentRef;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)

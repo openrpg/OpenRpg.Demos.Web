@@ -1,0 +1,28 @@
+﻿@page "/characters/builder"
+@using OpenRpg.Genres.Fantasy.Characters
+@using OpenRpg.Genres.Fantasy.Defaults
+@using OpenRpg.Core.Defaults
+@using OpenRpg.Core.Effects
+@using OpenRpg.Genres.Fantasy.Extensions
+@inject CharacterBuilder CharacterBuilder;
+@inject RaceRepository RaceRepository;
+@inject ClassRepository ClassRepository;
+
+<Markdown>
+    # Character Builder
+    
+    Using everything we have covered so far lets build a simple character builder.
+    
+    We can use the provided `RaceRepository` and `ClassRepository` to source the choices for the races/classes, then we use
+    all that data with the `CharacterBuilder` to generate the character.
+    
+    > The source code for all this can be found within the `Infrastructure` folder within this project, its bare bones simplest
+    approach but will at least let us get started.
+</Markdown>
+<br/>
+
+
+@code {
+    private DefaultCharacter _generatedCharacter;
+
+}
