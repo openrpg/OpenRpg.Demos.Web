@@ -2,6 +2,7 @@
 @using OpenRpg.Genres.Fantasy.Characters
 @using OpenRpg.Genres.Fantasy.Defaults
 @using OpenRpg.Core.Defaults
+@using OpenRpg.Core.Effects
 @using OpenRpg.Genres.Fantasy.Extensions
 @inject CharacterBuilder CharacterBuilder;
 
@@ -48,8 +49,8 @@
 
             ```csharp
             character.NameLocaleId = "John Doe";
-            character.Race = new DefaultRaceTemplate { NameLocaleId = "Human" };
-            character.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter" });
+            character.Race = new DefaultRaceTemplate { NameLocaleId = "Human", Effects = new Effect[0] };
+            character.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter", Effects = new Effect[0] });
             character.Stats = new DefaultEntityStats();
             character.Stats.MaxHealth(100);
             character.Stats.Health(50);
@@ -100,11 +101,11 @@
             .Build();
             ```
 
-            You can mess around and generate your own random character if you want.
+            You can mess around and generate your own random character if you want using the button above the character component.
         </Markdown>
     </div>
     <div class="column is-half has-text-centered">
-        <a class="button is-info" @onclick="RandomizeCharacter">Generate Random Character</a>
+        <a class="button is-info mb-3" @onclick="RandomizeCharacter">Generate Random Character</a>
         <br />
         <BasicCharacter Character="@_randomCharacter"></BasicCharacter>
     </div>
@@ -122,8 +123,8 @@
     ```c#
     public interface IGameCharacter : ICharacter, IHasActiveEffects
     {
-    ICollection&lt;Effect&gt; LevelUpEffects { get; set; }
-    ICollection&lt;ActiveEffect&gt; ActiveEffects {get;set;}
+        ICollection&lt;Effect&gt; LevelUpEffects { get; set; }
+        ICollection&lt;ActiveEffect&gt; ActiveEffects {get;set;}
     }
     ```
 
@@ -145,8 +146,8 @@
     {
         _manualCharacter = new DefaultCharacter();
         _manualCharacter.NameLocaleId = "John Doe";
-        _manualCharacter.Race = new DefaultRaceTemplate { NameLocaleId = "Human" };
-        _manualCharacter.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter" });
+        _manualCharacter.Race = new DefaultRaceTemplate { NameLocaleId = "Human", Effects = new Effect[0]};
+        _manualCharacter.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter", Effects = new Effect[0]});
 
         _manualCharacter.Stats = new DefaultEntityStats();
         _manualCharacter.Stats.MaxHealth(100);
