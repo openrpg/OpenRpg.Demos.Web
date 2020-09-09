@@ -1,4 +1,5 @@
 const indentationFinderRegex = new RegExp("^(?:[\\n])([ ]+){1}");
+const htmlEncodingFixRegex = new RegExp("&amp;", "g");
 
 window.toMarkdown = function (element) {
     const converter = new showdown.Converter({ extensions: ['highlight'] });
@@ -9,7 +10,7 @@ window.toMarkdown = function (element) {
 
     const indentationRemovalRegex = new RegExp(`^[ ]{${firstLineIndentationAmount}}`, "gm");
     const text = element.firstChild.value.replace(indentationRemovalRegex, "");
-    const html = converter.makeHtml(text);
+    const html = converter.makeHtml(text).replace(htmlEncodingFixRegex, "&");
     element.innerHTML = html;
 }
 
