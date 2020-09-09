@@ -85,10 +85,9 @@ namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Data
                 new Effect {Potency = 8, EffectType = EffectTypes.CharismaBonusAmount},
                 new Effect {Potency = 8, EffectType = EffectTypes.PureDamageAmount},
                 new Effect {Potency = 10, EffectType = EffectTypes.PureDefenseAmount},
-                new Effect {Potency = 0, EffectType = EffectTypes.DarkDamageAmount},
-                new Effect {Potency = 2, EffectType = EffectTypes.DarkDefenseAmount},
                 new Effect {Potency = 100, EffectType = EffectTypes.HealthBonusAmount},
-                new Effect {Potency = 0, EffectType = EffectTypes.MagicBonusAmount}
+                new Effect {Potency = -1, EffectType = EffectTypes.DarkDefenseAmount},
+
             };
 
             return new DefaultRaceTemplate

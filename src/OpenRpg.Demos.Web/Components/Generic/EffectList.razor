@@ -10,7 +10,11 @@
     <div class="content is-small has-text-centered">
         @foreach (var effect in Effects)
         {
-            <li style="list-style: none;">@(GetPotencySymbol(effect.Potency))@(effect.Potency) @GetEffectText(effect.EffectType)</li>
+            <li style="list-style: none;">
+                <span class="@(effect.Potency > 0 ? "has-text-success" : "has-text-danger")">
+                    @(effect.Potency > 0 ? "+":"")@(effect.Potency) @GetEffectText(effect.EffectType)
+                </span>
+            </li>
         }
     </div>
 }

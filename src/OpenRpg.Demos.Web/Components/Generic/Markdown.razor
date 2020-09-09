@@ -2,12 +2,12 @@
 
 @if (Containerless)
 {
-    <div @ref="MyContentRef"><textarea>@ChildContent</textarea></div>
+    <div class="content" @ref="MyContentRef"><textarea>@ChildContent</textarea></div>
 }
 else
 {
     <CardSection>
-        <div @ref="MyContentRef"><textarea>@ChildContent</textarea></div>
+        <div class="content" @ref="MyContentRef"><textarea>@ChildContent</textarea></div>
     </CardSection>
 }
 

@@ -17,3 +17,17 @@ section .documentation
 {
     border-radius: 1em;
 }
+
+.columns .is-fullheight {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.expand-full-width {
+    width: 100%;
+}
+
+ul.menu-list li.has-text-light {
+    color: #f5f5f5;
+}

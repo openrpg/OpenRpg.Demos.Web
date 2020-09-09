@@ -1,8 +1,8 @@
-<div class="card has-background-light with-rounding">
-    <div class="card-content content">@ChildContent</div>
+<div class="card with-rounding @(string.IsNullOrEmpty(customClasses) ? "has-background-light" : customClasses)">
+    <div class="card-content">@ChildContent</div>
 </div>
 
 @code {
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
+    [Parameter] public string customClasses { get; set; }
 }
