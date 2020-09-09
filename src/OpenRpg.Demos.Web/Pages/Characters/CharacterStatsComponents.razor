@@ -74,9 +74,9 @@
     Ok so we now know where stats live, and if you have read any of the other sections you have probably seen mention
     of `Effects` which can be used to dynamically calculate stats.
 
-    So for example you can have your race and class contain effects which should be used to calculate your characters
+    > So for example you can have your race and class contain effects which should be used to calculate your characters
     core stats. When doing things this way its expected that you already have your data setup (i.e using the editor or similar).
-    
+
     #### Update existing character
     To start with lets update our character to allow for effects on the character itself (there are other ways to do this,
     but lets keep it simple), we will need one `Effects` property to provide ALL effects for the character, and one `CustomEffects`
@@ -100,7 +100,7 @@
     }
     ```
 </Markdown>
-<br/>
+<br />
 <Markdown>
     #### Creating Race/Classes
     Then lets create our race/class with effects, the idea is that you create these ahead of time in a database of some kind
@@ -146,9 +146,9 @@
             ```csharp
             var characterSpecificEffects = new[]
             {
-                new Effect {Potency = 6, EffectType = EffectTypes.WisdomBonusAmount},
-                new Effect {Potency = 2, EffectType = EffectTypes.CharismaBonusAmount},
-                new Effect {Potency = 20, EffectType = EffectTypes.DarkDefenseAmount}
+            new Effect {Potency = 6, EffectType = EffectTypes.WisdomBonusAmount},
+            new Effect {Potency = 2, EffectType = EffectTypes.CharismaBonusAmount},
+            new Effect {Potency = 20, EffectType = EffectTypes.DarkDefenseAmount}
             };
 
             var character = new AutoStatsCharacter{ /* Setup as Frodo */ };
@@ -157,7 +157,7 @@
             character.Class = new DefaultCharacterClass(1, fighterClass);
             ```
 
-            So now we are in a position to auto generate our stats, you can do this any way you want but the `OpenRpg.Fantasy` library
+            Now we are in a position to auto generate our stats, you can do this any way you want but the `OpenRpg.Fantasy` library
             comes with a default implementation to auto generate core and combat related stats based off effects.
 
             ```csharp
@@ -167,16 +167,18 @@
             character.Stats = statsCalculator.ComputeStats(AutoStatsExample.Effects.ToArray());
             ```
 
-            The default stats computer would ideally be setup in Dependency Injection config somewhere but as we are hardcoding
+            As you can see we compute the stats for the character and assign them, there is also an added effect output section
+            so you can see all the effects being applied based on race/class/character.
+
+            > The default stats computer would ideally be setup in Dependency Injection config somewhere but as we are hardcoding
             everything you can see the default bits that make it up (to find out more about each bit look in the fantasy lib source).
 
-            We then compute the stats for the character and assign them.
-            
+
             #### Building other characters
 
             Now that we have re-usable races and classes lets just make a Pippin character too using only base stats from race and class,
             you should notice that Frodo has a higher *wis* and *cha* than Pippin as well as higher *mdef*.
-            
+
             As you can see it all works fine and if you were to have a database full of available races/classes you could quickly put together
             many characters quickly.
         </Markdown>
@@ -189,6 +191,21 @@
                 <CharacterVitals Stats="@AutoStatsExample.Stats" />
                 <br />
                 <CharacterStats Stats="@AutoStatsExample.Stats" />
+                <br />
+                <div class="columns">
+                    <div class="column has-text-centered">
+                        <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
+                        <CharacterEffects Effects="@AutoStatsExample.Race.Effects.ToArray()" />
+                    </div>
+                    <div class="column has-text-centered">
+                        <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
+                        <CharacterEffects Effects="@AutoStatsExample.Class.ClassTemplate.Effects.ToArray()" />
+                    </div>
+                    <div class="column has-text-centered">
+                        <h4 class="subtitle mb-2 has-text-dark">Character Effects</h4>
+                        <CharacterEffects Effects="@AutoStatsExample.CustomEffects.ToArray()" />
+                    </div>
+                </div>
             </div>
         </div>
         <br />
@@ -199,10 +216,26 @@
                 <CharacterVitals Stats="@AutoStatsExample2.Stats" />
                 <br />
                 <CharacterStats Stats="@AutoStatsExample2.Stats" />
+                <br />
+                <div class="columns">
+                    <div class="column has-text-centered">
+                        <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
+                        <CharacterEffects Effects="@AutoStatsExample2.Race.Effects.ToArray()" />
+                    </div>
+                    <div class="column has-text-centered">
+                        <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
+                        <CharacterEffects Effects="@AutoStatsExample2.Class.ClassTemplate.Effects.ToArray()" />
+                    </div>
+                    <div class="column has-text-centered">
+                        <h4 class="subtitle mb-2 has-text-dark">Character Effects</h4>
+                        <CharacterEffects Effects="@AutoStatsExample2.CustomEffects.ToArray()" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 @code {
 

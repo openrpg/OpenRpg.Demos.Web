@@ -40,9 +40,6 @@ namespace OpenRpg.Demos.Web.Extensions
 
         public static string ReplaceAll(this string text, string[] sources, string replacements)
         {
-            if (sources.Length != replacements.Length)
-            { throw new Exception("Counts do not match"); }
-
             var output = text;
             for (var i = 0; i < sources.Length; i++)
             { output = output.Replace(sources[i], replacements); }

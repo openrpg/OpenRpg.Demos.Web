@@ -7,12 +7,12 @@
 
 @if (Effects != null && Effects.Count > 0)
 {
-    <ul class="content">
+    <div class="content is-small has-text-centered">
         @foreach (var effect in Effects)
         {
-            <li class="is-small">@(effect.Potency > 0 ? "+" : "-") @(effect.Potency) @GetEffectText(effect.EffectType)</li>
+            <li style="list-style: none;">@(GetPotencySymbol(effect.Potency))@(effect.Potency) @GetEffectText(effect.EffectType)</li>
         }
-    </ul>
+    </div>
 }
 
 @code {
@@ -21,7 +21,7 @@
 
     private int[] _percentageEffectTypeCache;
     private IDictionary<int, string> _effectTypeTextCache;
-    private static readonly string[] _wordRemovals = new[] { "BonusAmount", "Percentage" };
+    private static readonly string[] _wordRemovals = new[] { "BonusAmount", "Amount", "Percentage" };
 
     protected override void OnInitialized()
     {
@@ -34,7 +34,7 @@
     private int[] GetAllPercentageEffectTypeIds(Type effectTypes)
     {
         return effectTypes
-            .GetProperties(BindingFlags.Public | BindingFlags.Static)
+            .GetFields(BindingFlags.Public | BindingFlags.Static)
             .Where(x => x.Name.Contains("Percentage"))
             .Select(x => (int)x.GetValue(null))
             .ToArray();
@@ -44,7 +44,7 @@
     {
 
         return effectTypes
-            .GetProperties(BindingFlags.Public | BindingFlags.Static)
+            .GetFields(BindingFlags.Public | BindingFlags.Static)
             .ToDictionary(x => (int)x.GetValue(null), x => x.Name.ReplaceAll(_wordRemovals, "").UnPascalCase());
     }
 
@@ -52,6 +52,9 @@
     { return _percentageEffectTypeCache.Contains(effectType); }
 
     public string GetEffectText(int effectType)
-    { return _effectTypeTextCache[effectType]; }
+    { return _effectTypeTextCache.ContainsKey(effectType) ? _effectTypeTextCache[effectType] : "Unknown"; }
+
+    public string GetPotencySymbol(float potency)
+    { return potency > 0 ? "+" : "-"; }
 
 }
