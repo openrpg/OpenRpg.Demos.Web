@@ -243,7 +243,6 @@
 
     public class AutoStatsCharacter : StatsCharacter, IHasEffects
     {
-        public IEntityStats Stats { get; set; } = new DefaultEntityStats();
         public IEnumerable<Effect> CustomEffects { get; set; } = new Effect[0];
         public IEnumerable<Effect> Effects => GetAllEffects();
 

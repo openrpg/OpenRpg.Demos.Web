@@ -31,3 +31,9 @@ section .documentation
 ul.menu-list li.has-text-light {
     color: #f5f5f5;
 }
+
+.item-border {
+    border-style: solid;
+    border-width: 4px;
+
+}

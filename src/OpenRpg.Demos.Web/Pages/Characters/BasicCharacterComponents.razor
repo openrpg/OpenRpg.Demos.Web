@@ -16,32 +16,55 @@
 <br/>
 <div class="columns">
   <div class="column is-half">
-    <Markdown>
-      ### A Simple Character
-      If we want to make a simple character all we need to do is think about what makes a character.
-      
-      They would need a name, a race and a class at minimum, so lets go ahead and make a simple character class
-      using the pre-made components within OpenRpg.
+      <Markdown>
+          ### A Simple Character
+          If we want to make a simple character all we need to do is think about what makes a character.
 
-      ```csharp
-      class SimpleCharacter : IHasLocaleDescription, IHasClass
-      {
+          They would need a name, a race and a class at minimum, so we need to supply an `IRaceTemplate` and an `IClass` as well as the Locale details,
+          which we can learn more about below.
+
+          > Locale details are a best practice to include, but wont really apply for player created characters as the player would name the character,
+          but in scenarios where you are creating NPC characters ahead of time you may have them use the Locale data rather than hard coded strings.
+
+          #### `IRaceTemplate` and `DefaultRaceTemplate`
+
+          `IRaceTemplate` wraps up the notion of a race, it contains the details of the race and any effects it has, and `DefaultRaceTemplate` is the default implementation
+          however you can always make your own implementation if required. Like most **template** objects in the system it will have a list of effects and requirements.
+
+          > The requirements are to allow you to lock certain race choices until criteria have been met, i.e player must complete the game once before they can pick
+          a certain race, or you need to unlock a story point, or get a character over level 30 etc. You can mix and match any requirements.
+
+          #### `IClass`, `DefaultClass` and `IClassTemplate` with `DefaultClassTemplate`
+
+          Much like the `IRaceTemplate` the `IClassTemplate` defines the class details, effects and requirements.
+
+          The `IClass` is another layer on top of the template though, as characters class also often has a level associated, but as the templates are seen as blueprints for
+          the classes/races, they do not track per character data, so this is where the `IClass` notion comes in, and you can even have a character with multiple classes if
+          your game scenario warrants that (which is covered later).
+
+          #### Making the simpler character
+
+          so lets go ahead and make a simple character class using the pre-made components within OpenRpg.
+
+          ```csharp
+          class SimpleCharacter : IHasLocaleDescription, IHasClass
+          {
           public string NameLocaleId { get; set; }
           public string DescriptionLocaleId { get; set; }
           public IRaceTemplate Race { get; set; }
           public IClass Class { get; set; }
-      }
-      ```
-      This is a bit barebones but lets create one of these and see what it looks like using the built in default class/race objects.
-      ```csharp
-      new SimpleCharacter 
-      {
+          }
+          ```
+          This is a bit barebones but lets create one of these and see what it looks like using the built in default class/race objects.
+          ```csharp
+          new SimpleCharacter
+          {
           NameLocaleId = "Frodo Baggins", // This should ideally be a locale id
           Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" }, // A hobbit?
           Class = new DefaultCharacterClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" }) // Closest class I can think of
-      }
-      ```
-    </Markdown>
+          }
+          ```
+      </Markdown>
   </div>
   <div class="column is-half">
       <CardSection>

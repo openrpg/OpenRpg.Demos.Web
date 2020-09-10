@@ -1,0 +1,121 @@
+@page "/items/basic-components"
+@using OpenRpg.Core.Defaults
+@using OpenRpg.Core.Common
+@using OpenRpg.Core.Classes
+@using OpenRpg.Core.Effects
+@using OpenRpg.Core.Modifications
+@using OpenRpg.Core.Races
+@using OpenRpg.Core.Requirements
+@using OpenRpg.Genres.Fantasy.Types
+@using OpenRpg.Items
+@using OpenRpg.Items.Defaults
+
+<Markdown>
+    ## Basic Item Components
+    Items are in some ways easier to work with than the notion of characters as its easier to constrain what an item would
+    look like, but there is some additional complexities depending on scenarios such as item modifications and requirements, 
+    so lets cover some of the high level bits.
+    
+    ### `IItemTemplate`
+    A bit like in the character examples there will be some layering of templates etc, and the `IItemTemplate` acts 
+    as the blueprint for the item, so we should only have 1 item template in existence for each item, so for example
+    we only need to describe a `Longsword` once.
+    
+    > You could be carrying 100 of them, but really all it would be is the single item template being linked to 100 times.
+    
+    The item template contains effects, requirements and any modification information, i.e a weapon may allow 2 gem slots,
+    an enchantment slot and 3 forging upgrades etc. So this system should allow you to define your items up front, and then
+    just consume them via the `IItem` interface.
+    
+    > There are also some more specific interfaces you can layer on top which have data for stacking information or weight limit scenarios.
+    
+    ### `IItem` and `DefaultItem`
+    
+    This acts as the instance of the item that a character would pickup/carry/equip. It allows for you to track the amount of the
+    item as well as any modifications you have applied. As you may have 10 healing potions, but really its just one template for a 
+    healing potion with the number 10 attached so you know to factor in that you have 10 of these.
+    
+    There is a default `IItem` implementation provided, but in most cases you probably want to make your own which lets you further
+    configure your item for stacking/weight scenarios.
+</Markdown>
+
+<br />
+<div class="columns">
+    <div class="column is-half">
+        <Markdown>
+            ### A Simple Item
+            So lets just make a simple sword item template based off the built in components.
+
+            ```csharp
+            var swordTemplate = new ItemTemplate
+            {
+                Id = 1,
+                NameLocaleId = "Sword",
+                AssetCode = "sword",
+                DescriptionLocaleId = "A really bad looking sword, can slay things though",
+                ItemQualityType = ItemQualityTypes.CommonQuality,
+                ItemType = ItemTypes.GenericWeapon,
+                ItemValue = 10,
+                ModificationAllowances = new ModificationAllowance[0],
+                Requirements = new Requirement[0],
+                Effects = new []
+                {
+                    new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
+                }
+            };
+            ```
+
+            This indicates that the sword is a **Generic Weapon** of **Common Quality**, then it has no requirements, no moddable slots and does damage of 30.
+            
+            To actually create an instance of this item we need to use the template with an `IItem` implementation, like so:
+            
+            ```csharp
+            var item = new DefaultItem
+            {
+                ItemTemplate = swordTemplate,
+                Amount = 1,
+                Modifications = new IModification[0],
+            };
+            ```
+
+            So we have one of them, but as we don't have stackable/weight based systems in place so we don't need any of that information.
+        </Markdown>
+    </div>
+    <div class="column is-half">
+        <ItemDetails Item="_simpleItem"></ItemDetails>
+    </div>
+</div>
+
+@code {
+    private IItem _simpleItem;
+    
+    protected override void OnInitialized()
+    {
+        var swordTemplate = new ItemTemplate
+        {
+            Id = 1,
+            NameLocaleId = "Sword",
+            AssetCode = "sword",
+            DescriptionLocaleId = "A really bad looking sword, can slay things though",
+            ItemQualityType = ItemQualityTypes.CommonQuality,
+            ItemType = ItemTypes.GenericWeapon,
+            ItemValue = 10,
+            ModificationAllowances = new ModificationAllowance[0],
+            Requirements = new Requirement[0],
+            Effects = new []
+            {
+                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
+            }
+        };
+
+        _simpleItem = new DefaultItem
+        {
+            ItemTemplate = swordTemplate,
+            Amount = 1,
+            Modifications = new IModification[0],
+        };
+
+        base.OnInitialized();
+    }
+
+}

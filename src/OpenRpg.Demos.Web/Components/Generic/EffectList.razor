@@ -4,6 +4,8 @@
 @using OpenRpg.Genres.Fantasy.Types
 @using System.Reflection
 @using OpenRpg.Demos.Web.Extensions
+@using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Locale
+@inject DefaultLocaleRepository LocaleRepository;
 
 @if (Effects != null && Effects.Count > 0)
 {
@@ -24,14 +26,11 @@
     public IReadOnlyCollection<Effect> Effects { get; set; }
 
     private int[] _percentageEffectTypeCache;
-    private IDictionary<int, string> _effectTypeTextCache;
-    private static readonly string[] _wordRemovals = new[] { "BonusAmount", "Amount", "Percentage" };
 
     protected override void OnInitialized()
     {
         // You could easily add other types in if you had custom ones
         _percentageEffectTypeCache = GetAllPercentageEffectTypeIds(typeof(EffectTypes));
-        _effectTypeTextCache = GetAllEffectTypeText(typeof(EffectTypes));
         base.OnInitialized();
     }
 
@@ -44,19 +43,12 @@
             .ToArray();
     }
 
-    private IDictionary<int, string> GetAllEffectTypeText(Type effectTypes)
-    {
-
-        return effectTypes
-            .GetFields(BindingFlags.Public | BindingFlags.Static)
-            .ToDictionary(x => (int)x.GetValue(null), x => x.Name.ReplaceAll(_wordRemovals, "").UnPascalCase());
-    }
 
     public bool IsPercentageEffect(int effectType)
     { return _percentageEffectTypeCache.Contains(effectType); }
 
     public string GetEffectText(int effectType)
-    { return _effectTypeTextCache.ContainsKey(effectType) ? _effectTypeTextCache[effectType] : "Unknown"; }
+    { return LocaleRepository.Retrieve(DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.EffectTextKey, effectType)); }
 
     public string GetPotencySymbol(float potency)
     { return potency > 0 ? "+" : "-"; }

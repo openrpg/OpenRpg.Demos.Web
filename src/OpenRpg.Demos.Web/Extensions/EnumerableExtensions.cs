@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using OpenRpg.Core.Utils;
 
 namespace OpenRpg.Demos.Web.Extensions
 {
     public static class EnumerableExtensions
     {
+        public static void ForEach<TK, TV>(this IDictionary<TK, TV> dictionary, Action<TK, TV> action)
+        {
+            foreach(var pair in dictionary)
+            { action(pair.Key, pair.Value); }
+        }
     }
 }
