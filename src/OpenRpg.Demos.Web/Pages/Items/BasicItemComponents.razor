@@ -41,7 +41,7 @@
 
 <br />
 <div class="columns">
-    <div class="column is-half">
+    <div class="column is-two-thirds">
         <Markdown>
             ### A Simple Item
             So lets just make a simple sword item template based off the built in components.
@@ -72,32 +72,85 @@
             ```csharp
             var item = new DefaultItem
             {
-                ItemTemplate = swordTemplate,
-                Amount = 1,
-                Modifications = new IModification[0],
+            ItemTemplate = swordTemplate,
+            Amount = 1,
+            Modifications = new IModification[0],
             };
             ```
 
             So we have one of them, but as we don't have stackable/weight based systems in place so we don't need any of that information.
         </Markdown>
     </div>
-    <div class="column is-half">
+    <div class="column is-one-third">
         <ItemDetails Item="_simpleItem"></ItemDetails>
     </div>
 </div>
 
+<br />
+<div class="columns">
+    <div class="column is-two-thirds">
+        <Markdown>
+            ### A More Complex Item
+            So now lets make an item which has some fancy effects on it,
+
+            ```csharp
+            var swordEffects = new[]
+            {
+                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 765.5f },
+                new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 20.0f },
+                new Effect { EffectType = EffectTypes.PureDamagePercentage, Potency = 10.0f },
+                new Effect { EffectType = EffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
+                new Effect { EffectType = EffectTypes.DarkDefenseAmount, Potency = 15.0f }
+            };
+
+            var template = new ItemTemplate
+            {
+                Id = 2,
+                NameLocaleId = "Super Sword",
+                AssetCode = "sword",
+                DescriptionLocaleId = "So fancy it could slice through stone",
+                ItemQualityType = ItemQualityTypes.EpicQuality,
+                ItemType = ItemTypes.GenericWeapon,
+                ItemValue = 1000,
+                ModificationAllowances = new ModificationAllowance[0],
+                Requirements = new Requirement[0],
+                Effects = swordEffects
+            };
+            ```
+
+            So we have the template built we can assign it to an item instance and show it.
+            
+            > At this point its worth mentioning that these templates should all be pre-made in a data store
+            of some sort, we are just hardcoding here to show simplest avenues for usage. You could do it all in code, 
+            a json/binary/xml file from an external editor etc. Ultimately as long as all these items can be grabbed 
+            from a repository of some sort you are good.
+        </Markdown>
+    </div>
+    <div class="column is-one-third">
+        <ItemDetails Item="_fancyItem"></ItemDetails>
+    </div>
+</div>
+
 @code {
-    private IItem _simpleItem;
-    
+    private IItem _simpleItem, _fancyItem;
+
     protected override void OnInitialized()
     {
-        var swordTemplate = new ItemTemplate
+        _simpleItem = MakeRubbishSword();
+        _fancyItem = MakeSuperSword();
+
+        base.OnInitialized();
+    }
+
+    private IItem MakeRubbishSword()
+    {
+        var template = new ItemTemplate
         {
             Id = 1,
             NameLocaleId = "Sword",
             AssetCode = "sword",
             DescriptionLocaleId = "A really bad looking sword, can slay things though",
-            ItemQualityType = ItemQualityTypes.CommonQuality,
+            ItemQualityType = ItemQualityTypes.JunkQuality,
             ItemType = ItemTypes.GenericWeapon,
             ItemValue = 10,
             ModificationAllowances = new ModificationAllowance[0],
@@ -108,14 +161,45 @@
             }
         };
 
-        _simpleItem = new DefaultItem
+        return new DefaultItem
         {
-            ItemTemplate = swordTemplate,
+            ItemTemplate = template,
             Amount = 1,
             Modifications = new IModification[0],
         };
+    }
 
-        base.OnInitialized();
+    private IItem MakeSuperSword()
+    {
+        var swordEffects = new[]
+        {
+            new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 765.5f },
+            new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 20.0f },
+            new Effect { EffectType = EffectTypes.PureDamagePercentage, Potency = 10.0f },
+            new Effect { EffectType = EffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
+            new Effect { EffectType = EffectTypes.DarkDefenseAmount, Potency = 15.0f }
+        };
+
+        var template = new ItemTemplate
+        {
+            Id = 2,
+            NameLocaleId = "Super Sword",
+            AssetCode = "sword",
+            DescriptionLocaleId = "So fancy it could slice through stone",
+            ItemQualityType = ItemQualityTypes.EpicQuality,
+            ItemType = ItemTypes.GenericWeapon,
+            ItemValue = 1000,
+            ModificationAllowances = new ModificationAllowance[0],
+            Requirements = new Requirement[0],
+            Effects = swordEffects
+        };
+
+        return new DefaultItem
+        {
+            ItemTemplate = template,
+            Amount = 1,
+            Modifications = new IModification[0],
+        };
     }
 
 }

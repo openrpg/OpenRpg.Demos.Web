@@ -1,33 +1,105 @@
 @using OpenRpg.Genres.Fantasy.Characters
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Classes
+@using OpenRpg.Core.Effects
+@using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Locale
+@using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
+@using OpenRpg.Items.Templates
+@inject DefaultLocaleRepository LocaleRepository;
 
-<CardSection customClasses="item-border">
-    <h2 class="title has-text-dark has-text-centered">@(GetItemName() ?? "Unnamed Item")</h2>
+<CardSection customClasses="@cardClasses">
+    <h4 class="title is-4 has-text-centered item-quality-@(_itemQualityTypeId)">@(GetItemName() ?? "Unnamed Item")</h4>
     @if (!string.IsNullOrEmpty(Item.ItemTemplate.DescriptionLocaleId))
     {
-        <h4 class="subtitle has-text-dark has-text-centered">@(Item.ItemTemplate.DescriptionLocaleId)</h4>
+        <h6 class="subtitle is-7 has-text-dark has-text-centered">@(Item.ItemTemplate.DescriptionLocaleId)</h6>
     }
     <div class="columns">
         <div class="column">
-            <figure class="image is-64x64 item-border with-rounding">
+            <figure class="image is-64x64 item-border with-rounding item-quality-@(_itemQualityTypeId)">
                 <img src="images/items/@(Item.ItemTemplate.AssetCode).png">
             </figure>
         </div>
+        <div class="column">
+            @if (IsWeapon)
+            {
+                <h4 class="title is-4 has-text-dark has-text-centered">@(Item.ItemTemplate.Effects.Where(x => x.EffectType == EffectTypes.PureDamageAmount).Sum(x => x.Potency))</h4>
+                <h6 class="subtitle is-7 has-text-dark has-text-centered">Damage</h6>
+            }
+            @if (IsArmour)
+            {
+                <h4 class="title is-4 has-text-dark has-text-centered">@(Item.ItemTemplate.Effects.Where(x => x.EffectType == EffectTypes.PureDefenseAmount).Sum(x => x.Potency))</h4>
+                <h6 class="subtitle is-7 has-text-dark has-text-centered">Defense</h6>
+            }
+        </div>
+        <div class="column">
+            @if (_itemQualityTypeId != 0)
+            {
+                <h6 class="subtitle is-5 has-text-dark has-text-centered mb-1">@(LocaleRepository.Retrieve(DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.ItemQualityTextKey, _itemQualityTypeId)))</h6>
+            }
+            <h6 class="subtitle is-6 has-text-dark has-text-centered">@(LocaleRepository.Retrieve(DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.ItemTypesTextKey, Item.ItemTemplate.ItemType)))</h6>
+        </div>
     </div>
+    @if (DisplayEffects.Any())
+    {
+        <div>
+            <EffectList Effects="DisplayEffects.ToArray()"></EffectList>
+        </div>
+    }
 </CardSection>
 
 @code {
-    [Parameter] public IItem Item { get; set; }
+
+    [Parameter]
+    public IItem Item { get; set; }
+
+    private bool IsWeapon => Item.ItemTemplate.ItemType == ItemTypes.GenericWeapon;
+
+    private bool IsArmour
+    {
+        get
+        {
+            var type = Item.ItemTemplate.ItemType;
+            return type == ItemTypes.BackArmour ||
+                   type == ItemTypes.FootArmour ||
+                   type == ItemTypes.HeadItem ||
+                   type == ItemTypes.WristItem ||
+                   type == ItemTypes.LowerBodyArmour ||
+                   type == ItemTypes.UpperBodyArmour;
+        }
+    }
+
+    private IEnumerable<Effect> DisplayEffects
+    {
+        get
+        {
+            if(IsWeapon){ return Item.ItemTemplate.Effects.Where(x => x.EffectType != EffectTypes.PureDamageAmount); }
+            if(IsArmour){ return Item.ItemTemplate.Effects.Where(x => x.EffectType != EffectTypes.PureDefenseAmount); }
+            return Item.ItemTemplate.Effects;
+        }
+    }
+
+    private int _itemQualityTypeId;
+    private string cardClasses;
 
     private string GetItemName()
     {
-        if(string.IsNullOrEmpty(Item.NameOverride))
-        { return Item.ItemTemplate.NameLocaleId; }
+        if (string.IsNullOrEmpty(Item.NameOverride))
+        {
+            return Item.ItemTemplate.NameLocaleId;
+        }
         else
-        { return Item.NameOverride; }
+        {
+            return Item.NameOverride;
+        }
     }
 
+    protected override void OnInitialized()
+    {
+        if(Item.ItemTemplate is IWithItemQuality itemQuality)
+        {_itemQualityTypeId = itemQuality.ItemQualityType; }
+        cardClasses = $"item-border item-quality-{_itemQualityTypeId}";
+
+    }
 
 }
