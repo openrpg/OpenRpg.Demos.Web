@@ -1,5 +1,5 @@
 ﻿@page "/characters/advanced-stats"
-@using OpenRpg.Core.Defaults
+
 @using OpenRpg.Core.Effects
 @using OpenRpg.Core.Stats
 @using OpenRpg.Genres.Fantasy.Defaults
@@ -17,6 +17,32 @@
    We also haven't discussed the notion of static vs dynamic stats, so for example your max health can be seen as static as 
    its computed once and possibly recomputed on effect changes etc, but your ACTUAL HEALTH value can change from various factors
    such as being hit, drinking a potion, being poisoned etc, so some stats can be seen as static and some as dynamic.
+</Markdown>
+
+<br/>
+
+<Markdown>
+    ## Damage/Defense Stats
+    In these examples we are sticking to `Pure Damage` and `Pure Defense` and using `Dark Damage` and `Dark Defense` as a stand in
+    for magic damage. In the real world you may have multiple damage sources and you can define as many as you want.
+    
+    The `OpenRpg.Fantasy` library comes with the notion the following melee damage types:
+    - Pure (No affinity type damage)
+    - Slashing
+    - Piercing
+    - Blunt
+    - Unarmed
+    
+    And the following magical damage types:
+    - Fire
+    - Ice
+    - Earth
+    - Wind
+    - Light
+    - Dark
+    
+    As with all the stuff in these libraries you can use as much or as little of it as you want, but to keep things simple we will only
+    be using pure damage/defense so we don't have to worry about juggling multiple types of damage in the effects.
 </Markdown>
 
 <br/>

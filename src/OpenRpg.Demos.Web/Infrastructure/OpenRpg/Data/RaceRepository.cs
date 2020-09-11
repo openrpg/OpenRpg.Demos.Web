@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using OpenRpg.Core.Defaults;
 using OpenRpg.Core.Effects;
 using OpenRpg.Core.Races;
 using OpenRpg.Core.Requirements;

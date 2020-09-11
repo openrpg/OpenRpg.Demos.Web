@@ -1,11 +1,9 @@
 ﻿using System.Linq;
 using OpenRpg.Core.Classes;
-using OpenRpg.Core.Defaults;
 using OpenRpg.Core.Extensions;
 using OpenRpg.Core.Races;
 using OpenRpg.Core.Stats;
 using OpenRpg.Core.Utils;
-using OpenRpg.Demos.Web.Extensions;
 using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Data;
 using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Items;
 using OpenRpg.Genres.Fantasy.Defaults;
@@ -95,7 +93,7 @@ namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Builders
             {
                 NameLocaleId = _name,
                 Race = RaceRepository.Retrieve(_raceId),
-                Class = new DefaultCharacterClass(_classLevels, ClassRepository.Retrieve(_classId)),
+                Class = new DefaultClass(_classLevels, ClassRepository.Retrieve(_classId)),
                 GenderType = (byte)_genderId,
                 Equipment = new DummyEquipment()
             };

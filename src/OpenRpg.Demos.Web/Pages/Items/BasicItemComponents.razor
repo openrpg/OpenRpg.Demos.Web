@@ -1,5 +1,5 @@
 @page "/items/basic-components"
-@using OpenRpg.Core.Defaults
+
 @using OpenRpg.Core.Common
 @using OpenRpg.Core.Classes
 @using OpenRpg.Core.Effects
@@ -8,7 +8,8 @@
 @using OpenRpg.Core.Requirements
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
-@using OpenRpg.Items.Defaults
+@using OpenRpg.Items.Extensions
+@using OpenRpg.Items.Templates
 
 <Markdown>
     ## Basic Item Components
@@ -27,7 +28,7 @@
     an enchantment slot and 3 forging upgrades etc. So this system should allow you to define your items up front, and then
     just consume them via the `IItem` interface.
     
-    > There are also some more specific interfaces you can layer on top which have data for stacking information or weight limit scenarios.
+    > There are also some more specific variables for stacking, slot or weight limit scenarios.
     
     ### `IItem` and `DefaultItem`
     
@@ -53,9 +54,7 @@
                 NameLocaleId = "Sword",
                 AssetCode = "sword",
                 DescriptionLocaleId = "A really bad looking sword, can slay things though",
-                ItemQualityType = ItemQualityTypes.CommonQuality,
                 ItemType = ItemTypes.GenericWeapon,
-                ItemValue = 10,
                 ModificationAllowances = new ModificationAllowance[0],
                 Requirements = new Requirement[0],
                 Effects = new []
@@ -63,18 +62,19 @@
                     new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
                 }
             };
+            swordTemplate.Variables.QualityType(ItemQualityTypes.JunkQuality);
+            swordTemplate.Variables.Value(10);
             ```
 
             This indicates that the sword is a **Generic Weapon** of **Common Quality**, then it has no requirements, no moddable slots and does damage of 30.
-            
+
             To actually create an instance of this item we need to use the template with an `IItem` implementation, like so:
-            
+
             ```csharp
             var item = new DefaultItem
             {
-            ItemTemplate = swordTemplate,
-            Amount = 1,
-            Modifications = new IModification[0],
+                ItemTemplate = swordTemplate,
+                Modifications = new IModification[0],
             };
             ```
 
@@ -109,13 +109,13 @@
                 NameLocaleId = "Super Sword",
                 AssetCode = "sword",
                 DescriptionLocaleId = "So fancy it could slice through stone",
-                ItemQualityType = ItemQualityTypes.EpicQuality,
                 ItemType = ItemTypes.GenericWeapon,
-                ItemValue = 1000,
                 ModificationAllowances = new ModificationAllowance[0],
                 Requirements = new Requirement[0],
                 Effects = swordEffects
             };
+            template.Variables.QualityType(ItemQualityTypes.EpicQuality);
+            template.Variables.Value(10000);
             ```
 
             So we have the template built we can assign it to an item instance and show it.
@@ -144,15 +144,13 @@
 
     private IItem MakeRubbishSword()
     {
-        var template = new ItemTemplate
+        var template = new DefaultItemTemplate
         {
             Id = 1,
             NameLocaleId = "Sword",
             AssetCode = "sword",
             DescriptionLocaleId = "A really bad looking sword, can slay things though",
-            ItemQualityType = ItemQualityTypes.JunkQuality,
             ItemType = ItemTypes.GenericWeapon,
-            ItemValue = 10,
             ModificationAllowances = new ModificationAllowance[0],
             Requirements = new Requirement[0],
             Effects = new []
@@ -160,11 +158,12 @@
                 new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
             }
         };
+        template.Variables.QualityType(ItemQualityTypes.JunkQuality);
+        template.Variables.Value(10);
 
         return new DefaultItem
         {
             ItemTemplate = template,
-            Amount = 1,
             Modifications = new IModification[0],
         };
     }
@@ -180,24 +179,23 @@
             new Effect { EffectType = EffectTypes.DarkDefenseAmount, Potency = 15.0f }
         };
 
-        var template = new ItemTemplate
+        var template = new DefaultItemTemplate
         {
             Id = 2,
             NameLocaleId = "Super Sword",
             AssetCode = "sword",
             DescriptionLocaleId = "So fancy it could slice through stone",
-            ItemQualityType = ItemQualityTypes.EpicQuality,
             ItemType = ItemTypes.GenericWeapon,
-            ItemValue = 1000,
             ModificationAllowances = new ModificationAllowance[0],
             Requirements = new Requirement[0],
             Effects = swordEffects
         };
+        template.Variables.QualityType(ItemQualityTypes.EpicQuality);
+        template.Variables.Value(10000);
 
         return new DefaultItem
         {
             ItemTemplate = template,
-            Amount = 1,
             Modifications = new IModification[0],
         };
     }

@@ -5,11 +5,14 @@
 @using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Locale
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
+@using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Templates
+@using OpenRpg.Items.Types
+
 @inject DefaultLocaleRepository LocaleRepository;
 
 <CardSection customClasses="@cardClasses">
-    <h4 class="title is-4 has-text-centered item-quality-@(_itemQualityTypeId)">@(GetItemName() ?? "Unnamed Item")</h4>
+    <h4 class="title is-4 has-text-centered item-quality-@(_itemQualityTypeId)">@(Item.ItemTemplate.NameLocaleId ?? "Unnamed Item")</h4>
     @if (!string.IsNullOrEmpty(Item.ItemTemplate.DescriptionLocaleId))
     {
         <h6 class="subtitle is-7 has-text-dark has-text-centered">@(Item.ItemTemplate.DescriptionLocaleId)</h6>
@@ -82,22 +85,11 @@
     private int _itemQualityTypeId;
     private string cardClasses;
 
-    private string GetItemName()
-    {
-        if (string.IsNullOrEmpty(Item.NameOverride))
-        {
-            return Item.ItemTemplate.NameLocaleId;
-        }
-        else
-        {
-            return Item.NameOverride;
-        }
-    }
 
     protected override void OnInitialized()
     {
-        if(Item.ItemTemplate is IWithItemQuality itemQuality)
-        {_itemQualityTypeId = itemQuality.ItemQualityType; }
+        if(Item.ItemTemplate.Variables.HasVariable(ItemTemplateVariableTypes.QualityType))
+        {_itemQualityTypeId = Item.ItemTemplate.Variables.QualityType(); }
         cardClasses = $"item-border item-quality-{_itemQualityTypeId}";
 
     }

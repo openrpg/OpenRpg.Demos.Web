@@ -1,10 +1,12 @@
 ﻿@page "/characters/stats-components"
-@using OpenRpg.Core.Defaults
+
 @using OpenRpg.Core.Effects
+@using OpenRpg.Core.Races
 @using OpenRpg.Core.Stats
 @using OpenRpg.Genres.Fantasy.Defaults
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Fantasy.Types
+@using OpenRpg.Core.Classes
 
 <Markdown>
     ## Character Stats Components
@@ -29,7 +31,7 @@
             ```csharp
             public class StatsCharacter : SimpleCharacter
             {
-                public IEntityStats Stats { get; set; } = new DefaultEntityStats();
+                public IStatsVariables Stats { get; set; } = new DefaultStatsVariables();
             }
             ```
 
@@ -83,7 +85,6 @@
     ```csharp
     public class AutoStatsCharacter : StatsCharacter, IHasEffects
     {
-        public IEntityStats Stats { get; set; } = new DefaultEntityStats();
         public IEnumerable&lt;Effect&gt; CustomEffects { get; set; } = new Effect[0];
         public IEnumerable&lt;Effect&gt; Effects =&gt; GetAllEffects();
 
@@ -144,9 +145,9 @@
             ```csharp
             var characterSpecificEffects = new[]
             {
-            new Effect {Potency = 6, EffectType = EffectTypes.WisdomBonusAmount},
-            new Effect {Potency = 2, EffectType = EffectTypes.CharismaBonusAmount},
-            new Effect {Potency = 20, EffectType = EffectTypes.DarkDefenseAmount}
+                new Effect {Potency = 6, EffectType = EffectTypes.WisdomBonusAmount},
+                new Effect {Potency = 2, EffectType = EffectTypes.CharismaBonusAmount},
+                new Effect {Potency = 20, EffectType = EffectTypes.DarkDefenseAmount}
             };
 
             var character = new AutoStatsCharacter{ /* Setup as Frodo */ };
@@ -238,7 +239,7 @@
 
     public class StatsCharacter : BasicCharacterComponents.SimpleCharacter
     {
-        public IEntityStats Stats { get; set; } = new DefaultEntityStats();
+        public IStatsVariables Stats { get; set; } = new DefaultStatsVariables();
     }
 
     public class AutoStatsCharacter : StatsCharacter, IHasEffects
@@ -265,9 +266,9 @@
         ManualStatsExample.NameLocaleId = "Frodo Baggins";
 
         ManualStatsExample.Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
-        ManualStatsExample.Class = new DefaultCharacterClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" });
+        ManualStatsExample.Class = new DefaultClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" });
 
-        ManualStatsExample.Stats = new DefaultEntityStats();
+        ManualStatsExample.Stats = new DefaultStatsVariables();
         ManualStatsExample.Stats.MaxHealth(100);
         ManualStatsExample.Stats.Health(50);
         ManualStatsExample.Stats.MaxMagic(10);
@@ -324,11 +325,11 @@
         AutoStatsExample.NameLocaleId = "Frodo Baggins";
         AutoStatsExample.CustomEffects = characterSpecificEffects;
         AutoStatsExample.Race = hobbitRace;
-        AutoStatsExample.Class = new DefaultCharacterClass(1, fighterClass);
+        AutoStatsExample.Class = new DefaultClass(1, fighterClass);
 
         AutoStatsExample2.NameLocaleId = "Peregrin Took";
         AutoStatsExample2.Race = hobbitRace;
-        AutoStatsExample2.Class = new DefaultCharacterClass(1, fighterClass);
+        AutoStatsExample2.Class = new DefaultClass(1, fighterClass);
 
         var statsCalculator = new DefaultStatsComputer(new DefaultAttributeStatPopulator(), new DefaultVitalStatsPopulator(),
           new DefaultDamageStatPopulator(), new DefaultDefenseStatPopulator());

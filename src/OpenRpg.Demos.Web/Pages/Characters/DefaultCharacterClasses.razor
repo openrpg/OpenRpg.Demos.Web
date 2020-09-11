@@ -1,9 +1,12 @@
 ﻿@page "/characters/default-character"
 @using OpenRpg.Genres.Fantasy.Characters
 @using OpenRpg.Genres.Fantasy.Defaults
-@using OpenRpg.Core.Defaults
+
 @using OpenRpg.Core.Effects
+@using OpenRpg.Core.Races
 @using OpenRpg.Genres.Fantasy.Extensions
+@using OpenRpg.Core.Classes
+@using OpenRpg.Core.Stats
 @inject CharacterBuilder CharacterBuilder;
 
 <Markdown>
@@ -51,7 +54,7 @@
             character.NameLocaleId = "John Doe";
             character.Race = new DefaultRaceTemplate { NameLocaleId = "Human", Effects = new Effect[0] };
             character.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter", Effects = new Effect[0] });
-            character.Stats = new DefaultEntityStats();
+            character.Stats = new DefaultStatsVariables();
             character.Stats.MaxHealth(100);
             character.Stats.Health(50);
             character.Stats.MaxMagic(10);
@@ -150,9 +153,9 @@
         _manualCharacter = new DefaultCharacter();
         _manualCharacter.NameLocaleId = "John Doe";
         _manualCharacter.Race = new DefaultRaceTemplate { NameLocaleId = "Human", Effects = new Effect[0]};
-        _manualCharacter.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter", Effects = new Effect[0]});
+        _manualCharacter.Class = new DefaultClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter", Effects = new Effect[0]});
 
-        _manualCharacter.Stats = new DefaultEntityStats();
+        _manualCharacter.Stats = new DefaultStatsVariables();
         _manualCharacter.Stats.MaxHealth(100);
         _manualCharacter.Stats.Health(50);
         _manualCharacter.Stats.MaxMagic(10);

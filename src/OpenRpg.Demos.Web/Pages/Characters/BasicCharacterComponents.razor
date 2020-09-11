@@ -1,5 +1,5 @@
 ﻿@page "/characters/basic-components"
-@using OpenRpg.Core.Defaults
+
 @using OpenRpg.Core.Common
 @using OpenRpg.Core.Classes
 @using OpenRpg.Core.Races
@@ -49,19 +49,19 @@
           ```csharp
           class SimpleCharacter : IHasLocaleDescription, IHasClass
           {
-          public string NameLocaleId { get; set; }
-          public string DescriptionLocaleId { get; set; }
-          public IRaceTemplate Race { get; set; }
-          public IClass Class { get; set; }
+              public string NameLocaleId { get; set; }
+              public string DescriptionLocaleId { get; set; }
+              public IRaceTemplate Race { get; set; }
+              public IClass Class { get; set; }
           }
           ```
           This is a bit barebones but lets create one of these and see what it looks like using the built in default class/race objects.
           ```csharp
           new SimpleCharacter
           {
-          NameLocaleId = "Frodo Baggins", // This should ideally be a locale id
-          Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" }, // A hobbit?
-          Class = new DefaultCharacterClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" }) // Closest class I can think of
+              NameLocaleId = "Frodo Baggins", // This should ideally be a locale id
+              Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" }, // A hobbit?
+              Class = new DefaultClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" }) // Closest class I can think of
           }
           ```
       </Markdown>
@@ -99,9 +99,9 @@
         Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" }, // A hobbit?
         Classes = new[]
         {
-          new DefaultCharacterClass(2, new DefaultClassTemplate {NameLocaleId = "Fighter"}), // Leveled Up
-          new DefaultCharacterClass(1, new DefaultClassTemplate {NameLocaleId = "Wraith"}), // oh noes
-          new DefaultCharacterClass(4, new DefaultClassTemplate {NameLocaleId = "Ring Bearer"}) // Multi classed
+          new DefaultClass(2, new DefaultClassTemplate {NameLocaleId = "Fighter"}), // Leveled Up
+          new DefaultClass(1, new DefaultClassTemplate {NameLocaleId = "Wraith"}), // oh noes
+          new DefaultClass(4, new DefaultClassTemplate {NameLocaleId = "Ring Bearer"}) // Multi classed
         }
       }
       ```
@@ -144,15 +144,15 @@
   {
     SimpleExample.NameLocaleId = "Frodo Baggins";
     SimpleExample.Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
-    SimpleExample.Class = new DefaultCharacterClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" });
+    SimpleExample.Class = new DefaultClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" });
     
     MultiClassExample.NameLocaleId = "Frodo Baggins";
     MultiClassExample.Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
     MultiClassExample.Classes = new[]
     {
-      new DefaultCharacterClass(2, new DefaultClassTemplate {NameLocaleId = "Fighter"}),
-      new DefaultCharacterClass(1, new DefaultClassTemplate {NameLocaleId = "Wraith"}),
-      new DefaultCharacterClass(4, new DefaultClassTemplate {NameLocaleId = "Ring Bearer"}),
+      new DefaultClass(2, new DefaultClassTemplate {NameLocaleId = "Fighter"}),
+      new DefaultClass(1, new DefaultClassTemplate {NameLocaleId = "Wraith"}),
+      new DefaultClass(4, new DefaultClassTemplate {NameLocaleId = "Ring Bearer"}),
     };
 
     base.OnInitialized();
