@@ -51,7 +51,7 @@
     {
         <h5 class="title is-5 has-text-centered has-text-dark mb-1 mt-1">Effects</h5>
         <div>
-            <EffectList Effects="DisplayEffects.ToArray()"></EffectList>
+            <EffectList Effects="DisplayEffects.ToArray()" Character="@Character"></EffectList>
         </div>
     }
     @if (Item.ItemTemplate.Requirements.Any())
@@ -115,6 +115,7 @@
     {
         if (Item.ItemTemplate.Variables.HasVariable(ItemTemplateVariableTypes.QualityType))
         { _itemQualityTypeId = Item.ItemTemplate.Variables.QualityType(); }
+
     }
 
 }

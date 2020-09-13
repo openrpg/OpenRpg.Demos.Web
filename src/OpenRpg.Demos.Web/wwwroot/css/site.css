@@ -41,6 +41,19 @@ ul.menu-list li.has-text-light {
     border-color: #ff3860;
 }
 
+.is-strikethrough {
+    text-decoration: line-through;
+}
+
+.effect-section div.requirement-section {
+    display: none;
+    border: 2px solid #9d9d9d;
+}
+
+.effect-section:hover div.requirement-section {
+    display: block;
+}
+
 .item-quality-1 { border-color: #9d9d9d; }
 .item-quality-2 { border-color: #ffffff; }
 .item-quality-3 { border-color: #1eff00; }
