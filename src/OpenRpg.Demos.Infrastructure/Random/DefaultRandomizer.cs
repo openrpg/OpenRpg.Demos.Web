@@ -1,6 +1,6 @@
 using OpenRpg.Core.Utils;
 
-namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Random
+namespace OpenRpg.Demos.Infrastructure.Random
 {
     public class DefaultRandomizer : IRandomizer
     {

@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 
-namespace OpenRpg.Demos.Web.Infrastructure.DI
+namespace OpenRpg.Demos.Infrastructure.DI
 {
     public interface IModule
     {

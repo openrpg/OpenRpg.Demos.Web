@@ -1,8 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using OpenRpg.Demos.Web.Infrastructure.DI;
-using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Builders;
-using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Data;
-using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Locale;
+using OpenRpg.Demos.Infrastructure.Builders;
+using OpenRpg.Demos.Infrastructure.Data;
+using OpenRpg.Demos.Infrastructure.DI;
+using OpenRpg.Demos.Infrastructure.Locale;
 
 namespace OpenRpg.Demos.Web.Modules
 {

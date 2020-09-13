@@ -3,10 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using OpenRpg.Combat.Processors;
 using OpenRpg.Core.Stats;
 using OpenRpg.Core.Utils;
-using OpenRpg.Demos.Web.Infrastructure.DI;
-using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Random;
+using OpenRpg.Demos.Infrastructure.DI;
+using OpenRpg.Demos.Infrastructure.Random;
 using OpenRpg.Genres.Fantasy.Combat;
 using OpenRpg.Genres.Fantasy.Defaults;
+using OpenRpg.Genres.Fantasy.Requirements;
 using OpenRpg.Genres.Fantasy.Stats;
 
 namespace OpenRpg.Demos.Web.Modules
@@ -24,6 +25,7 @@ namespace OpenRpg.Demos.Web.Modules
             services.AddSingleton<IAttackGenerator, BasicAttackGenerator>();
             services.AddSingleton<IAttackGenerator, BasicAttackGenerator>();
             services.AddSingleton<IAttackProcessor, DefaultAttackProcessor>();
+            services.AddSingleton<IRequirementChecker, DefaultRequirementChecker>();
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using OpenRpg.Core.Classes;
 using OpenRpg.Core.Effects;
-using OpenRpg.Core.Races;
 using OpenRpg.Core.Requirements;
 using OpenRpg.Data.Defaults;
+using OpenRpg.Demos.Infrastructure.Types;
 using OpenRpg.Genres.Fantasy.Types;
 
-namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Data
+namespace OpenRpg.Demos.Infrastructure.Data
 {
     public class ClassRepository : InMemoryDataRepository<IClassTemplate>
     {
@@ -32,7 +32,7 @@ namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Data
 
             return new DefaultClassTemplate
             {
-                Id = 1,
+                Id = ClassTypes.Fighter,
                 AssetCode = "class-fighter",
                 NameLocaleId = "Fighter",
                 DescriptionLocaleId = "Super tough, hits things",
@@ -53,7 +53,7 @@ namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Data
 
             return new DefaultClassTemplate
             {
-                Id = 2,
+                Id = ClassTypes.Mage,
                 AssetCode = "class-mage",
                 NameLocaleId = "Mage",
                 DescriptionLocaleId = "Powerful magic users",

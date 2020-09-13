@@ -1,7 +1,7 @@
 ﻿using OpenRpg.Genres.Fantasy.Equipment;
 using OpenRpg.Genres.Fantasy.Equipment.Slots;
 
-namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Items
+namespace OpenRpg.Demos.Infrastructure.Items
 {
     public class DummyEquipment : IEquipment
     {

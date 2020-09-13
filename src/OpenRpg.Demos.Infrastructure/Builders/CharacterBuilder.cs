@@ -4,13 +4,13 @@ using OpenRpg.Core.Extensions;
 using OpenRpg.Core.Races;
 using OpenRpg.Core.Stats;
 using OpenRpg.Core.Utils;
-using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Data;
-using OpenRpg.Demos.Web.Infrastructure.OpenRpg.Items;
+using OpenRpg.Demos.Infrastructure.Data;
+using OpenRpg.Demos.Infrastructure.Items;
 using OpenRpg.Genres.Fantasy.Defaults;
 using OpenRpg.Genres.Fantasy.Extensions;
 using RandomNameGenerator;
 
-namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Builders
+namespace OpenRpg.Demos.Infrastructure.Builders
 {
     public class CharacterBuilder
     {

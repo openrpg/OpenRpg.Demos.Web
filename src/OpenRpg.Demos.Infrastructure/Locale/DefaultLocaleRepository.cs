@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using OpenRpg.Demos.Web.Extensions;
+using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Genres.Fantasy.Types;
 using OpenRpg.Localization.Repositories;
 
-namespace OpenRpg.Demos.Web.Infrastructure.OpenRpg.Locale
+namespace OpenRpg.Demos.Infrastructure.Locale
 {
     public class DefaultLocaleRepository : LocaleRepository
     {

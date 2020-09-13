@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using OpenRpg.Demos.Web.Infrastructure.DI;
+using OpenRpg.Demos.Infrastructure.DI;
 
 namespace OpenRpg.Demos.Web.Extensions
 {
