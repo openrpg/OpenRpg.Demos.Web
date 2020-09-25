@@ -76,3 +76,23 @@ ul.menu-list li.has-text-light {
 .title.item-quality-8 { color: #e6cc80 !important; }
 .title.item-quality-9 { color: #ff8000 !important; }
 .title.item-quality-10 { color: #00ccff !important; }
+
+.item-icon .item-icon-summary {
+    display: none;
+    width: 25em;
+    position: absolute;
+    z-index: 1000;
+}
+
+.item-icon:hover .item-icon-summary {
+    display: block !important;
+}
+
+.item-amount {
+    position: absolute;
+    bottom: -3px;
+    right: 5px;
+    font-weight: bold;
+    -webkit-text-stroke: 1px black;
+    -webkit-text-fill-color: white;
+}

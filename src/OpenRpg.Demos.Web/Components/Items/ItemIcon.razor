@@ -1,0 +1,44 @@
+@using OpenRpg.Genres.Fantasy.Characters
+@using OpenRpg.Demos.Infrastructure.Locale
+@using OpenRpg.Items
+@using OpenRpg.Items.Extensions
+@using OpenRpg.Items.Types
+@using OpenRpg.Genres.Fantasy.Requirements
+@using OpenRpg.Core.Variables
+
+@inject DefaultLocaleRepository LocaleRepository;
+@inject IRequirementChecker RequirementsChecker
+
+<figure class="item-icon image is-64x64 item-border with-rounding item-quality-@(_itemQualityTypeId)">
+    <img src="images/items/@(Item.ItemTemplate.AssetCode).png">
+    <div class="item-amount">@(_itemAmount > 0 ? $"{_itemAmount}" : "")</div>
+    <div class="item-icon-summary">
+        <ItemDetails Item="Item" Character="Character"></ItemDetails>
+    </div>
+</figure>
+
+@code {
+
+    [Parameter]
+    public IItem Item { get; set; }
+
+    [Parameter]
+    public ICharacter Character { get; set; }
+
+    private int _itemQualityTypeId;
+    private int _itemAmount;
+
+
+    protected override void OnParametersSet()
+    {
+        if (Item.Variables != null && Item.Variables.HasVariable(ItemVariableTypes.Amount))
+        { _itemAmount = Item.Variables.Amount(); }
+        else
+        { _itemAmount = 0;}
+
+        if (Item.ItemTemplate.Variables.HasVariable(ItemTemplateVariableTypes.QualityType))
+        { _itemQualityTypeId = Item.ItemTemplate.Variables.QualityType(); }
+
+        base.OnParametersSet();
+    }
+}

@@ -1,0 +1,256 @@
+@page "/inventory/basic-components"
+
+@using OpenRpg.Core.Common
+@using OpenRpg.Core.Classes
+@using OpenRpg.Core.Effects
+@using OpenRpg.Core.Modifications
+@using OpenRpg.Core.Races
+@using OpenRpg.Core.Requirements
+@using OpenRpg.Demos.Infrastructure.Items
+@using OpenRpg.Genres.Fantasy.Types
+@using OpenRpg.Items
+@using OpenRpg.Items.Extensions
+@using OpenRpg.Items.Inventory
+@using OpenRpg.Items.Templates
+@using OpenRpg.Items.Types
+
+@inject IJSRuntime JSRuntime
+
+<Markdown>
+    ## Basic Inventory Components
+    The inventory component is quite simple at its core, as it just allows you to store a collection of items.
+
+    ### `IInventory`
+    This represents a common inventory which will expose a collection of items as well as `IInventoryVariables` which
+    can be used to store things like max slots, max weights and other data used in your custom scenarios.
+</Markdown>
+<br />
+<Markdown>
+    ## Example inventory
+    Lets have a simple inventory here where we have a number of items on the right, lets pretend its from a shop or a loot drop
+    and the inventory on the left which can have items populated by clicking the items on the right.
+
+    > A lot of these interactions would be view concerns for you to solve in your own engine, be it Unity/Monogame/Godot etc
+    as this library just exposes the data and methods for interacting with the inventory, not the view layer parts. Common examples
+    would be using drag and drop or additional functionality like stack splitting etc.
+</Markdown>
+
+<br />
+<div class="columns">
+    <div class="column ">
+        <CardSection>
+            <div>
+                <h6 class="title is-6 has-text-centered has-text-dark">Inventory</h6>
+                <h6 class="subtitle is-6 has-text-dark has-text-centered">Click the item to drop it</h6>
+            </div>
+            <br />
+            <BasicInventory Inventory="_inventory" OnItemInteraction="RemoveItem" @ref="_inventoryRef"></BasicInventory>
+        </CardSection>
+    </div>
+    <div class="column is-one-fifth">
+        <CardSection>
+            <div>
+                <h6 class="title is-6 has-text-centered has-text-dark">Shop</h6>
+                <h6 class="subtitle is-6 has-text-dark has-text-centered">Everything is free! Click to Buy!</h6>
+            </div>
+            <br />
+            <a @onclick="() => AddItem(_simpleItem)">
+                <ItemIcon Item="_simpleItem"></ItemIcon>
+            </a>
+            <br />
+            <a @onclick="() => AddItem(_fancyItem)">
+                <ItemIcon Item="_fancyItem"></ItemIcon>
+            </a>
+            <br />
+            <a @onclick="() => AddItem(_potionItem)">
+                <ItemIcon Item="_potionItem"></ItemIcon>
+            </a>
+            <br />
+            <a @onclick="() => AddItem(_junkPotions)">
+                <ItemIcon Item="_junkPotions"></ItemIcon>
+            </a>
+        </CardSection>
+    </div>
+</div>
+<br />
+<Markdown>
+    ## How it works?
+    In this example we have 2 unstackable items and 1 stackable item (potions), so when we click on one of the items in
+    the shop area it basically calls the `AddItem` method on the inventory (Using `DefaultInventory here) and that internally
+    will try to work out how to best add that item.
+    
+    For example if we have 3 potions and they stack in 5, and you want to add 1 potion then it should just add to the existing
+    potions stacking amount. So behind the scenes it will check for the existence of known metadata such as weights, slots, stacks etc
+    and then work out how to best apply that information.
+    
+    > Different implementations will treat this data differently, and if you have a niche scenario it is recommended you implement your
+    own `IInventory` interface to get what you need.
+    
+    ### Immutable Items
+    One super important thing is that the implementations **SHOULD** keep the item passed in as immutable, for example if you have 3 
+    potions and you want to add 4 potions, it should add 2 to the existing to max out the slot, then add 2 into a new slot with the same
+    template, giving you effectively 2 potion slots. 
+    
+    The problem here is if the item passed in was not treated as immutable then you would in the latter phase make the items amount 2 then
+    add it into the inventory. However as they are reference types, this causes issues as the shops item amount would go up to 2 if you changed
+    the amount on the source instance.
+    
+    So the default inventory implementation (and hopefully other implementations) will clone the item before it is applied anywhere so
+    you can continue to pass in the same items (i.e Quest Rewards, Loot Table Entries, Shop Stock etc) without worrying that it is going to 
+    be altered in any way.
+</Markdown>
+@code {
+    private IItem _simpleItem, _fancyItem, _potionItem, _junkPotions;
+    private IInventory _inventory;
+    private BasicInventory _inventoryRef;
+
+    protected override void OnInitialized()
+    {
+        _simpleItem = MakeRubbishSword();
+        _fancyItem = MakeSuperSword();
+        _potionItem = MakePotion();
+        _junkPotions = MakeJunkPotion();
+        _inventory = new DefaultInventory();
+        _inventory.Variables.MaxSlots(32);
+        base.OnInitialized();
+    }
+
+    public async void AddItem(IItem item)
+    {
+        var added = _inventory.AddItem(item);
+        if (!added)
+        {
+            var options = new { message = $"Can't Add {item.ItemTemplate.NameLocaleId}, Not enough slots", type = "is-danger", position = "center" };
+            await JSRuntime.InvokeVoidAsync("bulmaToast.toast", options);
+        }
+    }
+
+    public void RemoveItem(IItem item)
+    {
+        if (item == null) { return; }
+        var removed = _inventory.RemoveItem(item);
+        _inventoryRef.Refresh();
+
+    }
+
+    private IItem MakeRubbishSword()
+    {
+        var template = new DefaultItemTemplate
+        {
+            Id = 1,
+            NameLocaleId = "Sword",
+            AssetCode = "sword",
+            DescriptionLocaleId = "A really bad looking sword, can slay things though",
+            ItemType = ItemTypes.GenericWeapon,
+            ModificationAllowances = new ModificationAllowance[0],
+            Requirements = new Requirement[0],
+            Effects = new[]
+            {
+                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
+            }
+        };
+        template.Variables.QualityType(ItemQualityTypes.JunkQuality);
+        template.Variables.Value(10);
+
+        return new DefaultItem
+        {
+            ItemTemplate = template,
+            Modifications = new IModification[0],
+        };
+    }
+
+    private IItem MakeSuperSword()
+    {
+        var swordEffects = new[]
+        {
+            new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 765.5f },
+            new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 20.0f },
+            new Effect { EffectType = EffectTypes.PureDamagePercentage, Potency = 10.0f },
+            new Effect { EffectType = EffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
+            new Effect { EffectType = EffectTypes.DarkDefenseAmount, Potency = 15.0f }
+        };
+
+        var template = new DefaultItemTemplate
+        {
+            Id = 2,
+            NameLocaleId = "Super Sword",
+            AssetCode = "sword",
+            DescriptionLocaleId = "So fancy it could slice through stone",
+            ItemType = ItemTypes.GenericWeapon,
+            ModificationAllowances = new ModificationAllowance[0],
+            Requirements = new Requirement[0],
+            Effects = swordEffects
+        };
+        template.Variables.QualityType(ItemQualityTypes.EpicQuality);
+        template.Variables.Value(10000);
+
+        return new DefaultItem
+        {
+            ItemTemplate = template,
+            Modifications = new IModification[0],
+        };
+    }
+
+    private IItem MakePotion()
+    {
+        var template = new DefaultItemTemplate
+        {
+            Id = 3,
+            NameLocaleId = "Healing Potion",
+            AssetCode = "potion",
+            DescriptionLocaleId = "A sketchy looking potion, lets hope it heals you",
+            ItemType = ItemTypes.Potions,
+            ModificationAllowances = new ModificationAllowance[0],
+            Requirements = new Requirement[0],
+            Effects = new[]
+            {
+                new Effect { EffectType = EffectTypes.HealthRestoreAmount, Potency = 30.0f }
+            }
+        };
+        template.Variables.QualityType(ItemQualityTypes.UncommonQuality);
+        template.Variables.Value(20);
+        template.Variables.MaxStacks(5);
+
+        var item = new DefaultItem
+        {
+            ItemTemplate = template,
+            Modifications = new IModification[0],
+            Variables = new DefaultItemVariables()
+        };
+
+        item.Variables.Amount(1);
+        return item;
+    }
+
+    private IItem MakeJunkPotion()
+    {
+        var template = new DefaultItemTemplate
+        {
+            Id = 3,
+            NameLocaleId = "Junk Potion Combi-Deal",
+            AssetCode = "potion-2",
+            DescriptionLocaleId = "Who knows whats in this...",
+            ItemType = ItemTypes.Potions,
+            ModificationAllowances = new ModificationAllowance[0],
+            Requirements = new Requirement[0],
+            Effects = new[]
+            {
+                new Effect { EffectType = EffectTypes.HealthRestoreAmount, Potency = -5.0f }
+            }
+        };
+        template.Variables.QualityType(ItemQualityTypes.JunkQuality);
+        template.Variables.Value(0);
+        template.Variables.MaxStacks(5);
+
+        var item = new DefaultItem
+        {
+            ItemTemplate = template,
+            Modifications = new IModification[0],
+            Variables = new DefaultItemVariables()
+        };
+
+        item.Variables.Amount(3);
+        return item;
+    }
+
+}
