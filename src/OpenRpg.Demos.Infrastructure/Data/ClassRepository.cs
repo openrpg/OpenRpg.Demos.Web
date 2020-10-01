@@ -3,7 +3,7 @@ using OpenRpg.Core.Classes;
 using OpenRpg.Core.Effects;
 using OpenRpg.Core.Requirements;
 using OpenRpg.Data.Defaults;
-using OpenRpg.Demos.Infrastructure.Types;
+using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
 
 namespace OpenRpg.Demos.Infrastructure.Data
@@ -32,7 +32,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
 
             return new DefaultClassTemplate
             {
-                Id = ClassTypes.Fighter,
+                Id = ClassTypeLookups.Fighter,
                 AssetCode = "class-fighter",
                 NameLocaleId = "Fighter",
                 DescriptionLocaleId = "Super tough, hits things",
@@ -53,7 +53,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
 
             return new DefaultClassTemplate
             {
-                Id = ClassTypes.Mage,
+                Id = ClassTypeLookups.Mage,
                 AssetCode = "class-mage",
                 NameLocaleId = "Mage",
                 DescriptionLocaleId = "Powerful magic users",

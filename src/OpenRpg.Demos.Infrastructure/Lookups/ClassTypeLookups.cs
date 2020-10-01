@@ -1,6 +1,6 @@
-﻿namespace OpenRpg.Demos.Infrastructure.Types
+﻿namespace OpenRpg.Demos.Infrastructure.Lookups
 {
-    public static class ClassTypes
+    public static class ClassTypeLookups
     {
         public static int Unknown = 0;
 

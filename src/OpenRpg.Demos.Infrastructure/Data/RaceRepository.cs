@@ -3,7 +3,7 @@ using OpenRpg.Core.Effects;
 using OpenRpg.Core.Races;
 using OpenRpg.Core.Requirements;
 using OpenRpg.Data.Defaults;
-using OpenRpg.Demos.Infrastructure.Types;
+using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
 
 namespace OpenRpg.Demos.Infrastructure.Data
@@ -35,7 +35,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
 
             return new DefaultRaceTemplate
             {
-                Id = RaceTypes.Human,
+                Id = RaceTypeLookups.Human,
                 AssetCode = "race-human",
                 NameLocaleId = "Human",
                 DescriptionLocaleId = "Humans are the most common of all races",
@@ -64,7 +64,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
 
             return new DefaultRaceTemplate
             {
-                Id = RaceTypes.Elf,
+                Id = RaceTypeLookups.Elf,
                 AssetCode = "race-elf",
                 NameLocaleId = "Elf",
                 DescriptionLocaleId = "Elves are pretty common, have pointy ears too",
@@ -92,7 +92,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
 
             return new DefaultRaceTemplate
             {
-                Id = RaceTypes.Dwarf,
+                Id = RaceTypeLookups.Dwarf,
                 AssetCode = "race-dwarf",
                 NameLocaleId = "Dwarf",
                 DescriptionLocaleId = "Dwarves are strong and hardy",

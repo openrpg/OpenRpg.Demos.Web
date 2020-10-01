@@ -13,6 +13,7 @@ namespace OpenRpg.Demos.Web.Modules
             services.AddSingleton<RaceRepository>();
             services.AddSingleton<ClassRepository>();
             services.AddSingleton<CharacterBuilder>();
+            services.AddSingleton<ItemTemplateRepository>();
             services.AddSingleton<DefaultLocaleRepository>();
         }
     }

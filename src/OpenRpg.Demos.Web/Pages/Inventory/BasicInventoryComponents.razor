@@ -7,6 +7,7 @@
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Requirements
 @using OpenRpg.Demos.Infrastructure.Items
+@using OpenRpg.Demos.Infrastructure.Lookups
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
 @using OpenRpg.Items.Extensions
@@ -15,6 +16,7 @@
 @using OpenRpg.Items.Types
 
 @inject IJSRuntime JSRuntime
+@inject ItemTemplateRepository ItemTemplateRepository
 
 <Markdown>
     ## Basic Inventory Components
@@ -23,6 +25,8 @@
     ### `IInventory`
     This represents a common inventory which will expose a collection of items as well as `IInventoryVariables` which
     can be used to store things like max slots, max weights and other data used in your custom scenarios.
+    
+    > The default implementation provided is the `DefaultInventory` which supports slot/stacking use cases out the box.
 </Markdown>
 <br />
 <Markdown>
@@ -135,85 +139,27 @@
 
     private IItem MakeRubbishSword()
     {
-        var template = new DefaultItemTemplate
-        {
-            Id = 1,
-            NameLocaleId = "Sword",
-            AssetCode = "sword",
-            DescriptionLocaleId = "A really bad looking sword, can slay things though",
-            ItemType = ItemTypes.GenericWeapon,
-            ModificationAllowances = new ModificationAllowance[0],
-            Requirements = new Requirement[0],
-            Effects = new[]
-            {
-                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
-            }
-        };
-        template.Variables.QualityType(ItemQualityTypes.JunkQuality);
-        template.Variables.Value(10);
-
         return new DefaultItem
         {
-            ItemTemplate = template,
+            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.Sword),
             Modifications = new IModification[0],
         };
     }
 
     private IItem MakeSuperSword()
     {
-        var swordEffects = new[]
-        {
-            new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 765.5f },
-            new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 20.0f },
-            new Effect { EffectType = EffectTypes.PureDamagePercentage, Potency = 10.0f },
-            new Effect { EffectType = EffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
-            new Effect { EffectType = EffectTypes.DarkDefenseAmount, Potency = 15.0f }
-        };
-
-        var template = new DefaultItemTemplate
-        {
-            Id = 2,
-            NameLocaleId = "Super Sword",
-            AssetCode = "sword",
-            DescriptionLocaleId = "So fancy it could slice through stone",
-            ItemType = ItemTypes.GenericWeapon,
-            ModificationAllowances = new ModificationAllowance[0],
-            Requirements = new Requirement[0],
-            Effects = swordEffects
-        };
-        template.Variables.QualityType(ItemQualityTypes.EpicQuality);
-        template.Variables.Value(10000);
-
         return new DefaultItem
         {
-            ItemTemplate = template,
+            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.SuperSword),
             Modifications = new IModification[0],
         };
     }
 
     private IItem MakePotion()
     {
-        var template = new DefaultItemTemplate
-        {
-            Id = 3,
-            NameLocaleId = "Healing Potion",
-            AssetCode = "potion",
-            DescriptionLocaleId = "A sketchy looking potion, lets hope it heals you",
-            ItemType = ItemTypes.Potions,
-            ModificationAllowances = new ModificationAllowance[0],
-            Requirements = new Requirement[0],
-            Effects = new[]
-            {
-                new Effect { EffectType = EffectTypes.HealthRestoreAmount, Potency = 30.0f }
-            }
-        };
-        template.Variables.QualityType(ItemQualityTypes.UncommonQuality);
-        template.Variables.Value(20);
-        template.Variables.MaxStacks(5);
-
         var item = new DefaultItem
         {
-            ItemTemplate = template,
+            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.HealingPotion),
             Modifications = new IModification[0],
             Variables = new DefaultItemVariables()
         };
@@ -224,27 +170,9 @@
 
     private IItem MakeJunkPotion()
     {
-        var template = new DefaultItemTemplate
-        {
-            Id = 3,
-            NameLocaleId = "Junk Potion Combi-Deal",
-            AssetCode = "potion-2",
-            DescriptionLocaleId = "Who knows whats in this...",
-            ItemType = ItemTypes.Potions,
-            ModificationAllowances = new ModificationAllowance[0],
-            Requirements = new Requirement[0],
-            Effects = new[]
-            {
-                new Effect { EffectType = EffectTypes.HealthRestoreAmount, Potency = -5.0f }
-            }
-        };
-        template.Variables.QualityType(ItemQualityTypes.JunkQuality);
-        template.Variables.Value(0);
-        template.Variables.MaxStacks(5);
-
         var item = new DefaultItem
         {
-            ItemTemplate = template,
+            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.JunkPotion),
             Modifications = new IModification[0],
             Variables = new DefaultItemVariables()
         };
