@@ -4,7 +4,6 @@ using OpenRpg.Combat.Processors;
 using OpenRpg.Core.Stats;
 using OpenRpg.Core.Utils;
 using OpenRpg.Demos.Infrastructure.DI;
-using OpenRpg.Demos.Infrastructure.Random;
 using OpenRpg.Genres.Fantasy.Combat;
 using OpenRpg.Genres.Fantasy.Defaults;
 using OpenRpg.Genres.Fantasy.Requirements;
