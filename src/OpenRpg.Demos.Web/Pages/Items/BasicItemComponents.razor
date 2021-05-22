@@ -6,6 +6,7 @@
 @using OpenRpg.Core.Modifications
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Requirements
+@using OpenRpg.Demos.Infrastructure.Extensions
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
 @using OpenRpg.Items.Extensions
@@ -52,11 +53,8 @@
             {
                 Id = 1,
                 NameLocaleId = "Sword",
-                AssetCode = "sword",
                 DescriptionLocaleId = "A really bad looking sword, can slay things though",
                 ItemType = ItemTypes.GenericWeapon,
-                ModificationAllowances = new ModificationAllowance[0],
-                Requirements = new Requirement[0],
                 Effects = new []
                 {
                     new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
@@ -64,6 +62,7 @@
             };
             swordTemplate.Variables.QualityType(ItemQualityTypes.JunkQuality);
             swordTemplate.Variables.Value(10);
+            swordTemplate.Variables.AssetCode("sword");
             ```
 
             This indicates that the sword is a **Generic Weapon** of **Common Quality**, then it has no requirements, no moddable slots and does damage of 30.
@@ -73,8 +72,7 @@
             ```csharp
             var item = new DefaultItem
             {
-                ItemTemplate = swordTemplate,
-                Modifications = new IModification[0],
+                ItemTemplate = swordTemplate
             };
             ```
 
@@ -107,15 +105,13 @@
             {
                 Id = 2,
                 NameLocaleId = "Super Sword",
-                AssetCode = "sword",
                 DescriptionLocaleId = "So fancy it could slice through stone",
                 ItemType = ItemTypes.GenericWeapon,
-                ModificationAllowances = new ModificationAllowance[0],
-                Requirements = new Requirement[0],
                 Effects = swordEffects
             };
             template.Variables.QualityType(ItemQualityTypes.EpicQuality);
             template.Variables.Value(10000);
+            template.Variables.AssetCode("sword");
             ```
 
             So we have the template built we can assign it to an item instance and show it.
@@ -148,11 +144,8 @@
         {
             Id = 1,
             NameLocaleId = "Sword",
-            AssetCode = "sword",
             DescriptionLocaleId = "A really bad looking sword, can slay things though",
             ItemType = ItemTypes.GenericWeapon,
-            ModificationAllowances = new ModificationAllowance[0],
-            Requirements = new Requirement[0],
             Effects = new []
             {
                 new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
@@ -160,11 +153,11 @@
         };
         template.Variables.QualityType(ItemQualityTypes.JunkQuality);
         template.Variables.Value(10);
+        template.Variables.AssetCode("sword");
 
         return new DefaultItem
         {
-            ItemTemplate = template,
-            Modifications = new IModification[0],
+            ItemTemplate = template
         };
     }
 
@@ -183,20 +176,17 @@
         {
             Id = 2,
             NameLocaleId = "Super Sword",
-            AssetCode = "sword",
             DescriptionLocaleId = "So fancy it could slice through stone",
             ItemType = ItemTypes.GenericWeapon,
-            ModificationAllowances = new ModificationAllowance[0],
-            Requirements = new Requirement[0],
             Effects = swordEffects
         };
         template.Variables.QualityType(ItemQualityTypes.EpicQuality);
         template.Variables.Value(10000);
+        template.Variables.AssetCode("sword");
 
         return new DefaultItem
         {
-            ItemTemplate = template,
-            Modifications = new IModification[0],
+            ItemTemplate = template
         };
     }
 

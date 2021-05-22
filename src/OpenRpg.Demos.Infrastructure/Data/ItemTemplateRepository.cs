@@ -3,6 +3,7 @@ using OpenRpg.Core.Effects;
 using OpenRpg.Core.Modifications;
 using OpenRpg.Core.Requirements;
 using OpenRpg.Data.Defaults;
+using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
 using OpenRpg.Items.Extensions;
@@ -30,7 +31,6 @@ namespace OpenRpg.Demos.Infrastructure.Data
             {
                 Id = ItemTemplateLookups.Sword,
                 NameLocaleId = "Sword",
-                AssetCode = "sword",
                 DescriptionLocaleId = "A really bad looking sword, can slay things though",
                 ItemType = ItemTypes.GenericWeapon,
                 ModificationAllowances = new ModificationAllowance[0],
@@ -42,6 +42,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             };
             template.Variables.QualityType(ItemQualityTypes.JunkQuality);
             template.Variables.Value(10);
+            template.Variables.AssetCode("sword");
 
             return template;
         }
@@ -61,7 +62,6 @@ namespace OpenRpg.Demos.Infrastructure.Data
             {
                 Id = ItemTemplateLookups.SuperSword,
                 NameLocaleId = "Super Sword",
-                AssetCode = "sword",
                 DescriptionLocaleId = "So fancy it could slice through stone",
                 ItemType = ItemTypes.GenericWeapon,
                 ModificationAllowances = new ModificationAllowance[0],
@@ -70,7 +70,8 @@ namespace OpenRpg.Demos.Infrastructure.Data
             };
             template.Variables.QualityType(ItemQualityTypes.EpicQuality);
             template.Variables.Value(10000);
-
+            template.Variables.AssetCode("sword");
+            
             return template;
         }
 
@@ -80,7 +81,6 @@ namespace OpenRpg.Demos.Infrastructure.Data
             {
                 Id = ItemTemplateLookups.HealingPotion,
                 NameLocaleId = "Healing Potion",
-                AssetCode = "potion",
                 DescriptionLocaleId = "A sketchy looking potion, lets hope it heals you",
                 ItemType = ItemTypes.Potions,
                 ModificationAllowances = new ModificationAllowance[0],
@@ -93,6 +93,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             template.Variables.QualityType(ItemQualityTypes.UncommonQuality);
             template.Variables.Value(20);
             template.Variables.MaxStacks(5);
+            template.Variables.AssetCode("potion");
 
             return template;
         }
@@ -103,7 +104,6 @@ namespace OpenRpg.Demos.Infrastructure.Data
             {
                 Id = ItemTemplateLookups.JunkPotion,
                 NameLocaleId = "Junk Potion Combi-Deal",
-                AssetCode = "potion-2",
                 DescriptionLocaleId = "Who knows whats in this...",
                 ItemType = ItemTypes.Potions,
                 ModificationAllowances = new ModificationAllowance[0],
@@ -116,7 +116,8 @@ namespace OpenRpg.Demos.Infrastructure.Data
             template.Variables.QualityType(ItemQualityTypes.JunkQuality);
             template.Variables.Value(0);
             template.Variables.MaxStacks(5);
-
+            template.Variables.AssetCode("potion-2");
+            
             return template;
         }
     }

@@ -3,6 +3,7 @@ using OpenRpg.Core.Classes;
 using OpenRpg.Core.Effects;
 using OpenRpg.Core.Requirements;
 using OpenRpg.Data.Defaults;
+using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
 
@@ -30,15 +31,15 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 new Effect {Potency = 30, EffectType = EffectTypes.HealthBonusAmount}
             };
 
-            return new DefaultClassTemplate
+            var classTemplate = new DefaultClassTemplate
             {
                 Id = ClassTypeLookups.Fighter,
-                AssetCode = "class-fighter",
                 NameLocaleId = "Fighter",
                 DescriptionLocaleId = "Super tough, hits things",
-                Effects = effects,
-                Requirements = new List<Requirement>()
+                Effects = effects
             };
+            classTemplate.Variables.AssetCode("class-fighter");
+            return classTemplate;
         }
 
         private IClassTemplate GenerateMageClass()
@@ -51,15 +52,15 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 new Effect {Potency = 30, EffectType = EffectTypes.MagicBonusAmount}
             };
 
-            return new DefaultClassTemplate
+            var classTemplate = new DefaultClassTemplate
             {
                 Id = ClassTypeLookups.Mage,
-                AssetCode = "class-mage",
                 NameLocaleId = "Mage",
                 DescriptionLocaleId = "Powerful magic users",
-                Effects = effects,
-                Requirements = new List<Requirement>()
+                Effects = effects
             };
+            classTemplate.Variables.AssetCode("class-mage");
+            return classTemplate;
         }
     }
 }

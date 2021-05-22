@@ -6,6 +6,7 @@
 @using OpenRpg.Core.Modifications
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Requirements
+@using OpenRpg.Demos.Infrastructure.Extensions
 @using OpenRpg.Demos.Infrastructure.Lookups
 @using OpenRpg.Genres.Fantasy.Defaults
 @using OpenRpg.Genres.Fantasy.Types
@@ -118,11 +119,9 @@
         {
             Id = 1,
             NameLocaleId = "Staff Of Hitting",
-            AssetCode = "staff",
             DescriptionLocaleId = "A staff for hitting things, got gold bits on but still looks rubbish",
             ItemType = ItemTypes.GenericWeapon,
-            ModificationAllowances = new ModificationAllowance[0],
-            Requirements = new Requirement[]
+            Requirements = new[]
             {
                 new Requirement {RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 10 }
                 },
@@ -134,11 +133,11 @@
         };
         template.Variables.QualityType(ItemQualityTypes.UncommonQuality);
         template.Variables.Value(150);
+        template.Variables.AssetCode("staff");
 
         return new DefaultItem
         {
-            ItemTemplate = template,
-            Modifications = new IModification[0],
+            ItemTemplate = template
         };
     }
 
@@ -148,11 +147,9 @@
         {
             Id = 1,
             NameLocaleId = "Wizardy Wand",
-            AssetCode = "wand",
             DescriptionLocaleId = "A super special wand with some gem on the end that can only be used by the strongest of wizardy woos",
             ItemType = ItemTypes.GenericWeapon,
-            ModificationAllowances = new ModificationAllowance[0],
-            Requirements = new Requirement[]
+            Requirements = new[]
             {
                 new Requirement { RequirementType = RequirementTypes.ClassRequirement, AssociatedId = ClassTypeLookups.Mage },
                 new Requirement { RequirementType = RequirementTypes.LevelRequirement, AssociatedValue = 3 },
@@ -167,6 +164,7 @@
         };
         template.Variables.QualityType(ItemQualityTypes.RareQuality);
         template.Variables.Value(300);
+        template.Variables.AssetCode("wand");
 
         return new DefaultItem
         {
@@ -181,10 +179,8 @@
         {
             Id = 1,
             NameLocaleId = "Sword For The Strong",
-            AssetCode = "sword",
             DescriptionLocaleId = "A sword that can only unlock its full power for those with high strength",
             ItemType = ItemTypes.GenericWeapon,
-            ModificationAllowances = new ModificationAllowance[0],
             Requirements = new[]
             {
                 new Requirement { RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 8 },
@@ -212,18 +208,18 @@
         };
         template.Variables.QualityType(ItemQualityTypes.EpicQuality);
         template.Variables.Value(1000);
+        template.Variables.AssetCode("sword");
 
         return new DefaultItem
         {
-            ItemTemplate = template,
-            Modifications = new IModification[0],
+            ItemTemplate = template
         };
     }
 
     public void RandomizeCharacter()
     {
         _randomCharacter = CharacterBuilder.CreateNew().Build();
-        this.StateHasChanged();
+        StateHasChanged();
     }
 
 }

@@ -5,12 +5,13 @@
 @using OpenRpg.Items.Types
 @using OpenRpg.Genres.Fantasy.Requirements
 @using OpenRpg.Core.Variables
+@using OpenRpg.Demos.Infrastructure.Extensions
 
 @inject DefaultLocaleRepository LocaleRepository;
 @inject IRequirementChecker RequirementsChecker
 
 <figure class="item-icon image is-64x64 item-border with-rounding item-quality-@(_itemQualityTypeId)">
-    <img src="images/items/@(Item.ItemTemplate.AssetCode).png">
+    <img src="images/items/@(Item.ItemTemplate.Variables.AssetCode()).png">
     <div class="item-amount">@(_itemAmount > 0 ? $"{_itemAmount}" : "")</div>
     <div class="item-icon-summary">
         <ItemDetails Item="Item" Character="Character"></ItemDetails>

@@ -52,9 +52,8 @@
 
             ```csharp
             character.NameLocaleId = "John Doe";
-            character.Race = new DefaultRaceTemplate { NameLocaleId = "Human", Effects = new Effect[0] };
-            character.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter", Effects = new Effect[0] });
-            character.Stats = new DefaultStatsVariables();
+            character.Race = new DefaultRaceTemplate { NameLocaleId = "Human" };
+            character.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter" });
             character.Stats.MaxHealth(100);
             character.Stats.Health(50);
             character.Stats.MaxMagic(10);
@@ -152,10 +151,9 @@
     {
         _manualCharacter = new DefaultCharacter();
         _manualCharacter.NameLocaleId = "John Doe";
-        _manualCharacter.Race = new DefaultRaceTemplate { NameLocaleId = "Human", Effects = new Effect[0]};
-        _manualCharacter.Class = new DefaultClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter", Effects = new Effect[0]});
+        _manualCharacter.Race = new DefaultRaceTemplate { NameLocaleId = "Human"};
+        _manualCharacter.Class = new DefaultClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter"});
 
-        _manualCharacter.Stats = new DefaultStatsVariables();
         _manualCharacter.Stats.MaxHealth(100);
         _manualCharacter.Stats.Health(50);
         _manualCharacter.Stats.MaxMagic(10);

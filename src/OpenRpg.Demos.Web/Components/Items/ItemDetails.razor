@@ -9,6 +9,7 @@
 @using OpenRpg.Items.Templates
 @using OpenRpg.Items.Types
 @using System.Transactions
+@using OpenRpg.Demos.Infrastructure.Extensions
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Fantasy.Requirements
 
@@ -24,7 +25,7 @@
     <div class="columns">
         <div class="column">
             <figure class="image is-64x64 item-border with-rounding item-quality-@(_itemQualityTypeId)">
-                <img src="images/items/@(Item.ItemTemplate.AssetCode).png">
+                <img src="images/items/@(Item.ItemTemplate.Variables.AssetCode()).png">
             </figure>
         </div>
         <div class="column">

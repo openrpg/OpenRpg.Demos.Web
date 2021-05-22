@@ -53,7 +53,6 @@
     var lootEntry = new DefaultLootTableEntry
     {
         Item = item,
-        Requirements = new Requirement[0],
         Variables = lootEntryVariables
     };
     ```
@@ -137,7 +136,6 @@
         return new DefaultItem
         {
             ItemTemplate = potionTemplate,
-            Modifications = new IModification[0],
             Variables = new DefaultItemVariables()
         };
     }
@@ -148,7 +146,6 @@
         return new DefaultItem
         {
             ItemTemplate = potionTemplate,
-            Modifications = new IModification[0],
             Variables = new DefaultItemVariables()
         };
     }

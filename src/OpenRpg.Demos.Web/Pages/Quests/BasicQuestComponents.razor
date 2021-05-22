@@ -1,13 +1,8 @@
 ﻿@page "/quests/basic-components"
-
-@using OpenRpg.Core.Common
-@using OpenRpg.Core.Classes
-@using OpenRpg.Core.Races
-@using OpenRpg.Core.Requirements
+@using OpenRpg.Demos.Infrastructure.Extensions
 @using OpenRpg.Demos.Infrastructure.Lookups
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Quests
-@using OpenRpg.Quests.Defaults
 
 <Markdown>
     ## Basic Quests Components
@@ -31,11 +26,7 @@
                 Id = 1,
                 NameLocaleId = "A Simple Quest",
                 DescriptionLocaleId = "An NPC needs you to collect 5 health potions, better get on the case!",
-                AssetCode = "default-quest",
                 IsRepeatable = false,
-                Requirements = new Requirement[0],
-                Variables = new DefaultQuestVariables(),
-                Gifts = new Reward[0],
                 Objectives = new List&lt;Objective&gt;
                 {
                     new Objective {ObjectiveType = ObjectiveTypes.ItemObjective, AssociatedId = ItemTemplateLookups.HealingPotion, AssociatedValue = 5}
@@ -46,6 +37,7 @@
                     new Reward {RewardType = RewardTypes.GoldReward, AssociatedValue = 50}
                 }
             };
+            quest.Variables.AssetCode("default-quest");
             ```
 
         </Markdown>
@@ -134,16 +126,12 @@
 
     private IQuest CreateBasicQuest()
     {
-        return new DefaultQuest
+        var quest = new DefaultQuest
         {
             Id = 1,
             NameLocaleId = "A Simple Quest",
             DescriptionLocaleId = "An NPC needs you to collect 5 health potions, better get on the case!",
-            AssetCode = "default-quest",
             IsRepeatable = false,
-            Requirements = new Requirement[0],
-            Variables = new DefaultQuestVariables(),
-            Gifts = new Reward[0],
             Objectives = new List<Objective>
         {
                 new Objective {ObjectiveType = ObjectiveTypes.ItemObjective, AssociatedId = ItemTemplateLookups.HealingPotion, AssociatedValue = 5}
@@ -154,6 +142,8 @@
                 new Reward {RewardType = RewardTypes.GoldReward, AssociatedValue = 50}
             }
         };
+        quest.Variables.AssetCode("default-quest");
+        return quest;
     }
 
 }

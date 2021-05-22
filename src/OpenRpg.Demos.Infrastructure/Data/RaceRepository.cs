@@ -3,6 +3,7 @@ using OpenRpg.Core.Effects;
 using OpenRpg.Core.Races;
 using OpenRpg.Core.Requirements;
 using OpenRpg.Data.Defaults;
+using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
 
@@ -33,15 +34,15 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 new Effect {Potency = 10, EffectType = EffectTypes.MagicBonusAmount}
             };
 
-            return new DefaultRaceTemplate
+            var raceTemplate = new DefaultRaceTemplate
             {
                 Id = RaceTypeLookups.Human,
-                AssetCode = "race-human",
                 NameLocaleId = "Human",
                 DescriptionLocaleId = "Humans are the most common of all races",
-                Effects = effects,
-                Requirements = new List<Requirement>()
+                Effects = effects
             };
+            raceTemplate.Variables.AssetCode("race-human");
+            return raceTemplate;
         }
 
         private IRaceTemplate GenerateElfTemplate()
@@ -62,15 +63,15 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 new Effect {Potency = 30, EffectType = EffectTypes.MagicBonusAmount}
             };
 
-            return new DefaultRaceTemplate
+            var raceTemplate = new DefaultRaceTemplate
             {
                 Id = RaceTypeLookups.Elf,
-                AssetCode = "race-elf",
                 NameLocaleId = "Elf",
                 DescriptionLocaleId = "Elves are pretty common, have pointy ears too",
-                Effects = effects,
-                Requirements = new List<Requirement>()
+                Effects = effects
             };
+            raceTemplate.Variables.AssetCode("race-elf");
+            return raceTemplate;
         }
 
         private IRaceTemplate GenerateDwarfTemplate()
@@ -90,15 +91,15 @@ namespace OpenRpg.Demos.Infrastructure.Data
 
             };
 
-            return new DefaultRaceTemplate
+            var raceTemplate = new DefaultRaceTemplate
             {
                 Id = RaceTypeLookups.Dwarf,
-                AssetCode = "race-dwarf",
                 NameLocaleId = "Dwarf",
                 DescriptionLocaleId = "Dwarves are strong and hardy",
-                Effects = effects,
-                Requirements = new List<Requirement>()
+                Effects = effects
             };
+            raceTemplate.Variables.AssetCode("race-dwarf");
+            return raceTemplate;
         }
     }
 }
