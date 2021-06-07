@@ -114,7 +114,7 @@
 
     protected override void OnInitialized()
     {
-        if (Item.ItemTemplate.Variables.HasVariable(ItemTemplateVariableTypes.QualityType))
+        if (Item.ItemTemplate.Variables.ContainsKey(ItemTemplateVariableTypes.QualityType))
         { _itemQualityTypeId = Item.ItemTemplate.Variables.QualityType(); }
 
     }

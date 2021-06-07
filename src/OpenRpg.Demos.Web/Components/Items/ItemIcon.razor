@@ -32,12 +32,12 @@
 
     protected override void OnParametersSet()
     {
-        if (Item.Variables != null && Item.Variables.HasVariable(ItemVariableTypes.Amount))
+        if (Item.Variables != null && Item.Variables.ContainsKey(ItemVariableTypes.Amount))
         { _itemAmount = Item.Variables.Amount(); }
         else
         { _itemAmount = 0;}
 
-        if (Item.ItemTemplate.Variables.HasVariable(ItemTemplateVariableTypes.QualityType))
+        if (Item.ItemTemplate.Variables.ContainsKey(ItemTemplateVariableTypes.QualityType))
         { _itemQualityTypeId = Item.ItemTemplate.Variables.QualityType(); }
 
         base.OnParametersSet();
