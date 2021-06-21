@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using OpenRpg.Cards.Types;
 using OpenRpg.Demos.Infrastructure.Extensions;
+using OpenRpg.Demos.Infrastructure.Types;
 using OpenRpg.Genres.Fantasy.Types;
 using OpenRpg.Localization;
 using OpenRpg.Localization.Repositories;
@@ -23,6 +24,8 @@ namespace OpenRpg.Demos.Infrastructure.Locale
         public static readonly string DamageTypesTextKey = "types-damage-";
         public static readonly string AssociatedTypesTextKey = "types-associated-";
         public static readonly string CardTypesTextKey = "types-cards-";
+        public static readonly string UtilityTypesTextKey = "types-ai-utility-";
+        public static readonly string AdviceTypesTextKey = "types-ai-advice-";
         
         public static string GetKeyFor(string typeKey, int typeValue)
         { return $"{typeKey}{typeValue}"; }
@@ -42,6 +45,8 @@ namespace OpenRpg.Demos.Infrastructure.Locale
             GenerateQuestStateTypeLocaleText();
             GenerateRewardTypeLocaleText();
             GenerateCardTypeLocaleText();
+            GenerateUtilityTypeLocaleText();
+            GenerateAdviceTypeLocaleText();
         }
 
         private IDictionary<int, string> GetTypeFieldsDictionary<T>()
@@ -119,6 +124,18 @@ namespace OpenRpg.Demos.Infrastructure.Locale
         {
             GetTypeFieldsDictionary<CardTypes>()
                 .ForEach((key, value) => LocaleDataset.LocaleData.Add(GetKeyFor(CardTypesTextKey, key), value.Replace("Card", "")));
+        }
+        
+        private void GenerateUtilityTypeLocaleText()
+        {
+            GetTypeFieldsDictionary<UtilityVariableTypes>()
+                .ForEach((key, value) => LocaleDataset.LocaleData.Add(GetKeyFor(UtilityTypesTextKey, key), value));
+        }
+        
+        private void GenerateAdviceTypeLocaleText()
+        {
+            GetTypeFieldsDictionary<AdviceVariableTypes>()
+                .ForEach((key, value) => LocaleDataset.LocaleData.Add(GetKeyFor(AdviceTypesTextKey, key), value));
         }
     }
 }

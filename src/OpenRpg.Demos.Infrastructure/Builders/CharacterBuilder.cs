@@ -21,6 +21,7 @@ namespace OpenRpg.Demos.Infrastructure.Builders
 
         private int _raceId, _classId, _classLevels, _genderId;
         private string _name;
+        private static int currentId;
 
         public CharacterBuilder(RaceRepository raceRepository, ClassRepository classRepository, IStatsComputer statsComputer, IRandomizer randomizer)
         {
@@ -91,6 +92,7 @@ namespace OpenRpg.Demos.Infrastructure.Builders
 
             var character = new DefaultCharacter
             {
+                Id = ++currentId,
                 NameLocaleId = _name,
                 Race = RaceRepository.Retrieve(_raceId),
                 Class = new DefaultClass(_classLevels, ClassRepository.Retrieve(_classId)),

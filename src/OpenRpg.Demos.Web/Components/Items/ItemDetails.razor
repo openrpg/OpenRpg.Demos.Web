@@ -14,7 +14,7 @@
 @using OpenRpg.Genres.Fantasy.Requirements
 
 @inject DefaultLocaleRepository LocaleRepository;
-@inject IRequirementChecker RequirementsChecker
+@inject ICharacterRequirementChecker RequirementsChecker
 
 <CardSection customClasses="@cardClasses">
     <h4 class="title is-4 has-text-centered item-quality-@(_itemQualityTypeId)">@(Item.ItemTemplate.NameLocaleId ?? "Unnamed Item")</h4>

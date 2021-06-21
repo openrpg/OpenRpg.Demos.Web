@@ -8,7 +8,7 @@
 @using OpenRpg.Demos.Infrastructure.Extensions
 
 @inject DefaultLocaleRepository LocaleRepository;
-@inject IRequirementChecker RequirementsChecker
+@inject ICharacterRequirementChecker RequirementsChecker
 
 <figure class="item-icon image is-64x64 item-border with-rounding item-quality-@(_itemQualityTypeId)">
     <img src="images/items/@(Item.ItemTemplate.Variables.AssetCode()).png">
