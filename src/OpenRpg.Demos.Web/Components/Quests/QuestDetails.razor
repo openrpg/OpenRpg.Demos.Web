@@ -1,9 +1,11 @@
 @using OpenRpg.Quests
-@using OpenRpg.Genres.Fantasy.Characters
-@using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
 @using OpenRpg.Core.Modifications
+@using OpenRpg.Genres.Characters
+@using OpenRpg.Genres.Types
 @using OpenRpg.Items.Extensions
+@using OpenRpg.Items.Variables
+@using RewardTypes = OpenRpg.Genres.Fantasy.Types.RewardTypes
 
 @inject ItemTemplateRepository ItemTemplateRepository
 
@@ -65,7 +67,7 @@
                 {
                     <ItemIcon Item="GetItemFor(reward.AssociatedId, reward.AssociatedValue)" Character="Character"></ItemIcon>
                 }
-                else if (reward.RewardType == RewardTypes.GoldReward)
+                else if (reward.RewardType == RewardTypes.CurrencyReward)
                 {
                     <div class="subtitle is-6 has-text-dark">@(reward.AssociatedValue) Gold</div>
                 }
@@ -88,8 +90,7 @@
         var item = new DefaultItem
         {
             ItemTemplate = template,
-            Variables = new DefaultItemVariables(),
-            Modifications = new IModification[0]
+            Variables = new DefaultItemVariables()
         };
         item.Variables.Amount(itemAmount);
         return item;

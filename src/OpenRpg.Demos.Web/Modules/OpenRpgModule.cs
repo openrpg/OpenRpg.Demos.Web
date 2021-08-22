@@ -8,6 +8,7 @@ using OpenRpg.Genres.Fantasy.Combat;
 using OpenRpg.Genres.Fantasy.Defaults;
 using OpenRpg.Genres.Fantasy.Requirements;
 using OpenRpg.Genres.Fantasy.Stats;
+using OpenRpg.Genres.Requirements;
 
 namespace OpenRpg.Demos.Web.Modules
 {
@@ -23,7 +24,7 @@ namespace OpenRpg.Demos.Web.Modules
             services.AddSingleton<IRandomizer>(x => new DefaultRandomizer(new Random()));
             services.AddSingleton<IAttackGenerator, BasicAttackGenerator>();
             services.AddSingleton<IAttackProcessor, DefaultAttackProcessor>();
-            services.AddSingleton<ICharacterRequirementChecker, DefaultCharacterRequirementChecker>();
+            services.AddSingleton<ICharacterRequirementChecker, DefaultFantasyCharacterRequirementChecker>();
         }
     }
 }
