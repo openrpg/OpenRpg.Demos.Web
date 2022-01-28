@@ -24,7 +24,7 @@ namespace OpenRpg.Demos.Web.Modules
             services.AddSingleton<IRandomizer>(x => new DefaultRandomizer(new Random()));
             services.AddSingleton<IAttackGenerator, BasicAttackGenerator>();
             services.AddSingleton<IAttackProcessor, DefaultAttackProcessor>();
-            services.AddSingleton<ICharacterRequirementChecker, DefaultCharacterRequirementChecker>();
+            services.AddSingleton<ICharacterRequirementChecker, DefaultFantasyCharacterRequirementChecker>();
         }
     }
 }

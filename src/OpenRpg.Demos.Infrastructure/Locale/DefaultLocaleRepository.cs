@@ -62,7 +62,7 @@ namespace OpenRpg.Demos.Infrastructure.Locale
         private IDictionary<int, string> GetTypeFieldsDictionary(Type typeObject)
         {
             return typeObject
-                .GetFields(BindingFlags.Public | BindingFlags.Static)
+                .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
                 .ToDictionary(x => (int)x.GetValue(null), x => x.Name.UnPascalCase());
         }
 

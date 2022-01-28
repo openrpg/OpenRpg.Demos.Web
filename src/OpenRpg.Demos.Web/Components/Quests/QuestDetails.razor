@@ -90,8 +90,7 @@
         var item = new DefaultItem
         {
             ItemTemplate = template,
-            Variables = new DefaultItemVariables(),
-            Modifications = Array.Empty<IModification>()
+            Variables = new DefaultItemVariables()
         };
         item.Variables.Amount(itemAmount);
         return item;

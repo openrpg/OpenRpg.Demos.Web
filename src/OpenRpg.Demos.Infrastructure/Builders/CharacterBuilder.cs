@@ -7,7 +7,6 @@ using OpenRpg.Core.Utils;
 using OpenRpg.Demos.Infrastructure.Data;
 using OpenRpg.Genres.Characters;
 using OpenRpg.Genres.Extensions;
-using OpenRpg.Items.Equipment;
 using RandomNameGenerator;
 
 namespace OpenRpg.Demos.Infrastructure.Builders
@@ -96,8 +95,7 @@ namespace OpenRpg.Demos.Infrastructure.Builders
                 NameLocaleId = _name,
                 Race = RaceRepository.Retrieve(_raceId),
                 Class = new DefaultClass(_classLevels, ClassRepository.Retrieve(_classId)),
-                GenderType = (byte)_genderId,
-                Equipment = new DefaultEquipment()
+                GenderType = (byte)_genderId
             };
 
             character.Stats = StatsComputer.ComputeStats(character.GetEffects().ToArray());
