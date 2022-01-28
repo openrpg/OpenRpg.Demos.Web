@@ -11,8 +11,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="3.2.1" PrivateAssets="all" />
     <PackageReference Include="OpenRpg.AdviceEngine" Version="0.20.26" />
     <PackageReference Include="OpenRpg.Cards" Version="0.18.143" />
-    <PackageReference Include="OpenRpg.Genres" Version="0.20.11" />
-    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.20.11" />
+    <PackageReference Include="OpenRpg.Genres" Version="0.20.14" />
+    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.20.14" />
     <PackageReference Include="RandomNameGenerator" Version="1.0.4" />
     <PackageReference Include="System.Net.Http.Json" Version="3.2.1" />
   </ItemGroup>
