@@ -5,9 +5,9 @@ using OpenRpg.Core.Races;
 using OpenRpg.Core.Stats;
 using OpenRpg.Core.Utils;
 using OpenRpg.Demos.Infrastructure.Data;
-using OpenRpg.Demos.Infrastructure.Items;
-using OpenRpg.Genres.Fantasy.Defaults;
-using OpenRpg.Genres.Fantasy.Extensions;
+using OpenRpg.Genres.Characters;
+using OpenRpg.Genres.Extensions;
+using OpenRpg.Items.Equipment;
 using RandomNameGenerator;
 
 namespace OpenRpg.Demos.Infrastructure.Builders
@@ -97,10 +97,10 @@ namespace OpenRpg.Demos.Infrastructure.Builders
                 Race = RaceRepository.Retrieve(_raceId),
                 Class = new DefaultClass(_classLevels, ClassRepository.Retrieve(_classId)),
                 GenderType = (byte)_genderId,
-                Equipment = new DummyEquipment()
+                Equipment = new DefaultEquipment()
             };
 
-            character.Stats = StatsComputer.ComputeStats(character.GetActiveEffects().ToArray());
+            character.Stats = StatsComputer.ComputeStats(character.GetEffects().ToArray());
             return character;
         }
     }

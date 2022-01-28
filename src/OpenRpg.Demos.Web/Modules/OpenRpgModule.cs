@@ -8,6 +8,7 @@ using OpenRpg.Genres.Fantasy.Combat;
 using OpenRpg.Genres.Fantasy.Defaults;
 using OpenRpg.Genres.Fantasy.Requirements;
 using OpenRpg.Genres.Fantasy.Stats;
+using OpenRpg.Genres.Requirements;
 
 namespace OpenRpg.Demos.Web.Modules
 {

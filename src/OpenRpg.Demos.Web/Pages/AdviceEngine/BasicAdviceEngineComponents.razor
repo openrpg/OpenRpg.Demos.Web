@@ -156,7 +156,7 @@
             <input disabled="disabled" value="@UtilityVariables[lowHealthKey]" />
             <br/>
             <button @onclick="RefreshAdvice">Refresh Advice</button>
-            <p>Advice Score: @shouldHealAdvice.UtilityValue and target: @shouldHealAdvice.GetRelatedContext()</p>
+            <p>Advice Score: @shouldHealAdvice.Score and target: @shouldHealAdvice.ContextAccessor.GetContext()</p>
         </CardSection>
     </div>
 </div>
@@ -192,11 +192,12 @@
         base.OnInitialized();
 
         ExampleHealthValue = 60;
-        var healthAccessor = new ManualValueAccessor(() => ExampleHealthValue);
+        var healthAccessor = new ManualValueAccessor((unit, variables) => ExampleHealthValue);
         var healthClamper = new Clamper(0, 100);
         lowHealthConsideration = new ValueBasedConsideration(lowHealthKey, healthAccessor, healthClamper, PresetCurves.InverseLinear);
 
-        shouldHealAdvice = new DefaultAdvice(AdviceVariableTypes.ShouldHeal, new[] {lowHealthKey}, () => "Yourself");
+        var accessor = new ManualContextAccessor(null, UtilityVariables, (a, b) => "Yourself");
+        shouldHealAdvice = new DefaultAdvice(AdviceVariableTypes.ShouldHeal, new[] {lowHealthKey}, accessor);
 
         RefreshConsideration();
         RefreshAdvice();
@@ -205,13 +206,13 @@
     protected void RefreshConsideration()
     {
         if (ExampleHealthValue > 100) { ExampleHealthValue = 100; }
-        ExampleHealthUtility = lowHealthConsideration.CalculateUtility(UtilityVariables);
+        ExampleHealthUtility = lowHealthConsideration.CalculateUtility(null, UtilityVariables);
         UtilityVariables[lowHealthKey] = ExampleHealthUtility;
     }
 
     protected void RefreshAdvice()
     {
-        shouldHealAdvice.UtilityValue = UtilityVariables.GetRelatedUtilities(lowHealthKey.UtilityId).CalculateScore();
+        shouldHealAdvice.Score = UtilityVariables.GetRelatedUtilities(lowHealthKey.UtilityId).CalculateScore();
     }
 
 }

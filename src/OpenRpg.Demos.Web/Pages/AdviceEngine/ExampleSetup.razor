@@ -9,7 +9,6 @@
 @using OpenRpg.AdviceEngine.Keys
 @using OpenRpg.CurveFunctions
 @using OpenRpg.Demos.Infrastructure.Types
-@using OpenRpg.Genres.Fantasy.Characters
 @using OpenRpg.AdviceEngine
 @using OpenRpg.AdviceEngine.Considerations.Applicators
 @using OpenRpg.Core.Requirements
@@ -23,6 +22,13 @@
 @using OpenRpg.AdviceEngine.Advisors
 @using OpenRpg.AdviceEngine.Advisors.Applicators
 @using OpenRpg.AdviceEngine.Extensions
+@using OpenRpg.AdviceEngine.Handlers.Advisors.Factories
+@using OpenRpg.AdviceEngine.Handlers.Considerations.Factories
+@using OpenRpg.AdviceEngine.Variables
+@using OpenRpg.Core.Common
+@using OpenRpg.Genres.Characters
+@using OpenRpg.Genres.Extensions
+@using OpenRpg.Genres.Requirements
 
 @inject CharacterBuilder CharacterBuilder;
 @inject ICharacterRequirementChecker RequirementChecker;
@@ -86,10 +92,10 @@
                                 @foreach (var advice in agent.GetAdvice())
                                 {
 
-                                    var relatedContext = advice.GetRelatedContext() as ICharacter;
+                                    var relatedContext = advice.ContextAccessor.Context as ICharacter;
                                     <AdviceValue Text="@GetAdviceText(advice.AdviceId)"
                                                  ContextText="@relatedContext.NameLocaleId"
-                                                 IsBestAdvice="@(index++ == 0)" Value="@advice.UtilityValue"/>
+                                                 IsBestAdvice="@(index++ == 0)" Value="@advice.Score"/>
                                 }
                             </div>
                             <div class="columns">
@@ -338,8 +344,7 @@
         
         public override IConsideration CreateConsideration(IAgent agent)
         {
-            var character = agent.OwnerContext as ICharacter;
-            var healthValueAccessor = new ManualValueAccessor(() => character.Stats.Health());
+            var healthValueAccessor = new ManualValueAccessor((context, _) => (context as ICharacter).Stats.Health());
             return new ValueBasedConsideration(new UtilityKey(UtilityVariableTypes.LowHealth), healthValueAccessor, PresetClampers.ZeroToHundred, PresetCurves.InverseLinear);
         }
     }
@@ -359,7 +364,7 @@
         public IConsideration CreateConsideration(ICharacter goodCharacter, ICharacter badCharacter)
         {
             var distanceUtilityKey = new UtilityKey(UtilityVariableTypes.EnemyDistance, badCharacter.Id);
-            var distanceAccessor = new ManualValueAccessor(() => Math.Abs((float)badCharacter.Variables[PositionVariable] - (float)goodCharacter.Variables[PositionVariable]));
+            var distanceAccessor = new ManualValueAccessor((a,b) => Math.Abs((float)badCharacter.Variables[PositionVariable] - (float)goodCharacter.Variables[PositionVariable]));
             return new ValueBasedConsideration(distanceUtilityKey, distanceAccessor, DistanceClamper, PresetCurves.QuadraticLowerLeft);
         }
 
@@ -385,10 +390,10 @@
 
         public override IAdvice CreateAdvice(IAgent agent)
         {
-            return new DefaultAdvice(AdviceVariableTypes.ShouldHeal, new[]
-            {
-                new UtilityKey(UtilityVariableTypes.LowHealth)
-            }, () => agent.OwnerContext as ICharacter);
+            var contextAccessor = new ManualContextAccessor(agent.OwnerContext, agent.UtilityVariables, (context, _) => context as ICharacter);
+            return new DefaultAdvice(AdviceVariableTypes.ShouldHeal, 
+                new[] { new UtilityKey(UtilityVariableTypes.LowHealth)}, 
+                contextAccessor);
         }
     }
     
@@ -402,9 +407,9 @@
             AllAgents = allAgents;
         }
         
-        public ICharacter GetBestTarget(IAgent agent)
+        public ICharacter GetBestTarget(IHasDataId context, IUtilityVariables variables)
         {
-            var targetUtility = agent.UtilityVariables
+            var targetUtility = variables
                 .GetRelatedUtilities(UtilityVariableTypes.EnemyDistance)
                 .OrderByDescending(x => x.Value)
                 .First();
@@ -414,10 +419,11 @@
 
         public override IAdvice CreateAdvice(IAgent agent)
         {
+            var contextAccessor = new ManualContextAccessor(agent.OwnerContext, agent.UtilityVariables, GetBestTarget);
             return new DefaultAdvice(AdviceVariableTypes.ShouldAttack, new[]
             {
                 new UtilityKey(UtilityVariableTypes.EnemyDistance)
-            }, () => GetBestTarget(agent));
+            }, contextAccessor);
         }
     }
 
@@ -476,9 +482,9 @@
 
     public IAgent CreateAgentFor(ICharacter character, IRefreshScheduler refreshScheduler)
     {
-        var considerationHandler = new ConsiderationHandler(refreshScheduler);
-        var adviceHandler = new AdviceHandler(refreshScheduler);
-        return new Agent(character, considerationHandler, adviceHandler);
+        var considerationHandlerFactory = new DefaultConsiderationHandlerFactory(refreshScheduler);
+        var adviceHandlerFactory = new DefaultAdviceHandlerFactory(refreshScheduler);
+        return new Agent(character, considerationHandlerFactory, adviceHandlerFactory);
     }
 
     public int GetRandomHealthValue()

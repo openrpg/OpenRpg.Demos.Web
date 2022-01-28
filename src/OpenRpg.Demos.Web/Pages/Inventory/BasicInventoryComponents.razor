@@ -1,19 +1,10 @@
 @page "/inventory/basic-components"
-
-@using OpenRpg.Core.Common
-@using OpenRpg.Core.Classes
-@using OpenRpg.Core.Effects
 @using OpenRpg.Core.Modifications
-@using OpenRpg.Core.Races
-@using OpenRpg.Core.Requirements
-@using OpenRpg.Demos.Infrastructure.Items
 @using OpenRpg.Demos.Infrastructure.Lookups
-@using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
 @using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Inventory
-@using OpenRpg.Items.Templates
-@using OpenRpg.Items.Types
+@using OpenRpg.Items.Variables
 
 @inject IJSRuntime JSRuntime
 @inject ItemTemplateRepository ItemTemplateRepository
@@ -141,8 +132,7 @@
     {
         return new DefaultItem
         {
-            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.Sword),
-            Modifications = new IModification[0],
+            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.Sword)
         };
     }
 
@@ -150,8 +140,7 @@
     {
         return new DefaultItem
         {
-            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.SuperSword),
-            Modifications = new IModification[0],
+            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.SuperSword)
         };
     }
 
@@ -159,9 +148,7 @@
     {
         var item = new DefaultItem
         {
-            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.HealingPotion),
-            Modifications = new IModification[0],
-            Variables = new DefaultItemVariables()
+            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.HealingPotion)
         };
 
         item.Variables.Amount(1);
@@ -172,9 +159,7 @@
     {
         var item = new DefaultItem
         {
-            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.JunkPotion),
-            Modifications = new IModification[0],
-            Variables = new DefaultItemVariables()
+            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.JunkPotion)
         };
 
         item.Variables.Amount(3);

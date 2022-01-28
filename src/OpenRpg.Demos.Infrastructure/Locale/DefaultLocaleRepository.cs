@@ -5,9 +5,16 @@ using System.Reflection;
 using OpenRpg.Cards.Types;
 using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Demos.Infrastructure.Types;
-using OpenRpg.Genres.Fantasy.Types;
+using OpenRpg.Genres.Types;
 using OpenRpg.Localization;
 using OpenRpg.Localization.Repositories;
+using DamageTypes = OpenRpg.Genres.Fantasy.Types.DamageTypes;
+using EffectTypes = OpenRpg.Genres.Fantasy.Types.EffectTypes;
+using ItemQualityTypes = OpenRpg.Genres.Fantasy.Types.ItemQualityTypes;
+using ItemTypes = OpenRpg.Genres.Fantasy.Types.ItemTypes;
+using ModificationTypes = OpenRpg.Genres.Fantasy.Types.ModificationTypes;
+using RequirementTypes = OpenRpg.Genres.Fantasy.Types.RequirementTypes;
+using RewardTypes = OpenRpg.Genres.Fantasy.Types.RewardTypes;
 
 namespace OpenRpg.Demos.Infrastructure.Locale
 {
