@@ -3,11 +3,13 @@
 @using OpenRpg.Combat.Attacks
 @using OpenRpg.Demos.Infrastructure.Locale
 @using OpenRpg.Genres.Characters
+@using OpenRpg.Localization.Data.Extensions
+@using OpenRpg.Localization.Data.Repositories
 
 @inject CharacterBuilder CharacterBuilder
 @inject IAttackGenerator AttackGenerator
 @inject IAttackProcessor AttackProcessor
-@inject DefaultLocaleRepository LocaleRepository
+@inject ILocaleRepository LocaleRepository
 
 <Markdown>
     ## Defending
@@ -113,8 +115,8 @@
 
     public string GetDamageTypeText(int damageType)
     {
-        var damageLocaleKey = DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.DamageTypesTextKey, damageType);
-        return LocaleRepository.Retrieve(damageLocaleKey);
+        var damageLocaleKey = LocaleDataGenerator.GetKeyFor(LocaleDataGenerator.DamageTypesTextKey, damageType);
+        return LocaleRepository.Get(damageLocaleKey);
     }
 
     public void GenerateAttack()

@@ -1,13 +1,19 @@
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Core.Requirements
+@using OpenRpg.Data
+@using OpenRpg.Data.Conventions.Extensions
 @using OpenRpg.Demos.Infrastructure.Locale
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Fantasy.Requirements
 @using OpenRpg.Genres.Requirements
-@inject DefaultLocaleRepository LocaleRepository
-@inject RaceRepository RaceRepository
-@inject ClassRepository ClassRepository
+@using OpenRpg.Localization.Data.Repositories
+@using OpenRpg.Core.Classes
+@using OpenRpg.Core.Races
+@using OpenRpg.Localization.Data.Extensions
+
+@inject ILocaleRepository LocaleRepository
+@inject IRepository Repository
 @inject ICharacterRequirementChecker RequirementsChecker
 
 @if (Requirements != null && Requirements.Count > 0)
@@ -18,9 +24,9 @@
             <li style="list-style: none;">
                 <span class="@(IsRequirementMet(requirement) ? "has-text-success" : "has-text-danger")">
                     @if (requirement.RequirementType == RequirementTypes.ClassRequirement)
-                    {<span>@(ClassRepository.Retrieve(requirement.AssociatedId).NameLocaleId) Class Required</span>}
+                    {<span>@(Repository.Get<IClassTemplate>(requirement.AssociatedId).NameLocaleId) Class Required</span>}
                     else if (requirement.RequirementType == RequirementTypes.RaceRequirement)
-                    {<span>@(RaceRepository.Retrieve(requirement.AssociatedId).NameLocaleId) Race Required</span>}
+                    {<span>@(Repository.Get<IRaceTemplate>(requirement.AssociatedId).NameLocaleId) Race Required</span>}
                     else if (requirement.RequirementType == RequirementTypes.StrengthRequirement)
                     {<span>@(requirement.AssociatedValue) Strength Required</span>}
                     else if (requirement.RequirementType == RequirementTypes.LevelRequirement)
@@ -45,5 +51,5 @@
     { return RequirementsChecker.IsRequirementMet(Character, requirement); }
 
     public string GetRequirementText(int requirementType)
-    { return LocaleRepository.Retrieve(DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.RequirementTextKey, requirementType)); }
+    { return LocaleRepository.Get(LocaleDataGenerator.GetKeyFor(LocaleDataGenerator.RequirementTextKey, requirementType)); }
 }

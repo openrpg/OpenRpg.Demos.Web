@@ -1,26 +1,24 @@
 ﻿using System.Collections.Generic;
 using OpenRpg.Core.Classes;
 using OpenRpg.Core.Effects;
-using OpenRpg.Core.Requirements;
-using OpenRpg.Data.Defaults;
 using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
 
 namespace OpenRpg.Demos.Infrastructure.Data
 {
-    public class ClassRepository : InMemoryDataRepository<IClassTemplate>
+    public class ClassTemplateDataGenerator : IDataGenerator<IClassTemplate>
     {
-        public ClassRepository()
+        public IEnumerable<IClassTemplate> GenerateData()
         {
-            Data = new List<IClassTemplate>
+            return new []
             {
                 GenerateFighterClass(),
                 GenerateMageClass()
             };
         }
 
-        private IClassTemplate GenerateFighterClass()
+        public IClassTemplate GenerateFighterClass()
         {
             var effects = new[]
             {
@@ -42,7 +40,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             return classTemplate;
         }
 
-        private IClassTemplate GenerateMageClass()
+        public IClassTemplate GenerateMageClass()
         {
             var effects = new[]
             {
@@ -62,5 +60,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             classTemplate.Variables.AssetCode("class-mage");
             return classTemplate;
         }
+
+
     }
 }

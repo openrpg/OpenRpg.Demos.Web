@@ -1,19 +1,17 @@
 ﻿using System.Collections.Generic;
 using OpenRpg.Core.Effects;
 using OpenRpg.Core.Races;
-using OpenRpg.Core.Requirements;
-using OpenRpg.Data.Defaults;
 using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
 
 namespace OpenRpg.Demos.Infrastructure.Data
 {
-    public class RaceRepository : InMemoryDataRepository<IRaceTemplate>
+    public class RaceTemplateDataGenerator : IDataGenerator<IRaceTemplate>
     {
-        public RaceRepository()
+        public IEnumerable<IRaceTemplate> GenerateData()
         {
-            Data = new List<IRaceTemplate>
+            return new [] 
             {
                 GenerateHumanTemplate(),
                 GenerateElfTemplate(),
@@ -21,7 +19,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             };
         }
 
-        private IRaceTemplate GenerateHumanTemplate()
+        public IRaceTemplate GenerateHumanTemplate()
         {
             var effects = new[]
             {
@@ -45,7 +43,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             return raceTemplate;
         }
 
-        private IRaceTemplate GenerateElfTemplate()
+        public IRaceTemplate GenerateElfTemplate()
         {
             var effects = new[]
             {
@@ -74,7 +72,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             return raceTemplate;
         }
 
-        private IRaceTemplate GenerateDwarfTemplate()
+        public IRaceTemplate GenerateDwarfTemplate()
         {
             var effects = new[]
             {
