@@ -1,13 +1,16 @@
 @using OpenRpg.Quests
 @using OpenRpg.Items
 @using OpenRpg.Core.Modifications
+@using OpenRpg.Data
+@using OpenRpg.Data.Conventions.Extensions
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Types
 @using OpenRpg.Items.Extensions
+@using OpenRpg.Items.Templates
 @using OpenRpg.Items.Variables
 @using RewardTypes = OpenRpg.Genres.Fantasy.Types.RewardTypes
 
-@inject ItemTemplateRepository ItemTemplateRepository
+@inject IRepository Repository
 
 <CardSection>
     <div class="has-text-centered">
@@ -86,7 +89,7 @@
 
     public IItem GetItemFor(int itemId, int itemAmount)
     {
-        var template = ItemTemplateRepository.Retrieve(itemId);
+        var template = Repository.Get<IItemTemplate>(itemId);
         var item = new DefaultItem
         {
             ItemTemplate = template,

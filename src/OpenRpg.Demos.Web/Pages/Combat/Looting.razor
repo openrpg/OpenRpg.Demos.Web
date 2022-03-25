@@ -1,18 +1,19 @@
 ﻿@page "/combat/looting"
 @using OpenRpg.Combat.Processors
-@using OpenRpg.Core.Modifications
 @using OpenRpg.Core.Utils
-@using OpenRpg.Demos.Infrastructure.Locale
+@using OpenRpg.Data
+@using OpenRpg.Data.Conventions.Extensions
 @using OpenRpg.Demos.Infrastructure.Lookups
 @using OpenRpg.Items
 @using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Loot
+@using OpenRpg.Items.Templates
 @using OpenRpg.Items.Variables
+@using OpenRpg.Localization.Data.Repositories
 
 @inject CharacterBuilder CharacterBuilder
-@inject ItemTemplateRepository ItemTemplateRepository
+@inject IRepository Repository
 @inject IAttackProcessor AttackProcessor
-@inject DefaultLocaleRepository LocaleRepository
 @inject IRandomizer Randomizer
 
 <Markdown>
@@ -133,7 +134,7 @@
     
     public IItem GeneratePotion()
     {
-        var potionTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.HealingPotion);
+        var potionTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.HealingPotion);
         return new DefaultItem
         {
             ItemTemplate = potionTemplate,
@@ -143,7 +144,7 @@
     
     public IItem GenerateSword()
     {
-        var potionTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.Sword);
+        var potionTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.Sword);
         return new DefaultItem
         {
             ItemTemplate = potionTemplate,

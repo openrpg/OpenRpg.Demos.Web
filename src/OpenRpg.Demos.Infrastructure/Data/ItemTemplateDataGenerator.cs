@@ -2,7 +2,6 @@
 using OpenRpg.Core.Effects;
 using OpenRpg.Core.Modifications;
 using OpenRpg.Core.Requirements;
-using OpenRpg.Data.Defaults;
 using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
@@ -12,11 +11,11 @@ using ItemTypes = OpenRpg.Genres.Fantasy.Types.ItemTypes;
 
 namespace OpenRpg.Demos.Infrastructure.Data
 {
-    public class ItemTemplateRepository : InMemoryDataRepository<IItemTemplate>
+    public class ItemTemplateDataGenerator : IDataGenerator<IItemTemplate>
     {
-        public ItemTemplateRepository()
+        public IEnumerable<IItemTemplate> GenerateData()
         {
-            Data = new List<IItemTemplate>
+            return new []
             {
                 MakeRubbishSword(),
                 MakeSuperSword(),
@@ -25,7 +24,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             };
         }
 
-        private IItemTemplate MakeRubbishSword()
+        public IItemTemplate MakeRubbishSword()
         {
             var template = new DefaultItemTemplate
             {
@@ -75,7 +74,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             return template;
         }
 
-        private IItemTemplate MakePotion()
+        public IItemTemplate MakePotion()
         {
             var template = new DefaultItemTemplate
             {
@@ -98,7 +97,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             return template;
         }
 
-        private IItemTemplate MakeJunkPotion()
+        public IItemTemplate MakeJunkPotion()
         {
             var template = new DefaultItemTemplate
             {
@@ -120,5 +119,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
             
             return template;
         }
+
+
     }
 }

@@ -9,11 +9,13 @@
 @using OpenRpg.Cards
 @using OpenRpg.Cards.Effects
 @using OpenRpg.Combat.Abilities
+@using OpenRpg.Core.Classes
+@using OpenRpg.Core.Races
+@using OpenRpg.Data
+@using OpenRpg.Data.Conventions.Extensions
 @using OpenRpg.Demos.Infrastructure.Lookups
 
-@inject ClassRepository _classRepository
-@inject ItemTemplateRepository _itemTemplateRepository
-@inject RaceRepository _raceRepository
+@inject IRepository Repository
 
 <Markdown>
     ## Basic Card Components
@@ -124,11 +126,11 @@
 
     private IEnumerable<ICard> MakeExampleCards()
     {
-        var potion = new DefaultItem {ItemTemplate = _itemTemplateRepository.Retrieve(ItemTemplateLookups.HealingPotion)};
+        var potion = new DefaultItem {ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.HealingPotion)};
         yield return new ItemCard(potion);
         yield return _rubbishSwordCard;
-        yield return new ClassCard(_classRepository.Retrieve(ClassTypeLookups.Fighter));
-        yield return new RaceCard(_raceRepository.Retrieve(RaceTypeLookups.Dwarf));
+        yield return new ClassCard(Repository.Get<IClassTemplate>(ClassTypeLookups.Fighter));
+        yield return new RaceCard(Repository.Get<IRaceTemplate>(RaceTypeLookups.Dwarf));
         yield return new AbilityCard(new Ability
         {
             Id = 1,

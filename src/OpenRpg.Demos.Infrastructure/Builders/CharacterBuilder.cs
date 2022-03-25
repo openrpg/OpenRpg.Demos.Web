@@ -4,7 +4,8 @@ using OpenRpg.Core.Extensions;
 using OpenRpg.Core.Races;
 using OpenRpg.Core.Stats;
 using OpenRpg.Core.Utils;
-using OpenRpg.Demos.Infrastructure.Data;
+using OpenRpg.Data;
+using OpenRpg.Data.Conventions.Extensions;
 using OpenRpg.Genres.Characters;
 using OpenRpg.Genres.Extensions;
 using RandomNameGenerator;
@@ -13,8 +14,7 @@ namespace OpenRpg.Demos.Infrastructure.Builders
 {
     public class CharacterBuilder
     {
-        public RaceRepository RaceRepository { get; }
-        public ClassRepository ClassRepository { get; }
+        public IRepository Repository { get; }
         public IStatsComputer StatsComputer { get; }
         public IRandomizer Randomizer { get; }
 
@@ -22,10 +22,9 @@ namespace OpenRpg.Demos.Infrastructure.Builders
         private string _name;
         private static int currentId;
 
-        public CharacterBuilder(RaceRepository raceRepository, ClassRepository classRepository, IStatsComputer statsComputer, IRandomizer randomizer)
+        public CharacterBuilder(IRepository repository, IStatsComputer statsComputer, IRandomizer randomizer)
         {
-            RaceRepository = raceRepository;
-            ClassRepository = classRepository;
+            Repository = repository;
             StatsComputer = statsComputer;
             Randomizer = randomizer;
         }
@@ -81,8 +80,11 @@ namespace OpenRpg.Demos.Infrastructure.Builders
 
         public DefaultCharacter Build()
         {
-            if (_raceId == 0) { _raceId = Randomizer.TakeRandomFrom(RaceRepository.Data).Id; }
-            if (_classId == 0) { _classId = Randomizer.TakeRandomFrom(ClassRepository.Data).Id; }
+            var raceData = Repository.DataSource.GetAll<IRaceTemplate>();
+            var classData = Repository.DataSource.GetAll<IClassTemplate>();
+            
+            if (_raceId == 0) { _raceId = Randomizer.TakeRandomFrom(raceData).Id; }
+            if (_classId == 0) { _classId = Randomizer.TakeRandomFrom(classData).Id; }
             if (_genderId == 0) { _genderId = Randomizer.Random(1,2); }
             if (_classLevels == 0) { _classLevels = Randomizer.Random(1,5); }
             
@@ -93,8 +95,8 @@ namespace OpenRpg.Demos.Infrastructure.Builders
             {
                 Id = ++currentId,
                 NameLocaleId = _name,
-                Race = RaceRepository.Retrieve(_raceId),
-                Class = new DefaultClass(_classLevels, ClassRepository.Retrieve(_classId)),
+                Race = Repository.Get<IRaceTemplate>(_raceId),
+                Class = new DefaultClass(_classLevels, Repository.Get<IClassTemplate>(_classId)),
                 GenderType = (byte)_genderId
             };
 

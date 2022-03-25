@@ -1,13 +1,14 @@
 @page "/inventory/basic-components"
-@using OpenRpg.Core.Modifications
+@using OpenRpg.Data
+@using OpenRpg.Data.Conventions.Extensions
 @using OpenRpg.Demos.Infrastructure.Lookups
 @using OpenRpg.Items
 @using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Inventory
-@using OpenRpg.Items.Variables
+@using OpenRpg.Items.Templates
 
 @inject IJSRuntime JSRuntime
-@inject ItemTemplateRepository ItemTemplateRepository
+@inject IRepository Repository
 
 <Markdown>
     ## Basic Inventory Components
@@ -132,7 +133,7 @@
     {
         return new DefaultItem
         {
-            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.Sword)
+            ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.Sword)
         };
     }
 
@@ -140,7 +141,7 @@
     {
         return new DefaultItem
         {
-            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.SuperSword)
+            ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.SuperSword)
         };
     }
 
@@ -148,7 +149,7 @@
     {
         var item = new DefaultItem
         {
-            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.HealingPotion)
+            ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.HealingPotion)
         };
 
         item.Variables.Amount(1);
@@ -159,7 +160,7 @@
     {
         var item = new DefaultItem
         {
-            ItemTemplate = ItemTemplateRepository.Retrieve(ItemTemplateLookups.JunkPotion)
+            ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.JunkPotion)
         };
 
         item.Variables.Amount(3);

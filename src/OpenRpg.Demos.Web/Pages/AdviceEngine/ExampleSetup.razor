@@ -28,10 +28,12 @@
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Requirements
+@using OpenRpg.Localization.Data.Extensions
+@using OpenRpg.Localization.Data.Repositories
 
 @inject CharacterBuilder CharacterBuilder;
 @inject ICharacterRequirementChecker RequirementChecker;
-@inject DefaultLocaleRepository LocaleRepository;
+@inject ILocaleRepository LocaleRepository;
 
 @implements IDisposable
 
@@ -517,15 +519,15 @@
 
     public string GetUtilityText(UtilityKey key)
     {
-        var lookupKey = DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.UtilityTypesTextKey, key.UtilityId);
-        var lookupText = LocaleRepository.Retrieve(lookupKey);
+        var lookupKey = LocaleDataGenerator.GetKeyFor(LocaleDataGenerator.UtilityTypesTextKey, key.UtilityId);
+        var lookupText = LocaleRepository.Get(lookupKey);
         return key.RelatedId == 0 ? lookupText : $"{lookupText}:{key.RelatedId}";
     }
     
     public string GetAdviceText(int adviceKey)
     {
-        var lookupKey = DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.AdviceTypesTextKey, adviceKey);
-        return LocaleRepository.Retrieve(lookupKey);
+        var lookupKey = LocaleDataGenerator.GetKeyFor(LocaleDataGenerator.AdviceTypesTextKey, adviceKey);
+        return LocaleRepository.Get(lookupKey);
     }
 
     public void Dispose()

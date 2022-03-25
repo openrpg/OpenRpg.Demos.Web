@@ -3,10 +3,12 @@
 @using OpenRpg.Genres.Fantasy.Defaults
 @using RandomNameGenerator
 @using OpenRpg.Genres.Characters
+@using OpenRpg.Data
+@using OpenRpg.Core.Races
+@using OpenRpg.Core.Classes
 
 @inject CharacterBuilder CharacterBuilder;
-@inject RaceRepository RaceRepository;
-@inject ClassRepository ClassRepository;
+@inject IRepository Repository;
 
 <Markdown>
     # Character Builder
@@ -54,7 +56,7 @@
         <div class="has-text-centered">
             <h2 class="title has-text-dark has-text-centered">Race Selection</h2>
             <div class="columns">
-                @foreach (var race in RaceRepository.Data)
+                @foreach (var race in Repository.DataSource.GetAll<IRaceTemplate>())
                 {
                     <div class="column is-fullheight">
                         <CardSection customClasses="has-background-dark expand-full-width">
@@ -77,7 +79,7 @@
         <div class="has-text-centered">
             <h2 class="title has-text-dark has-text-centered">Class Selection</h2>
             <div class="columns">
-                @foreach (var classTemplate in ClassRepository.Data)
+                @foreach (var classTemplate in Repository.DataSource.GetAll<IClassTemplate>())
                 {
                     <div class="column is-fullheight">
                         <CardSection customClasses="has-background-dark expand-full-width">

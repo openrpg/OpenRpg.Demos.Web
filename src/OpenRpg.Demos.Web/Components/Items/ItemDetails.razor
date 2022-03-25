@@ -14,8 +14,10 @@
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Fantasy.Requirements
 @using OpenRpg.Genres.Requirements
+@using OpenRpg.Localization.Data.Extensions
+@using OpenRpg.Localization.Data.Repositories
 
-@inject DefaultLocaleRepository LocaleRepository;
+@inject ILocaleRepository LocaleRepository;
 @inject ICharacterRequirementChecker RequirementsChecker
 
 <CardSection customClasses="@cardClasses">
@@ -45,9 +47,9 @@
         <div class="column">
             @if (_itemQualityTypeId != 0)
             {
-                <h6 class="subtitle is-5 has-text-dark has-text-centered mb-1">@(LocaleRepository.Retrieve(DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.ItemQualityTextKey, _itemQualityTypeId)))</h6>
+                <h6 class="subtitle is-5 has-text-dark has-text-centered mb-1">@(LocaleRepository.Get(LocaleDataGenerator.GetKeyFor(LocaleDataGenerator.ItemQualityTextKey, _itemQualityTypeId)))</h6>
             }
-            <h6 class="subtitle is-6 has-text-dark has-text-centered">@(LocaleRepository.Retrieve(DefaultLocaleRepository.GetKeyFor(DefaultLocaleRepository.ItemTypesTextKey, Item.ItemTemplate.ItemType)))</h6>
+            <h6 class="subtitle is-6 has-text-dark has-text-centered">@(LocaleRepository.Get(LocaleDataGenerator.GetKeyFor(LocaleDataGenerator.ItemTypesTextKey, Item.ItemTemplate.ItemType)))</h6>
         </div>
     </div>
     @if (DisplayEffects.Any())
