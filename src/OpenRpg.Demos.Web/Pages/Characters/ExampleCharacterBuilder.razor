@@ -6,6 +6,7 @@
 @using OpenRpg.Data
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Classes
+@using OpenRpg.Data.Conventions.Extensions
 
 @inject CharacterBuilder CharacterBuilder;
 @inject IRepository Repository;
@@ -56,7 +57,7 @@
         <div class="has-text-centered">
             <h2 class="title has-text-dark has-text-centered">Race Selection</h2>
             <div class="columns">
-                @foreach (var race in Repository.DataSource.GetAll<IRaceTemplate>())
+                @foreach (var race in Repository.GetAll<IRaceTemplate>())
                 {
                     <div class="column is-fullheight">
                         <CardSection customClasses="has-background-dark expand-full-width">
@@ -79,7 +80,7 @@
         <div class="has-text-centered">
             <h2 class="title has-text-dark has-text-centered">Class Selection</h2>
             <div class="columns">
-                @foreach (var classTemplate in Repository.DataSource.GetAll<IClassTemplate>())
+                @foreach (var classTemplate in Repository.GetAll<IClassTemplate>())
                 {
                     <div class="column is-fullheight">
                         <CardSection customClasses="has-background-dark expand-full-width">

@@ -80,8 +80,8 @@ namespace OpenRpg.Demos.Infrastructure.Builders
 
         public DefaultCharacter Build()
         {
-            var raceData = Repository.DataSource.GetAll<IRaceTemplate>();
-            var classData = Repository.DataSource.GetAll<IClassTemplate>();
+            var raceData = Repository.GetAll<IRaceTemplate>();
+            var classData = Repository.GetAll<IClassTemplate>();
             
             if (_raceId == 0) { _raceId = Randomizer.TakeRandomFrom(raceData).Id; }
             if (_classId == 0) { _classId = Randomizer.TakeRandomFrom(classData).Id; }
