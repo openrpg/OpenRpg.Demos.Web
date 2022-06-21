@@ -69,7 +69,7 @@
                     {
                         <div class=" column has-text-centered">
                             <h4 class="title is-6 has-text-grey-dark">@((agent.OwnerContext as ICharacter).NameLocaleId)</h4>
-                            <TagLabel Label="Health" Content="@((agent.OwnerContext as ICharacter).Stats.Health().ToString())"></TagLabel>
+                            <TagLabel Label="Health" Content="@((agent.OwnerContext as ICharacter).State.Health().ToString())"></TagLabel>
                             <TagLabel Label="Position" Content="@(((float)(agent.OwnerContext as ICharacter).Variables[PositionVariable]).ToString("F2"))"></TagLabel>
                         </div>
                     }
@@ -346,7 +346,7 @@
         
         public override IConsideration CreateConsideration(IAgent agent)
         {
-            var healthValueAccessor = new ManualValueAccessor((context, _) => (context as ICharacter).Stats.Health());
+            var healthValueAccessor = new ManualValueAccessor((context, _) => (context as ICharacter).State.Health());
             return new ValueBasedConsideration(new UtilityKey(UtilityVariableTypes.LowHealth), healthValueAccessor, PresetClampers.ZeroToHundred, PresetCurves.InverseLinear);
         }
     }
@@ -502,7 +502,7 @@
         void ApplyRandoms(ICharacter character)
         {
             character.Variables[PositionVariable] = GetRandomPositionValue();
-            character.Stats.Health(GetRandomHealthValue());
+            character.State.Health(GetRandomHealthValue());
         }
 
         foreach (var agent in Agents)

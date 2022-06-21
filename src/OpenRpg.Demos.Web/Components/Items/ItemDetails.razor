@@ -35,12 +35,12 @@
         <div class="column">
             @if (IsWeapon)
             {
-                <h4 class="title is-4 has-text-dark has-text-centered">@(Item.ItemTemplate.Effects.Where(x => x.EffectType == EffectTypes.PureDamageAmount).Sum(x => x.Potency))</h4>
+                <h4 class="title is-4 has-text-dark has-text-centered">@(Item.ItemTemplate.Effects.Where(x => x.EffectType == EffectTypes.DamageBonusAmount).Sum(x => x.Potency))</h4>
                 <h6 class="subtitle is-7 has-text-dark has-text-centered">Damage</h6>
             }
             @if (IsArmour)
             {
-                <h4 class="title is-4 has-text-dark has-text-centered">@(Item.ItemTemplate.Effects.Where(x => x.EffectType == EffectTypes.PureDefenseAmount).Sum(x => x.Potency))</h4>
+                <h4 class="title is-4 has-text-dark has-text-centered">@(Item.ItemTemplate.Effects.Where(x => x.EffectType == EffectTypes.DefenseBonusAmount).Sum(x => x.Potency))</h4>
                 <h6 class="subtitle is-7 has-text-dark has-text-centered">Defense</h6>
             }
         </div>
@@ -96,8 +96,8 @@
     {
         get
         {
-            if (IsWeapon) { return Item.ItemTemplate.Effects.Where(x => x.EffectType != EffectTypes.PureDamageAmount); }
-            if (IsArmour) { return Item.ItemTemplate.Effects.Where(x => x.EffectType != EffectTypes.PureDefenseAmount); }
+            if (IsWeapon) { return Item.ItemTemplate.Effects.Where(x => x.EffectType != EffectTypes.DamageBonusAmount); }
+            if (IsArmour) { return Item.ItemTemplate.Effects.Where(x => x.EffectType != EffectTypes.DefenseBonusAmount); }
             return Item.ItemTemplate.Effects;
         }
     }

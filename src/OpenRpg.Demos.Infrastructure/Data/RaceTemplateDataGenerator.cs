@@ -24,8 +24,8 @@ namespace OpenRpg.Demos.Infrastructure.Data
             var effects = new[]
             {
                 new Effect {Potency = 10, EffectType = EffectTypes.AllAttributeBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.PureDamageAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.PureDefenseAmount},
+                new Effect {Potency = 8, EffectType = EffectTypes.DamageBonusAmount},
+                new Effect {Potency = 8, EffectType = EffectTypes.DefenseBonusAmount},
                 new Effect {Potency = 1, EffectType = EffectTypes.DarkDamageAmount},
                 new Effect {Potency = 5, EffectType = EffectTypes.DarkDefenseAmount},
                 new Effect {Potency = 80, EffectType = EffectTypes.HealthBonusAmount},
@@ -53,8 +53,8 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 new Effect {Potency = 12, EffectType = EffectTypes.IntelligenceBonusAmount},
                 new Effect {Potency = 10, EffectType = EffectTypes.WisdomBonusAmount},
                 new Effect {Potency = 10, EffectType = EffectTypes.CharismaBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.PureDamageAmount},
-                new Effect {Potency = 7, EffectType = EffectTypes.PureDefenseAmount},
+                new Effect {Potency = 8, EffectType = EffectTypes.DamageBonusAmount},
+                new Effect {Potency = 7, EffectType = EffectTypes.DefenseBonusAmount},
                 new Effect {Potency = 5, EffectType = EffectTypes.DarkDamageAmount},
                 new Effect {Potency = 10, EffectType = EffectTypes.DarkDefenseAmount},
                 new Effect {Potency = 70, EffectType = EffectTypes.HealthBonusAmount},
@@ -82,8 +82,8 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 new Effect {Potency = 10, EffectType = EffectTypes.IntelligenceBonusAmount},
                 new Effect {Potency = 10, EffectType = EffectTypes.WisdomBonusAmount},
                 new Effect {Potency = 8, EffectType = EffectTypes.CharismaBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.PureDamageAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.PureDefenseAmount},
+                new Effect {Potency = 8, EffectType = EffectTypes.DamageBonusAmount},
+                new Effect {Potency = 10, EffectType = EffectTypes.DefenseBonusAmount},
                 new Effect {Potency = 100, EffectType = EffectTypes.HealthBonusAmount},
                 new Effect {Potency = -1, EffectType = EffectTypes.DarkDefenseAmount},
 

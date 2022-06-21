@@ -1,22 +1,28 @@
 @using OpenRpg.Core.Stats
+@using OpenRpg.Core.Stats.Variables
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Extensions
+@using OpenRpg.Genres.Variables
 
-@if (Stats != null)
+@if (State != null)
 {
     <div class="columns">
         <div class="column">
             <h4 class="subtitle mb-2 has-text-dark has-text-centered">Health</h4>
-            <progress class="progress is-danger" value="@Stats.Health().ToString()" max="@Stats.MaxHealth().ToString()"></progress>
+            <progress class="progress is-danger" value="@State.Health().ToString()" max="@Stats.MaxHealth().ToString()"></progress>
         </div>
         <div class="column">
             <h4 class="subtitle mb-2 has-text-dark has-text-centered">Magic</h4>
-            <progress class="progress is-info" value="@Stats.Magic().ToString()" max="@Stats.MaxMagic().ToString()"></progress>
+            <progress class="progress is-info" value="@State.Magic().ToString()" max="@Stats.MaxMagic().ToString()"></progress>
         </div>
     </div>
 }
 
 @code {
+    [Parameter]
+    public ICharacterStateVariables State { get; set; }
+    
+    
     [Parameter]
     public IStatsVariables Stats { get; set; }
 }

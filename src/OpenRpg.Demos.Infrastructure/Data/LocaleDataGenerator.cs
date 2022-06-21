@@ -9,11 +9,13 @@ using OpenRpg.Demos.Infrastructure.Types;
 using OpenRpg.Genres.Types;
 using OpenRpg.Localization;
 using OpenRpg.Localization.Data.Repositories;
+using OpenRpg.Quests.Types;
 using DamageTypes = OpenRpg.Genres.Fantasy.Types.DamageTypes;
 using EffectTypes = OpenRpg.Genres.Fantasy.Types.EffectTypes;
 using ItemQualityTypes = OpenRpg.Genres.Fantasy.Types.ItemQualityTypes;
 using ItemTypes = OpenRpg.Genres.Fantasy.Types.ItemTypes;
 using ModificationTypes = OpenRpg.Genres.Fantasy.Types.ModificationTypes;
+using ObjectiveTypes = OpenRpg.Genres.Types.ObjectiveTypes;
 using RequirementTypes = OpenRpg.Genres.Fantasy.Types.RequirementTypes;
 using RewardTypes = OpenRpg.Genres.Fantasy.Types.RewardTypes;
 
@@ -63,8 +65,11 @@ namespace OpenRpg.Demos.Infrastructure.Locale
 
         private IDictionary<int, string> GetTypeFieldsDictionary(Type typeObject)
         {
-            return typeObject
-                .GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy)
+            var relatedInterfaceTypes = typeObject.GetInterfaces().ToList();
+            relatedInterfaceTypes.Add(typeObject);
+            
+            return relatedInterfaceTypes
+                .SelectMany(x => x.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy))
                 .ToDictionary(x => (int)x.GetValue(null), x => x.Name.UnPascalCase());
         }
 

@@ -36,7 +36,7 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 Requirements = new Requirement[0],
                 Effects = new[]
                 {
-                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f }
+                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 30.0f }
             }
             };
             template.Variables.QualityType(ItemQualityTypes.JunkQuality);
@@ -50,9 +50,9 @@ namespace OpenRpg.Demos.Infrastructure.Data
         {
             var swordEffects = new[]
             {
-                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 765.5f },
+                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 765.5f },
                 new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 20.0f },
-                new Effect { EffectType = EffectTypes.PureDamagePercentage, Potency = 10.0f },
+                new Effect { EffectType = EffectTypes.DamageBonusPercentage, Potency = 10.0f },
                 new Effect { EffectType = EffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
                 new Effect { EffectType = EffectTypes.DarkDefenseAmount, Potency = 15.0f }
             };

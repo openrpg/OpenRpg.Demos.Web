@@ -24,8 +24,8 @@ namespace OpenRpg.Demos.Infrastructure.Data
             {
                 new Effect {Potency = 2, EffectType = EffectTypes.StrengthBonusAmount},
                 new Effect {Potency = 2, EffectType = EffectTypes.ConstitutionBonusAmount},
-                new Effect {Potency = 5, EffectType = EffectTypes.PureDamageAmount},
-                new Effect {Potency = 5, EffectType = EffectTypes.PureDefenseAmount},
+                new Effect {Potency = 5, EffectType = EffectTypes.DamageBonusAmount},
+                new Effect {Potency = 5, EffectType = EffectTypes.DefenseBonusAmount},
                 new Effect {Potency = 30, EffectType = EffectTypes.HealthBonusAmount}
             };
 

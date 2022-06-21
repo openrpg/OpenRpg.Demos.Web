@@ -122,7 +122,7 @@
                 },
             Effects = new[]
             {
-                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 30.0f },
+                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 30.0f },
                 new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 3.0f }
             }
         };
@@ -151,7 +151,7 @@
                 },
             Effects = new[]
             {
-                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 15.0f },
+                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 15.0f },
                 new Effect { EffectType = EffectTypes.DarkDamageAmount, Potency = 30.0f },
                 new Effect { EffectType = EffectTypes.IntelligenceBonusAmount, Potency = 5.0f },
                 new Effect { EffectType = EffectTypes.MagicBonusAmount, Potency = 40.0f }
@@ -181,20 +181,20 @@
             },
             Effects = new[]
             {
-                new Effect { EffectType = EffectTypes.PureDamageAmount, Potency = 20 },
-                new Effect { EffectType = EffectTypes.PureDefenseAmount, Potency = 5.0f, Requirements = new []
+                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 20 },
+                new Effect { EffectType = EffectTypes.DefenseBonusAmount, Potency = 5.0f, Requirements = new []
             {
                     new Requirement{RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 9 }
                 }},
-                new Effect { EffectType = EffectTypes.PureDefenseAmount, Potency = 7.5f, Requirements = new []
+                new Effect { EffectType = EffectTypes.DefenseBonusAmount, Potency = 7.5f, Requirements = new []
             {
                     new Requirement{RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 10 }
                 }},
-                new Effect { EffectType = EffectTypes.PureDefenseAmount, Potency = 10.0f, Requirements = new []
+                new Effect { EffectType = EffectTypes.DefenseBonusAmount, Potency = 10.0f, Requirements = new []
             {
                     new Requirement{RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 11 }
                 }},
-                new Effect { EffectType = EffectTypes.PureDefenseAmount, Potency = 12.5f, Requirements = new []
+                new Effect { EffectType = EffectTypes.DefenseBonusAmount, Potency = 12.5f, Requirements = new []
             {
                     new Requirement{RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 12 }
                 }},

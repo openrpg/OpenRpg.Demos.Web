@@ -6,8 +6,11 @@
 @using OpenRpg.Genres.Fantasy.Defaults
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Core.Classes
+@using OpenRpg.Core.Stats.Variables
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Extensions
+@using OpenRpg.Genres.Fantasy.Stats
+@using OpenRpg.Genres.Variables
 
 <Markdown>
     ## Character Stats Components
@@ -241,6 +244,7 @@
     public class StatsCharacter : BasicCharacterComponents.SimpleCharacter
     {
         public IStatsVariables Stats { get; set; } = new DefaultStatsVariables();
+        public ICharacterStateVariables State { get; set; } = new DefaultCharacterStateVariables();
     }
 
     public class AutoStatsCharacter : StatsCharacter, IHasEffects
@@ -269,11 +273,13 @@
         ManualStatsExample.Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
         ManualStatsExample.Class = new DefaultClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" });
 
+        
+        
         ManualStatsExample.Stats = new DefaultStatsVariables();
         ManualStatsExample.Stats.MaxHealth(100);
-        ManualStatsExample.Stats.Health(50);
+        ManualStatsExample.State.Health(50);
         ManualStatsExample.Stats.MaxMagic(10);
-        ManualStatsExample.Stats.Magic(7);
+        ManualStatsExample.State.Magic(7);
 
         ManualStatsExample.Stats.Strength(11);
         ManualStatsExample.Stats.Dexterity(12);
@@ -296,8 +302,8 @@
       new Effect {Potency = 12, EffectType = EffectTypes.IntelligenceBonusAmount},
       new Effect {Potency = 12, EffectType = EffectTypes.WisdomBonusAmount},
       new Effect {Potency = 12, EffectType = EffectTypes.CharismaBonusAmount},
-      new Effect {Potency = 6, EffectType = EffectTypes.PureDamageAmount},
-      new Effect {Potency = 5, EffectType = EffectTypes.PureDefenseAmount},
+      new Effect {Potency = 6, EffectType = EffectTypes.DamageBonusAmount},
+      new Effect {Potency = 5, EffectType = EffectTypes.DefenseBonusAmount},
       new Effect {Potency = 1, EffectType = EffectTypes.DarkDamageAmount},
       new Effect {Potency = 5, EffectType = EffectTypes.DarkDefenseAmount},
       new Effect {Potency = 50, EffectType = EffectTypes.HealthBonusAmount},
@@ -308,8 +314,8 @@
         {
       new Effect {Potency = 3, EffectType = EffectTypes.StrengthBonusAmount},
       new Effect {Potency = 1, EffectType = EffectTypes.DexterityBonusAmount},
-      new Effect {Potency = 4, EffectType = EffectTypes.PureDamageAmount},
-      new Effect {Potency = 3, EffectType = EffectTypes.PureDefenseAmount},
+      new Effect {Potency = 4, EffectType = EffectTypes.DamageBonusAmount},
+      new Effect {Potency = 3, EffectType = EffectTypes.DefenseBonusAmount},
       new Effect {Potency = 50, EffectType = EffectTypes.HealthBonusAmount}
     };
 
@@ -332,11 +338,11 @@
         AutoStatsExample2.Race = hobbitRace;
         AutoStatsExample2.Class = new DefaultClass(1, fighterClass);
 
-        var statsCalculator = new DefaultStatsComputer(new DefaultAttributeStatPopulator(), new DefaultVitalStatsPopulator(),
+        var statsCalculator = new FantasyStatsPopulator(new DefaultAttributeStatPopulator(), new DefaultVitalStatsPopulator(),
           new DefaultDamageStatPopulator(), new DefaultDefenseStatPopulator());
 
-        AutoStatsExample.Stats = statsCalculator.ComputeStats(AutoStatsExample.Effects.ToArray());
-        AutoStatsExample2.Stats = statsCalculator.ComputeStats(AutoStatsExample2.Effects.ToArray());
+        statsCalculator.Populate(AutoStatsExample.Stats, AutoStatsExample.Effects.ToArray(), null);
+        statsCalculator.Populate(AutoStatsExample2.Stats, AutoStatsExample2.Effects.ToArray(), null);
     }
 
     protected override void OnInitialized()

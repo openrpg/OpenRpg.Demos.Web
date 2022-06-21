@@ -2,7 +2,7 @@
 using OpenRpg.Core.Classes;
 using OpenRpg.Core.Extensions;
 using OpenRpg.Core.Races;
-using OpenRpg.Core.Stats;
+using OpenRpg.Core.Stats.Variables;
 using OpenRpg.Core.Utils;
 using OpenRpg.Data;
 using OpenRpg.Data.Conventions.Extensions;
@@ -15,17 +15,17 @@ namespace OpenRpg.Demos.Infrastructure.Builders
     public class CharacterBuilder
     {
         public IRepository Repository { get; }
-        public IStatsComputer StatsComputer { get; }
+        public IStatPopulator StatsPopulator { get; }
         public IRandomizer Randomizer { get; }
 
         private int _raceId, _classId, _classLevels, _genderId;
         private string _name;
         private static int currentId;
 
-        public CharacterBuilder(IRepository repository, IStatsComputer statsComputer, IRandomizer randomizer)
+        public CharacterBuilder(IRepository repository, IStatPopulator statsPopulator, IRandomizer randomizer)
         {
             Repository = repository;
-            StatsComputer = statsComputer;
+            StatsPopulator = statsPopulator;
             Randomizer = randomizer;
         }
 
@@ -100,7 +100,7 @@ namespace OpenRpg.Demos.Infrastructure.Builders
                 GenderType = (byte)_genderId
             };
 
-            character.Stats = StatsComputer.ComputeStats(character.GetEffects().ToArray());
+            StatsPopulator.Populate(character.Stats, character.GetEffects().ToArray(), null);
             return character;
         }
     }
