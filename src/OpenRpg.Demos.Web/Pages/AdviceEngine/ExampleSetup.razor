@@ -119,7 +119,7 @@
                                     continue;
                                 }
 
-                                <h6 class="title is-7 has-text-grey-dark">@((enemy.OwnerContext as ICharacter).NameLocaleId) (Id: @(enemy.OwnerContext as ICharacter).UniqueId)</h6>
+                                <h6 class="title is-7 has-text-grey-dark">@((enemy.OwnerContext as ICharacter).NameLocaleId)</h6>
                                 <div class="field is-grouped is-grouped-multiline">
                                     @foreach (var (key, value) in unitUtilities)
                                     {
@@ -520,7 +520,7 @@
     {
         var lookupKey = LocaleDataGenerator.GetKeyFor(LocaleDataGenerator.UtilityTypesTextKey, key.UtilityId);
         var lookupText = LocaleRepository.Get(lookupKey);
-        return key.RelatedId == 0 ? lookupText : $"{lookupText}:{key.RelatedId}";
+        return key.RelatedId == 0 ? lookupText : $"{lookupText}";
     }
     
     public string GetAdviceText(int adviceKey)
