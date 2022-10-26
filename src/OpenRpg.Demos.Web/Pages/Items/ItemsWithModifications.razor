@@ -9,7 +9,7 @@
 @using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Templates
 
-@inject CharacterBuilder CharacterBuilder;
+@inject DemoCharacterBuilder CharacterBuilder;
 
 <Markdown>
     ## Modifications In General
@@ -95,7 +95,7 @@
     </div>
 </div>
 @code {
-    private DefaultCharacter _randomCharacter;
+    private ICharacter _randomCharacter;
     private IItem _item1WithRequirement, _item2WithRequirements, _item3WithEffectRequirements;
 
     protected override void OnInitialized()

@@ -5,7 +5,7 @@
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Core.Classes
 @using OpenRpg.Genres.Characters
-@inject CharacterBuilder CharacterBuilder;
+@inject DemoCharacterBuilder CharacterBuilder;
 
 <Markdown>
     ## Default Character Classes
@@ -53,16 +53,16 @@
             character.Race = new DefaultRaceTemplate { NameLocaleId = "Human" };
             character.Class = new DefaultCharacterClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter" });
             character.Stats.MaxHealth(100);
-            character.Stats.Health(50);
+            character.State.Health(50);
             character.Stats.MaxMagic(10);
-            character.Stats.Magic(7);
+            character.State.Magic(7);
             character.Stats.Strength(11);
             character.Stats.Dexterity(12);
             character.Stats.Intelligence(12);
             character.Stats.Wisdom(18);
             character.Stats.Charisma(14);
-            character.Stats.PureDamage(10);
-            character.Stats.PureDefense(8);
+            character.Stats.Damage(10);
+            character.Stats.Defense(8);
             character.Stats.DarkDamage(1);
             character.Stats.DarkDefense(25);
             ```
@@ -143,7 +143,8 @@
 
 
 @code {
-    private DefaultCharacter _manualCharacter, _randomCharacter;
+    private DefaultCharacter _manualCharacter;
+    private ICharacter _randomCharacter;
 
     protected override void OnInitialized()
     {
@@ -163,8 +164,8 @@
         _manualCharacter.Stats.Wisdom(18);
         _manualCharacter.Stats.Charisma(14);
 
-        _manualCharacter.Stats.PureDamage(10);
-        _manualCharacter.Stats.PureDefense(8);
+        _manualCharacter.Stats.Damage(10);
+        _manualCharacter.Stats.Defense(8);
         _manualCharacter.Stats.DarkDamage(1);
         _manualCharacter.Stats.DarkDefense(25);
 
@@ -176,7 +177,7 @@
     public void RandomizeCharacter()
     {
         _randomCharacter = CharacterBuilder.CreateNew().Build();
-        this.StateHasChanged();
+        StateHasChanged();
     }
 
 }

@@ -31,7 +31,7 @@
 @using OpenRpg.Localization.Data.Extensions
 @using OpenRpg.Localization.Data.Repositories
 
-@inject CharacterBuilder CharacterBuilder;
+@inject DemoCharacterBuilder CharacterBuilder;
 @inject ICharacterRequirementChecker RequirementChecker;
 @inject ILocaleRepository LocaleRepository;
 
@@ -111,15 +111,15 @@
                                 }
                             </div>
                             <h5 class="title is-6 has-text-grey-dark">Related Utilities</h5>
-                            @foreach (var enemy in Agents.Where(x => x.OwnerContext.Id != agent.OwnerContext.Id))
+                            @foreach (var enemy in Agents.Where(x => (x.OwnerContext as ICharacter).UniqueId != (agent.OwnerContext as ICharacter).UniqueId))
                             {
-                                var unitUtilities = GetOtherUnitUtilities(enemy.OwnerContext.Id, agent);
+                                var unitUtilities = GetOtherUnitUtilities((enemy.OwnerContext as ICharacter).UniqueId.GetHashCode(), agent);
                                 if (!unitUtilities.Any())
                                 {
                                     continue;
                                 }
 
-                                <h6 class="title is-7 has-text-grey-dark">@((enemy.OwnerContext as ICharacter).NameLocaleId) (Id: @enemy.OwnerContext.Id)</h6>
+                                <h6 class="title is-7 has-text-grey-dark">@((enemy.OwnerContext as ICharacter).NameLocaleId)</h6>
                                 <div class="field is-grouped is-grouped-multiline">
                                     @foreach (var (key, value) in unitUtilities)
                                     {
@@ -365,7 +365,7 @@
 
         public IConsideration CreateConsideration(ICharacter goodCharacter, ICharacter badCharacter)
         {
-            var distanceUtilityKey = new UtilityKey(UtilityVariableTypes.EnemyDistance, badCharacter.Id);
+            var distanceUtilityKey = new UtilityKey(UtilityVariableTypes.EnemyDistance, badCharacter.UniqueId.GetHashCode());
             var distanceAccessor = new ManualValueAccessor((context, variables) => Math.Abs((float)badCharacter.Variables[PositionVariable] - (float)goodCharacter.Variables[PositionVariable]));
             return new ValueBasedConsideration(distanceUtilityKey, distanceAccessor, DistanceClamper, PresetCurves.QuadraticLowerLeft);
         }
@@ -411,14 +411,13 @@
             AllAgents = allAgents;
         }
         
-        public ICharacter GetBestTarget(IHasDataId context, IUtilityVariables variables)
+        public ICharacter GetBestTarget(object context, IUtilityVariables variables)
         {
             var targetUtility = variables
                 .GetRelatedUtilities(UtilityVariableTypes.EnemyDistance)
-                .OrderByDescending(x => x.Value)
-                .First();
+                .MaxBy(x => x.Value);
             
-            return AllAgents.First(x => x.OwnerContext.Id == targetUtility.Key.RelatedId).OwnerContext as ICharacter;
+            return AllAgents.First(x => (x.OwnerContext as ICharacter).UniqueId.GetHashCode() == targetUtility.Key.RelatedId).OwnerContext as ICharacter;
         }
 
         public override IAdvice CreateAdvice(IAgent agent)
@@ -521,7 +520,7 @@
     {
         var lookupKey = LocaleDataGenerator.GetKeyFor(LocaleDataGenerator.UtilityTypesTextKey, key.UtilityId);
         var lookupText = LocaleRepository.Get(lookupKey);
-        return key.RelatedId == 0 ? lookupText : $"{lookupText}:{key.RelatedId}";
+        return key.RelatedId == 0 ? lookupText : $"{lookupText}";
     }
     
     public string GetAdviceText(int adviceKey)
@@ -531,8 +530,5 @@
     }
 
     public void Dispose()
-    {
-        _sub.Dispose();
-    }
-
+    { _sub.Dispose(); }
 }
