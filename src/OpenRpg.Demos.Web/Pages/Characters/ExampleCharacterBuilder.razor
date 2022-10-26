@@ -1,6 +1,5 @@
 ﻿@page "/characters/builder"
 
-@using OpenRpg.Genres.Fantasy.Defaults
 @using RandomNameGenerator
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Data
@@ -8,7 +7,7 @@
 @using OpenRpg.Core.Classes
 @using OpenRpg.Data.Conventions.Extensions
 
-@inject CharacterBuilder CharacterBuilder;
+@inject DemoCharacterBuilder CharacterBuilder;
 @inject IRepository Repository;
 
 <Markdown>
@@ -134,7 +133,7 @@
 }
 
 @code {
-    private DefaultCharacter _generatedCharacter;
+    private ICharacter _generatedCharacter;
 
     private int _raceId, _classId, _genderId;
     private string _name;

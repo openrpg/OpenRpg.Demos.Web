@@ -2,7 +2,6 @@
 
 @using OpenRpg.Core.Effects
 @using OpenRpg.Core.Races
-@using OpenRpg.Core.Stats
 @using OpenRpg.Genres.Fantasy.Defaults
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Core.Classes
@@ -18,7 +17,7 @@
 
     Stats can store anything specific to your character, a common example would be *strength*, *dexterity* etc but it can
     store almost anything numeric that you would need to use for calculations later, even things like *weapon damage*.
-
+    
     So lets look at a simple example where we hard code some stats using the `OpenRpg.Fantasy` helpers.
 </Markdown>
 
@@ -44,16 +43,14 @@
             ```csharp
             var character = new StatsCharacter{ /* Setup as Frodo */ };
             character.Stats.MaxHealth(100);
-            character.Stats.Health(50);
             character.Stats.MaxMagic(10);
-            character.Stats.Magic(7);
             character.Stats.Strength(11);
             character.Stats.Dexterity(12);
             character.Stats.Intelligence(12);
             character.Stats.Wisdom(18);
             character.Stats.Charisma(14);
-            character.Stats.PureDamage(10);
-            character.Stats.PureDefense(8);
+            character.Stats.Damage(10);
+            character.Stats.Defense(8);
             character.Stats.DarkDamage(1);
             character.Stats.DarkDefense(25);
             ```
@@ -74,9 +71,9 @@
 <br />
 
 <Markdown>
-    ### Dynamic stats
+    ### Computed stats
     Ok so we now know where stats live, and if you have read any of the other sections you have probably seen mention
-    of `Effects` which can be used to dynamically calculate stats.
+    of `Effects` which can be used to dynamically compute stats.
 
     > So for example you can have your race and class contain effects which should be used to calculate your characters
     core stats. When doing things this way its expected that you already have your data setup (i.e using the editor or similar).
@@ -118,8 +115,8 @@
         new Effect {Potency = 12, EffectType = EffectTypes.IntelligenceBonusAmount},
         new Effect {Potency = 12, EffectType = EffectTypes.WisdomBonusAmount},
         new Effect {Potency = 12, EffectType = EffectTypes.CharismaBonusAmount},
-        new Effect {Potency = 6, EffectType = EffectTypes.PureDamageAmount},
-        new Effect {Potency = 5, EffectType = EffectTypes.PureDefenseAmount},
+        new Effect {Potency = 6, EffectType = EffectTypes.DamageAmount},
+        new Effect {Potency = 5, EffectType = EffectTypes.DefenseAmount},
         new Effect {Potency = 1, EffectType = EffectTypes.DarkDamageAmount},
         new Effect {Potency = 5, EffectType = EffectTypes.DarkDefenseAmount},
         new Effect {Potency = 50, EffectType = EffectTypes.HealthBonusAmount},
@@ -287,8 +284,8 @@
         ManualStatsExample.Stats.Wisdom(18);
         ManualStatsExample.Stats.Charisma(14);
 
-        ManualStatsExample.Stats.PureDamage(10.0f);
-        ManualStatsExample.Stats.PureDefense(8.0f);
+        ManualStatsExample.Stats.Damage(10.0f);
+        ManualStatsExample.Stats.Defense(8.0f);
         ManualStatsExample.Stats.DarkDamage(1);
         ManualStatsExample.Stats.DarkDefense(25);
     }

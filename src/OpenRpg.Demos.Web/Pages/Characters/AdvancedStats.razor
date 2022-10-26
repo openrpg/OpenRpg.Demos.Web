@@ -8,15 +8,16 @@
 
 <Markdown>
    ## Advanced Stats
-   Now that we have covered the basics around dynamic stats based off effects its time to dive a bit deeper into this topic.
+   Now that we have covered the basics around computed stats based off effects its time to dive a bit deeper into this topic.
    
    As you have seen your stats can be seen as a culmination of all effects on you, and at the moment we have added effects at
    race and class level as well as providing manual effects on the character, but in the real world you may want to get 
    effects from equipment, buffs, multi classing etc.
    
-   We also haven't discussed the notion of static vs dynamic stats, so for example your max health can be seen as static as 
+   We also haven't discussed the notion of `state` vs `stats`, so for example your max health can be seen as static as 
    its computed once and possibly recomputed on effect changes etc, but your ACTUAL HEALTH value can change from various factors
-   such as being hit, drinking a potion, being poisoned etc, so some stats can be seen as static and some as dynamic.
+   such as being hit, drinking a potion, being poisoned etc, so while `Health` is kind of like a stat it is dynamic in value
+   and is stored separately as a `State`.
 </Markdown>
 
 <br/>
@@ -49,22 +50,19 @@
 <br/>
 
 <Markdown>
-  ## Static vs Dynamic Stats
-  You don't need to worry too much about this stuff, and really stats are just stats, the static ones are treated no differently
-  to dynamic ones in terms of how they are stored (in the `EntityStats` object). However conceptually they differ quite a bit.
-   
-  So like mentioned above MaxHealth can be seen as static and Health can be seen as dynamic, and this becomes important when
-  we think about how we want to save/load our characters.
+  ## Stats (static) vs State (dynamic)
+  So like mentioned above MaxHealth is one of your `Stats` and Health can be seen as dynamic, and this becomes important when
+  we think about how we want to save/load our characters and related data.
    
   We could simply just dump the whole character object into JSON or some other format and load it back in and call it a day,
   but this can cause you issues down the line. For example lets say you save your character on v1.0 of your game by dumping
-  the character and all stats. Then an update comes along for v1.1 which adds a new +10 maxhp bonus to your race, you get 
+  the character and all stats and associated items etc. Then an update comes along for v1.1 which adds a new +10 maxhp bonus to your race, you get 
   the update and boot up your game loading your save and you dont have this bonus maxhp as your character had its maxhp baked 
   into the save.
    
-  To get around this we try to think about static vs dynamic in persistence terms and you generally want to cull all static
-  data on persistence actions as it should all be regenerated when the character is loaded in, the only data that REALLY needs
-  persisting from the stats is dynamic data like Health and Magic and any other dynamic stats you add.
+  To get around this we try to think about the differences between static vs dynamic data in persistence terms and you generally 
+  want to cull all static data on persistence actions as it should all be regenerated when the character is loaded in, the only data 
+  that REALLY needs persisting from the stats is dynamic data like Health and Magic and any other `State` variables you add.
    
 </Markdown>
 
@@ -101,5 +99,5 @@
 </Markdown>
 
 @code {
-
+   
 }
