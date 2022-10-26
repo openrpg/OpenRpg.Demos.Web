@@ -28,7 +28,7 @@
     for magic damage. In the real world you may have multiple damage sources and you can define as many as you want.
     
     The `OpenRpg.Fantasy` library comes with the notion of the following melee damage types:
-    - Pure (No affinity type damage)
+    - Damage (No affinity type damage)
     - Slashing
     - Piercing
     - Blunt
@@ -63,13 +63,12 @@
   To get around this we try to think about the differences between static vs dynamic data in persistence terms and you generally 
   want to cull all static data on persistence actions as it should all be regenerated when the character is loaded in, the only data 
   that REALLY needs persisting from the stats is dynamic data like Health and Magic and any other `State` variables you add.
-   
 </Markdown>
 
 <br/>
 
 <Markdown>
-   ## General Persistence Thoughts
+   ## General Data Persistence
    So while we are discussing persistence its worth saying that in most cases you want to create an object which encapsulates
    the key aspects of a character. In the above example where we dumped everything its a massive waste as we are saving race,
    class, effect, stat data as well as potentially other guff in real world scenarios.
@@ -77,9 +76,9 @@
    So it is best to create a separate model which would contain the key bits we care about:
    
    ```csharp
-   public class PersistedCharacter : IHasLocaleDescription
+   public class PersistedCharacter
    {
-      public string NameLocaleId { get; set; }        // These may not be locale ids if you let players name your character
+      public string NameLocaleId { get; set; }        // These may not ACTUALLY be locale ids if you let players name the character
       public string DescriptionLocaleId { get; set; }
       public int RaceId { get; set; }
       public int ClassLevels { get; set; }
@@ -96,6 +95,8 @@
    Also with this approach we solve the previous v1.0 -> v1.1 problem, as we would load up the `PersistedCharacter` then
    use those details to build back up the `AutoStatsCharacter` and we can regenerate the stats, which would give us our
    new improved MaxHp then we just manually overwrite the `character.Stats.Health(persistedCharacter.Health)` etc.
+   
+   > We will touch more on persistence in a later section as there are some existing models to help with this scenario
 </Markdown>
 
 @code {
