@@ -14,7 +14,7 @@ public class DemoCharacterMapper : CharacterMapper
 {
     public IRepository Repository { get; }
 
-    public DemoCharacterMapper(IItemMapper itemMapper, IClassMapper classMapper, IEquipmentMapper equipmentMapper, IInventoryMapper inventoryMapper, IStatPopulator statsPopulator, IRepository repository) : base(itemMapper, classMapper, equipmentMapper, inventoryMapper, statsPopulator)
+    public DemoCharacterMapper(IItemMapper itemMapper, IClassMapper classMapper, IEquipmentMapper equipmentMapper, IInventoryMapper inventoryMapper, IRepository repository) : base(itemMapper, classMapper, equipmentMapper, inventoryMapper)
     { Repository = repository; }
 
     public override IRaceTemplate GetRaceTemplateFor(int raceTemplateId)

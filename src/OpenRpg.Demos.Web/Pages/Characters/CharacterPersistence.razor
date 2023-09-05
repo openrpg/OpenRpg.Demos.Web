@@ -84,15 +84,15 @@
             ```csharp
             public class DemoCharacterMapper : CharacterMapper
             {
-            public IRepository Repository { get; }
+                public IRepository Repository { get; }
 
-            public DemoCharacterMapper(IItemMapper itemMapper, IClassMapper classMapper, IEquipmentMapper equipmentMapper, 
-            IInventoryMapper inventoryMapper, IStatPopulator statsPopulator, IRepository repository) 
-            : base(itemMapper, classMapper, equipmentMapper, inventoryMapper, statsPopulator)
-            { Repository = repository; }
+                public DemoCharacterMapper(IItemMapper itemMapper, IClassMapper classMapper, IEquipmentMapper equipmentMapper, 
+                IInventoryMapper inventoryMapper, IStatPopulator statsPopulator, IRepository repository) 
+                : base(itemMapper, classMapper, equipmentMapper, inventoryMapper, statsPopulator)
+                { Repository = repository; }
 
-            public override IRaceTemplate GetRaceTemplateFor(int raceTemplateId)
-            { return Repository.Get&lt;IRaceTemplate&gt;(raceTemplateId); }
+                public override IRaceTemplate GetRaceTemplateFor(int raceTemplateId)
+                { return Repository.Get&lt;IRaceTemplate&gt;(raceTemplateId); }
             }
             ```
            

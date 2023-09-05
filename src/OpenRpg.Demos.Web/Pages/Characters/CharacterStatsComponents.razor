@@ -2,7 +2,6 @@
 
 @using OpenRpg.Core.Effects
 @using OpenRpg.Core.Races
-@using OpenRpg.Genres.Fantasy.Defaults
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Core.Classes
 @using OpenRpg.Core.Stats.Variables
@@ -18,7 +17,7 @@
     Stats can store anything specific to your character, a common example would be *strength*, *dexterity* etc but it can
     store almost anything numeric that you would need to use for calculations later, even things like *weapon damage*.
     
-    So lets look at a simple example where we hard code some stats using the `OpenRpg.Fantasy` helpers.
+    So lets look at a simple example where we hard code some stats using the `OpenRpg.Genres.Fantasy` helpers.
 </Markdown>
 
 <br />
@@ -161,17 +160,15 @@
             comes with a default implementation to auto generate core and combat related stats based off effects.
 
             ```csharp
-            var statsCalculator = new DefaultStatsComputer(new DefaultAttributeStatPopulator(), new DefaultVitalStatsPopulator(),
-            new DefaultDamageStatPopulator(), new DefaultDefenseStatPopulator());
-
+            var statsCalculator = new FantasyStatsPopulator();
             character.Stats = statsCalculator.ComputeStats(AutoStatsExample.Effects.ToArray());
             ```
 
             As you can see we compute the stats for the character and assign them, there is also an added effect output section
             so you can see all the effects being applied based on race/class/character.
 
-            > The default stats computer would ideally be setup in Dependency Injection config somewhere but as we are hardcoding
-            everything you can see the default bits that make it up (to find out more about each bit look in the fantasy lib source).
+            > The stats populator would ideally be setup in Dependency Injection config somewhere but as we are hardcoding
+            everything you can just use this as an example, you can also pass in additional partial stat populators to layer functionality.
 
 
             #### Building other characters
@@ -335,8 +332,7 @@
         AutoStatsExample2.Race = hobbitRace;
         AutoStatsExample2.Class = new DefaultClass(1, fighterClass);
 
-        var statsCalculator = new FantasyStatsPopulator(new DefaultAttributeStatPopulator(), new DefaultVitalStatsPopulator(),
-          new DefaultDamageStatPopulator(), new DefaultDefenseStatPopulator());
+        var statsCalculator = new FantasyStatsPopulator();
 
         statsCalculator.Populate(AutoStatsExample.Stats, AutoStatsExample.Effects.ToArray(), null);
         statsCalculator.Populate(AutoStatsExample2.Stats, AutoStatsExample2.Effects.ToArray(), null);
