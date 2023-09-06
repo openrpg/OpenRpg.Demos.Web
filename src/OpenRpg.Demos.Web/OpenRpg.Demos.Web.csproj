@@ -11,20 +11,20 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="OpenRpg.AdviceEngine" Version="0.24.34" />
-    <PackageReference Include="OpenRpg.Cards" Version="0.26.200" />
-    <PackageReference Include="OpenRpg.Genres" Version="0.28.79" />
-    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.28.79" />
+    <PackageReference Include="OpenRpg.Cards" Version="0.28.205" />
+    <PackageReference Include="OpenRpg.Genres" Version="0.28.81" />
+    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.28.81" />
     <PackageReference Include="RandomNameGenerator" Version="1.0.4" />
     <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenRpg.Combat" Version="0.26.200" />
-    <PackageReference Include="OpenRpg.Core" Version="0.26.200" />
-    <PackageReference Include="OpenRpg.Data" Version="0.26.200" />
-    <PackageReference Include="OpenRpg.Items" Version="0.26.200" />
-    <PackageReference Include="OpenRpg.Localization" Version="0.26.200" />
-    <PackageReference Include="OpenRpg.Quests" Version="0.26.200" />
+    <PackageReference Include="OpenRpg.Combat" Version="0.28.205" />
+    <PackageReference Include="OpenRpg.Core" Version="0.28.205" />
+    <PackageReference Include="OpenRpg.Data" Version="0.28.205" />
+    <PackageReference Include="OpenRpg.Items" Version="0.28.205" />
+    <PackageReference Include="OpenRpg.Localization" Version="0.28.205" />
+    <PackageReference Include="OpenRpg.Quests" Version="0.28.205" />
   </ItemGroup>
 
   <ItemGroup>

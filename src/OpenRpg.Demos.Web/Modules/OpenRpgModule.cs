@@ -1,4 +1,4 @@
-using OpenRpg.Combat.Processors;
+using OpenRpg.Combat.Processors.Attacks;
 using OpenRpg.Core.Stats.Populators;
 using OpenRpg.Core.Utils;
 using OpenRpg.Demos.Infrastructure.DI;
