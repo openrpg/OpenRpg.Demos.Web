@@ -1,5 +1,6 @@
-@using OpenRpg.CurveFunctions
+@using OpenRpg.CurveFunctions.Scaling
 @using OpenRpg.Demos.Web.Models
+@using OpenRpg.CurveFunctions.Extensions
 
 @implements IRefreshable
 
@@ -17,14 +18,20 @@
     public string Title { get; set; }
     
     [Parameter]
-    public ICurveFunction CurveFunction { get; set; }
+    public ScalingFunction ScalingFunction { get; set; }
 
     [Parameter]
     public bool ShowLabels { get; set; } = true;
     
     [Parameter]
-    public string ChartColor { get; set; } = "#008FFB";
+    public string ChartColor { get; set; } = "#FF4560";
 
+    [Parameter]
+    public string XAxisName { get; set; } = "Input";
+
+    [Parameter]
+    public string YAxisName { get; set; } = "Output";
+    
     public List<DataPoint> Data { get; set; } = new();
     
     public ApexChartOptions<DataPoint> ChartOptions { get; set; } = new();
@@ -34,6 +41,7 @@
     {
         Data.Clear();
         var newPoints = FixedDataRanges.NormalizedZeroToOne
+            .Denormalize(ScalingFunction.InputScaleMin, ScalingFunction.InputScaleMax)
             .Select(GenerateDataPoint)
             .ToArray();
         
@@ -42,7 +50,7 @@
 
     DataPoint GenerateDataPoint(float input)
     {
-        return new DataPoint((decimal)input, (decimal)CurveFunction.Plot(input));
+        return new DataPoint((decimal)input, (decimal)ScalingFunction.Plot(input));
     }
    
     protected override void OnInitialized()
@@ -62,8 +70,8 @@
         ChartOptions.Xaxis = new XAxis()
         {
             Labels = new XAxisLabels() { Show  = ShowLabels }, 
-            Min = 0.0M,
-            Max = 1.0M
+            Min = (decimal)ScalingFunction.InputScaleMin,
+            Max = (decimal)ScalingFunction.InputScaleMax
         };
         
         ChartOptions.Yaxis = new List<YAxis>()
@@ -71,15 +79,15 @@
             new()
             {
                 Labels = new YAxisLabels() { Formatter = @"function (value) { return value.toFixed(1); }", Show = ShowLabels },
-                Min = 0.0M,
-                Max = 1.0M,
+                Min = (decimal)ScalingFunction.OutputScaleMin,
+                Max = (decimal)ScalingFunction.OutputScaleMax,
             }
         };
 
         if (ShowLabels)
         {
-            ChartOptions.Yaxis[0].Title = new AxisTitle() { Text = "Output" };
-            ChartOptions.Xaxis.Title = new AxisTitle() { Text = "Input" };
+            ChartOptions.Yaxis[0].Title = new AxisTitle() { Text = YAxisName };
+            ChartOptions.Xaxis.Title = new AxisTitle() { Text = XAxisName };
         }
         
         PopulatePoints();

@@ -1,4 +1,4 @@
-﻿@page "/curves/basic-components"
+﻿@page "/curves/curve-functions"
 @using OpenRpg.CurveFunctions
 
 <CardSection>
@@ -35,7 +35,7 @@
          </Markdown>
       </div>
       <div class="column is-one-third">
-         <CurveFunctionChart CurveFunctionName="Bell Curve Preset" CurveFunction="ExampleCurveFunction" />
+         <CurveFunctionChart Title="Bell Curve Preset" CurveFunction="ExampleCurveFunction" />
       </div>
       <div class="column is-one-third">
          <div class="field">
@@ -66,73 +66,73 @@
    
    <div class="columns">
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Constant" CurveFunction="PresetCurves.Constant" ShowLabels="false"/>
+         <CurveFunctionChart Title="Constant" CurveFunction="PresetCurves.Constant" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Linear" CurveFunction="PresetCurves.Linear" ShowLabels="false"/>
+         <CurveFunctionChart Title="Linear" CurveFunction="PresetCurves.Linear" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Inverse Linear" CurveFunction="PresetCurves.InverseLinear" ShowLabels="false"/>
+         <CurveFunctionChart Title="Inverse Linear" CurveFunction="PresetCurves.InverseLinear" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Cooldown" CurveFunction="PresetCurves.StandardCooldown" ShowLabels="false"/>
-      </div>
-   </div>
-   <div class="columns">
-      <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Runtime" CurveFunction="PresetCurves.StandardRuntime" ShowLabels="false"/>
-      </div>
-      <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Quadratic Lower Left" CurveFunction="PresetCurves.QuadraticLowerLeft" ShowLabels="false"/>
-      </div>
-      <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Quadratic Lower Right" CurveFunction="PresetCurves.QuadraticLowerRight" ShowLabels="false"/>
-      </div>
-      <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Quadratic Upper Left" CurveFunction="PresetCurves.QuadraticUpperLeft" ShowLabels="false"/>
+         <CurveFunctionChart Title="Cooldown" CurveFunction="PresetCurves.StandardCooldown" ShowLabels="false"/>
       </div>
    </div>
    <div class="columns">
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Quadratic Upper Right" CurveFunction="PresetCurves.QuadraticUpperRight" ShowLabels="false"/>
+         <CurveFunctionChart Title="Runtime" CurveFunction="PresetCurves.StandardRuntime" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Logistic" CurveFunction="PresetCurves.Logistic" ShowLabels="false"/>
+         <CurveFunctionChart Title="Quadratic Lower Left" CurveFunction="PresetCurves.QuadraticLowerLeft" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Inverse Logistic" CurveFunction="PresetCurves.InverseLogistic" ShowLabels="false"/>
+         <CurveFunctionChart Title="Quadratic Lower Right" CurveFunction="PresetCurves.QuadraticLowerRight" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Logit" CurveFunction="PresetCurves.Logit" ShowLabels="false"/>
+         <CurveFunctionChart Title="Quadratic Upper Left" CurveFunction="PresetCurves.QuadraticUpperLeft" ShowLabels="false"/>
       </div>
    </div>
    <div class="columns">
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Inverse Logit" CurveFunction="PresetCurves.InverseLogit" ShowLabels="false"/>
+         <CurveFunctionChart Title="Quadratic Upper Right" CurveFunction="PresetCurves.QuadraticUpperRight" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Bell Curve" CurveFunction="PresetCurves.BellCurve" ShowLabels="false"/>
+         <CurveFunctionChart Title="Logistic" CurveFunction="PresetCurves.Logistic" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Inverse Bell Curve" CurveFunction="PresetCurves.InverseBellCurve" ShowLabels="false"/>
+         <CurveFunctionChart Title="Inverse Logistic" CurveFunction="PresetCurves.InverseLogistic" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Sine Wave" CurveFunction="PresetCurves.SineWave" ShowLabels="false"/>
+         <CurveFunctionChart Title="Logit" CurveFunction="PresetCurves.Logit" ShowLabels="false"/>
+      </div>
+   </div>
+   <div class="columns">
+      <div class="column is-one-quarter">
+         <CurveFunctionChart Title="Inverse Logit" CurveFunction="PresetCurves.InverseLogit" ShowLabels="false"/>
+      </div>
+      <div class="column is-one-quarter">
+         <CurveFunctionChart Title="Bell Curve" CurveFunction="PresetCurves.BellCurve" ShowLabels="false"/>
+      </div>
+      <div class="column is-one-quarter">
+         <CurveFunctionChart Title="Inverse Bell Curve" CurveFunction="PresetCurves.InverseBellCurve" ShowLabels="false"/>
+      </div>
+      <div class="column is-one-quarter">
+         <CurveFunctionChart Title="Sine Wave" CurveFunction="PresetCurves.SineWave" ShowLabels="false"/>
       </div>
 
    </div>
    <div class="columns">
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Inverse Sine Wave" CurveFunction="PresetCurves.InverseSineWave" ShowLabels="false"/>
+         <CurveFunctionChart Title="Inverse Sine Wave" CurveFunction="PresetCurves.InverseSineWave" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Greater Than Half" CurveFunction="PresetCurves.GreaterThanHalf" ShowLabels="false"/>
+         <CurveFunctionChart Title="Greater Than Half" CurveFunction="PresetCurves.GreaterThanHalf" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Less Than Half" CurveFunction="PresetCurves.LessThanHalf" ShowLabels="false"/>
+         <CurveFunctionChart Title="Less Than Half" CurveFunction="PresetCurves.LessThanHalf" ShowLabels="false"/>
       </div>
       <div class="column is-one-quarter">
-         <CurveFunctionChart CurveFunctionName="Pass Through" CurveFunction="PresetCurves.PassThrough" ShowLabels="false"/>
+         <CurveFunctionChart Title="Pass Through" CurveFunction="PresetCurves.PassThrough" ShowLabels="false"/>
       </div>
    </div>
 </CardSection>
