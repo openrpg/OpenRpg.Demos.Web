@@ -1,7 +1,7 @@
 @using OpenRpg.CurveFunctions
 @using OpenRpg.Demos.Web.Models
 
-@implements IChartHandle
+@implements IRefreshable
 
 <ApexChart TItem="DataPoint" Title="@CurveFunctionName" @ref="ChartInstance" Options="ChartOptions" XAxisType="XAxisType.Numeric">
     <ApexPointSeries TItem="DataPoint"

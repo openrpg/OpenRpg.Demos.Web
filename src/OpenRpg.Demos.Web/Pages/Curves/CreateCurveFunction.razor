@@ -44,29 +44,41 @@
          </div>
       </div>
       <div class="column is-two-quarters">
-         <CurveFunctionChart CurveFunction="@CustomCurveFunction" CurveFunctionName="Custom Polynomial Function" @ref="ChartHandle"/>
+         <CurveFunctionChart CurveFunction="@CustomCurveFunction" CurveFunctionName="Custom Polynomial Function" @ref="ChartRefresher"/>
+         <div class="field">
+            <label class="label">Example Source Code</label>
+            <div>
+               <code class="content">
+                  var myCurve = new PolynomialCurveFunction(@(Slope)f, @(XShift)f, @(YShift)f, @(Exponent)f);
+               </code>
+            </div>
+            <div>
+               <code class="content">
+                  var output = myCurve.Plot(0.5f);
+               </code>
+            </div>
+         </div>
       </div>
       <div class="column is-one-quarter">
          <div class="field">
-               <label class="label">Input</label>
-               <div class="control">
-                  <input class="input" type="text" @bind="InputValue">
-               </div>
+            <label class="label">Input</label>
+            <div class="control">
+               <input class="input" type="text" @bind="InputValue">
             </div>
-            <div class="field">
-               <label class="label">Output</label>
-               <div class="control">
-                  <a class="button is-primary" @onclick="RefreshOutputValue">Plot Value</a>
-                  <label class="label">@OutputValue</label>
-               </div>
+         </div>
+         <div class="field">
+            <label class="label">Output</label>
+            <div class="control">
+               <a class="button is-primary" @onclick="RefreshOutputValue">Plot Value</a>
+               <label class="label">@OutputValue</label>
             </div>
+         </div>
       </div>
    </div>
-   
 </CardSection>
 
 @code {
-   public IChartHandle ChartHandle { get; set; }
+   public IRefreshable ChartRefresher { get; set; }
    public ICurveFunction CustomCurveFunction { get; set; }
    public float InputValue { get; set; } = 0.5f;
    public float OutputValue { get; set; }
@@ -81,9 +93,9 @@
       CustomCurveFunction = new PolynomialCurveFunction(Slope, XShift, YShift, Exponent);
       
       // TODO: No idea why it needs to do this, but it wont work otherwise
-      await ChartHandle.Refresh();
+      await ChartRefresher.Refresh();
       StateHasChanged();
-      await ChartHandle.Refresh();
+      await ChartRefresher.Refresh();
       StateHasChanged();
    }
 
