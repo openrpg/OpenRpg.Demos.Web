@@ -107,30 +107,73 @@
 
 <CardSection>
    <div class="columns">
+      <div class="column is-one-third">
+         <Markdown Containerless>
+            ### Experience Required To Level Example
+            Given how easy this is to do now lets have another look at a useful example, experience required for each level.
+               
+            Lets not do anything fancy, just make it scale linearly with us having 20 levels with the maximum xp threshold 
+            being 10000, that means its about 500 extra per level when done linearly.
+         </Markdown>
+      </div>
+      <div class="column is-one-third">
+         <ScalingFunctionChart Title="Experience Per Level" ScalingFunction="XpToLevelScalingFunction" XAxisName="Level" YAxisName="Experience Required" ChartColor="#2ecc71" />
+      </div>
+      <div class="column is-one-third">
+         <div class="field">
+            <label class="label">Level</label>
+            <div class="control">
+               <input class="input" type="text" @bind="InputValue3">
+            </div>
+         </div>
+         <div class="field">
+            <label class="label">Experience Required</label>
+            <div class="control">
+               <a class="button is-primary" @onclick="RefreshOutputValue3">Plot Value</a>
+               <label class="label">@OutputValue3</label>
+            </div>
+         </div>
+      </div>
+   </div>
+</CardSection>
+
+<br/>
+
+<CardSection>
+   <div class="columns">
          <div class="column is-one-third">
             <Markdown Containerless>
-               ### Experience Required To Level Example
-               Given how easy this is to do now lets have another look at a useful example, experience required for each level.
+               ### Inverse Value Scaling
+               So lets look at something which you may need to do but dont know it yet, and this is a real world problem I faced
+               when doing some work in Unity.
                
-               Lets not do anything fancy, just make it scale linearly with us having 20 levels with the maximum xp threshold 
-               being 10000, that means its about 500 extra per level when done linearly.
+               Say you have to have an `AttackSpeed` stat, and you want `Effects` to bump that value up so you can attack faster,
+               it sounds great until you come to implement it as to attack faster you want LESS of a cooldown between attacks.
+               
+               This is a scenario where you want to inversely scale the input value as they are both pulling in different directions,
+               so far both values have being going up together at their own rate of scale, but in this case we want to go the opposite
+               way, so lets use an `InverseLinear` preset and set input range as 0-100 as 100 seems pretty high for attack speed, then
+               set the output scaling as between 0.5 and 2.
+               
+               > As this is using an INVERSE curve the max and min are effectively flipped so the maximum input value would yield
+               > the minimum output value, give it a go.
             </Markdown>
          </div>
          <div class="column is-one-third">
-            <ScalingFunctionChart Title="Experience Per Level" ScalingFunction="XpToLevelScalingFunction" XAxisName="Level" YAxisName="Experience Required" ChartColor="#2ecc71" />
+            <ScalingFunctionChart Title="Attack Cooldowns" ScalingFunction="AttackSpeedScalingFunction" XAxisName="Attack Speed" YAxisName="Cooldown In Seconds" ChartColor="#3498db" />
          </div>
          <div class="column is-one-third">
             <div class="field">
-               <label class="label">Level</label>
+               <label class="label">Attack Speed</label>
                <div class="control">
-                  <input class="input" type="text" @bind="InputValue3">
+                  <input class="input" type="text" @bind="InputValue4">
                </div>
             </div>
             <div class="field">
-               <label class="label">Experience Required</label>
+               <label class="label">Attack Cooldown</label>
                <div class="control">
-                  <a class="button is-primary" @onclick="RefreshOutputValue3">Plot Value</a>
-                  <label class="label">@OutputValue3</label>
+                  <a class="button is-primary" @onclick="RefreshOutputValue4">Plot Value</a>
+                  <label class="label">@OutputValue4</label>
                </div>
             </div>
          </div>
@@ -148,8 +191,12 @@
    public float OutputValue2 { get; set; }
    
    public ScalingFunction XpToLevelScalingFunction = new ScalingFunction(PresetCurves.Linear, 0, 10000, 0, 20);
-   public float InputValue3 { get; set; } = 10;
+   public float InputValue3 { get; set; } = 1;
    public float OutputValue3 { get; set; }
+   
+   public ScalingFunction AttackSpeedScalingFunction = new ScalingFunction(PresetCurves.InverseLinear, 0.5f, 2, 0, 100);
+   public float InputValue4 { get; set; } = 35;
+   public float OutputValue4 { get; set; }
    
    public void RefreshOutputValue1()
    {
@@ -164,5 +211,10 @@
    public void RefreshOutputValue3()
    {
       OutputValue3 = XpToLevelScalingFunction.Plot(InputValue3);
+   }
+   
+   public void RefreshOutputValue4()
+   {
+      OutputValue4 = AttackSpeedScalingFunction.Plot(InputValue4);
    }
 }
