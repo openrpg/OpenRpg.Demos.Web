@@ -3,10 +3,12 @@
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Persistence.Characters
 @using Newtonsoft.Json
+@using OpenRpg.Core.Stats.Populators
 @using OpenRpg.Genres.Extensions
 
 @inject DemoCharacterBuilder CharacterBuilder;
 @inject ICharacterMapper CharacterMapper;
+@inject IStatPopulator StatPopulator;
 
 <Markdown>
    #### Character Persistence
@@ -152,6 +154,7 @@
     public void RandomizeCharacter()
     {
         _randomCharacter = CharacterBuilder.CreateNew().Build();
+        StatPopulator.Populate(_randomCharacter.Stats, _randomCharacter.GetEffects().ToArray(), null);
         PersistCharacter();
         StateHasChanged();
     }
@@ -167,6 +170,7 @@
     {
         var data = JsonConvert.DeserializeObject<CharacterData>(_persistedData);
         _regeneratedCharacter = CharacterMapper.Map(data);
+        StatPopulator.Populate(_regeneratedCharacter.Stats, _regeneratedCharacter.GetEffects().ToArray(), null);
         StateHasChanged();
     }
 }

@@ -5,10 +5,13 @@
 @using OpenRpg.Data
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Classes
+@using OpenRpg.Core.Stats.Populators
 @using OpenRpg.Data.Conventions.Extensions
+@using OpenRpg.Genres.Extensions
 
 @inject DemoCharacterBuilder CharacterBuilder;
 @inject IRepository Repository;
+@inject IStatPopulator StatPopulator;
 
 <Markdown>
     # Character Builder
@@ -160,6 +163,7 @@
         { builder = builder.AsFemale(); }
 
         _generatedCharacter = builder.Build();
+        StatPopulator.Populate(_generatedCharacter.Stats, _generatedCharacter.GetEffects().ToArray(), null);
 
         StateHasChanged();
     }

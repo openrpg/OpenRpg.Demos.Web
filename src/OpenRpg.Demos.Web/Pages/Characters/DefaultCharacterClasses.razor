@@ -4,8 +4,10 @@
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Core.Classes
+@using OpenRpg.Core.Stats.Populators
 @using OpenRpg.Genres.Characters
 @inject DemoCharacterBuilder CharacterBuilder;
+@inject IStatPopulator StatPopulator;
 
 <Markdown>
     ## Default Character Classes
@@ -177,6 +179,7 @@
     public void RandomizeCharacter()
     {
         _randomCharacter = CharacterBuilder.CreateNew().Build();
+        StatPopulator.Populate(_randomCharacter.Stats, _randomCharacter.GetEffects().ToArray(), null);
         StateHasChanged();
     }
 

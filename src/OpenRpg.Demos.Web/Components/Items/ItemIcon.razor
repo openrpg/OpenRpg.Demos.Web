@@ -31,7 +31,7 @@
 
     protected override void OnParametersSet()
     {
-        if (Item.Variables != null && Item.Variables.ContainsKey(DefaultItemVariableTypes.Amount))
+        if (Item.Variables != null && Item.Variables.ContainsKey(ItemVariableTypes.Amount))
         { _itemAmount = Item.Variables.Amount(); }
         else
         { _itemAmount = 0;}

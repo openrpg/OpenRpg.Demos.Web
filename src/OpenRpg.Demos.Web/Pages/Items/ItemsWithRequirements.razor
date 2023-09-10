@@ -2,15 +2,18 @@
 @using OpenRpg.Core.Effects
 @using OpenRpg.Core.Modifications
 @using OpenRpg.Core.Requirements
+@using OpenRpg.Core.Stats.Populators
 @using OpenRpg.Demos.Infrastructure.Extensions
 @using OpenRpg.Demos.Infrastructure.Lookups
 @using OpenRpg.Genres.Characters
+@using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
 @using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Templates
 
 @inject DemoCharacterBuilder CharacterBuilder;
+@inject IStatPopulator StatPopulator;
 
 <Markdown>
     ## Requirements In General
@@ -215,6 +218,7 @@
     public void RandomizeCharacter()
     {
         _randomCharacter = CharacterBuilder.CreateNew().Build();
+        StatPopulator.Populate(_randomCharacter.Stats, _randomCharacter.GetEffects().ToArray(), null);
         StateHasChanged();
     }
 

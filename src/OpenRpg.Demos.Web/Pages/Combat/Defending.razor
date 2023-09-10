@@ -2,8 +2,10 @@
 
 @using OpenRpg.Combat.Attacks
 @using OpenRpg.Combat.Processors.Attacks
+@using OpenRpg.Core.Stats.Populators
 @using OpenRpg.Demos.Infrastructure.Locale
 @using OpenRpg.Genres.Characters
+@using OpenRpg.Genres.Extensions
 @using OpenRpg.Localization.Data.Extensions
 @using OpenRpg.Localization.Data.Repositories
 
@@ -11,6 +13,7 @@
 @inject IAttackGenerator AttackGenerator
 @inject IAttackProcessor AttackProcessor
 @inject ILocaleRepository LocaleRepository
+@inject IStatPopulator StatPopulator;
 
 <Markdown>
     ## Defending
@@ -107,11 +110,13 @@
     public void RandomizeAttacker()
     {
         _attackingCharacter = CharacterBuilder.CreateNew().Build();
+        StatPopulator.Populate(_attackingCharacter.Stats, _attackingCharacter.GetEffects().ToArray(), null);
     }
 
     public void RandomizeDefender()
     {
         _defendingCharacter = CharacterBuilder.CreateNew().Build();
+        StatPopulator.Populate(_defendingCharacter.Stats, _defendingCharacter.GetEffects().ToArray(), null);
     }
 
     public string GetDamageTypeText(int damageType)

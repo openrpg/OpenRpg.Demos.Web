@@ -4,11 +4,11 @@
 @using OpenRpg.Core.Races
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Core.Classes
+@using OpenRpg.Core.State.Entity
 @using OpenRpg.Core.Stats.Variables
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Fantasy.Stats
-@using OpenRpg.Genres.Variables
 
 <Markdown>
     ## Character Stats Components
@@ -238,7 +238,7 @@
     public class StatsCharacter : BasicCharacterComponents.SimpleCharacter
     {
         public IStatsVariables Stats { get; set; } = new DefaultStatsVariables();
-        public ICharacterStateVariables State { get; set; } = new DefaultCharacterStateVariables();
+        public IEntityStateVariables State { get; set; } = new DefaultEntityStateVariables();
     }
 
     public class AutoStatsCharacter : StatsCharacter, IHasEffects

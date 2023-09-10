@@ -2,7 +2,7 @@
 @using OpenRpg.Core.Stats.Variables
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Extensions
-@using OpenRpg.Genres.Variables
+@using OpenRpg.Core.State.Entity
 
 @if (State != null)
 {
@@ -20,7 +20,7 @@
 
 @code {
     [Parameter]
-    public ICharacterStateVariables State { get; set; }
+    public IEntityStateVariables State { get; set; }
     
     
     [Parameter]
