@@ -7,7 +7,6 @@ using OpenRpg.Demos.Infrastructure.Builders;
 using OpenRpg.Demos.Infrastructure.Data;
 using OpenRpg.Demos.Infrastructure.DI;
 using OpenRpg.Demos.Infrastructure.Extensions;
-using OpenRpg.Demos.Infrastructure.Locale;
 using OpenRpg.Demos.Infrastructure.Persistence;
 using OpenRpg.Genres.Fantasy.Persistence.Items.Equipment;
 using OpenRpg.Genres.Persistence.Characters;

@@ -110,13 +110,13 @@
             Id = 1,
             NameLocaleId = "Sword",
             DescriptionLocaleId = "A really bad looking sword, can slay things though",
-            ItemType = ItemTypes.GenericWeapon,
+            ItemType = FantasyItemTypes.GenericWeapon,
             Effects = new []
             {
-                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 30.0f }
+                new Effect { EffectType = FantasyEffectTypes.DamageBonusAmount, Potency = 30.0f }
             }
         };
-        template.Variables.QualityType(ItemQualityTypes.JunkQuality);
+        template.Variables.QualityType(FantasyItemQualityTypes.JunkQuality);
         template.Variables.Value(10);
         template.Variables.AssetCode("sword");
 
@@ -147,7 +147,7 @@
                 new Effect
                 {
                     Potency = 5,
-                    EffectType = EffectTypes.StrengthBonusAmount
+                    EffectType = FantasyEffectTypes.StrengthBonusAmount
                 }
             }
         });

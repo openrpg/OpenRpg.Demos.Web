@@ -5,13 +5,13 @@
 @using OpenRpg.Data
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Classes
-@using OpenRpg.Core.Stats.Populators
 @using OpenRpg.Data.Conventions.Extensions
 @using OpenRpg.Genres.Extensions
+@using OpenRpg.Genres.Populators.Entity.Stats
 
 @inject DemoCharacterBuilder CharacterBuilder;
 @inject IRepository Repository;
-@inject IStatPopulator StatPopulator;
+@inject IEntityStatPopulator StatPopulator;
 
 <Markdown>
     # Character Builder

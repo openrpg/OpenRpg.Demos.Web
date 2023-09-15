@@ -3,23 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using OpenRpg.Cards.Types;
-using OpenRpg.Demos.Infrastructure.Data;
 using OpenRpg.Demos.Infrastructure.Extensions;
 using OpenRpg.Demos.Infrastructure.Types;
+using OpenRpg.Genres.Fantasy.Types;
 using OpenRpg.Genres.Types;
 using OpenRpg.Localization;
-using OpenRpg.Localization.Data.Repositories;
 using OpenRpg.Quests.Types;
-using DamageTypes = OpenRpg.Genres.Fantasy.Types.DamageTypes;
-using EffectTypes = OpenRpg.Genres.Fantasy.Types.EffectTypes;
-using ItemQualityTypes = OpenRpg.Genres.Fantasy.Types.ItemQualityTypes;
-using ItemTypes = OpenRpg.Genres.Fantasy.Types.ItemTypes;
-using ModificationTypes = OpenRpg.Genres.Fantasy.Types.ModificationTypes;
-using ObjectiveTypes = OpenRpg.Genres.Types.ObjectiveTypes;
-using RequirementTypes = OpenRpg.Genres.Fantasy.Types.RequirementTypes;
-using RewardTypes = OpenRpg.Genres.Fantasy.Types.RewardTypes;
 
-namespace OpenRpg.Demos.Infrastructure.Locale
+namespace OpenRpg.Demos.Infrastructure.Data
 {
     public class LocaleDataGenerator : IDataGenerator<LocaleDataset>
     {
@@ -76,31 +67,31 @@ namespace OpenRpg.Demos.Infrastructure.Locale
         public void GenerateEffectLocaleText(LocaleDataset localeDataset)
         {
             var effectWordRemovals = new[] { "Bonus", "Amount", "Percentage", "  " };
-            GetTypeFieldsDictionary<EffectTypes>()
+            GetTypeFieldsDictionary<FantasyEffectTypes>()
                     .ForEach((key, value) => localeDataset.LocaleData.Add(GetKeyFor(EffectTextKey, key), value.ReplaceAll(effectWordRemovals, "")));
         }
 
         public void GenerateRequirementLocaleText(LocaleDataset localeDataset)
         {
-            GetTypeFieldsDictionary<RequirementTypes>()
+            GetTypeFieldsDictionary<FantasyRequirementTypes>()
                 .ForEach((key, value) => localeDataset.LocaleData.Add(GetKeyFor(RequirementTextKey, key), value.Replace("Requirement", "")));
         }
 
         public void GenerateItemTypeLocaleText(LocaleDataset localeDataset)
         {
-            GetTypeFieldsDictionary<ItemTypes>()
+            GetTypeFieldsDictionary<FantasyItemTypes>()
                 .ForEach((key, value) => localeDataset.LocaleData.Add(GetKeyFor(ItemTypesTextKey, key), value.Replace("Generic", "")));
         }
 
         public void GenerateItemQualityTypeLocaleText(LocaleDataset localeDataset)
         {
-            GetTypeFieldsDictionary<ItemQualityTypes>()
+            GetTypeFieldsDictionary<FantasyItemQualityTypes>()
                 .ForEach((key, value) => localeDataset.LocaleData.Add(GetKeyFor(ItemQualityTextKey, key), value));
         }
 
         public void GenerateModificationTypeLocaleText(LocaleDataset localeDataset)
         {
-            GetTypeFieldsDictionary<ModificationTypes>()
+            GetTypeFieldsDictionary<FantasyModificationTypes>()
                 .ForEach((key, value) => localeDataset.LocaleData.Add(GetKeyFor(ModificationTextKey, key), value.Replace("Modification", "s")));
         }
 
@@ -118,19 +109,19 @@ namespace OpenRpg.Demos.Infrastructure.Locale
 
         public void GenerateRewardTypeLocaleText(LocaleDataset localeDataset)
         {
-            GetTypeFieldsDictionary<RewardTypes>()
+            GetTypeFieldsDictionary<FantasyRewardTypes>()
                 .ForEach((key, value) => localeDataset.LocaleData.Add(GetKeyFor(RewardsTextKey, key), value.Replace("Reward", "")));
         }
 
         public void GenerateDamageTypeLocaleText(LocaleDataset localeDataset)
         {
-            GetTypeFieldsDictionary<DamageTypes>()
+            GetTypeFieldsDictionary<FantasyDamageTypes>()
                 .ForEach((key, value) => localeDataset.LocaleData.Add(GetKeyFor(DamageTypesTextKey, key), value));
         }
 
         public void GenerateAssociatedTypeLocaleText(LocaleDataset localeDataset)
         {
-            GetTypeFieldsDictionary<AssociatedTypes>()
+            GetTypeFieldsDictionary<GenreAssociatedTypes>()
                 .ForEach((key, value) => localeDataset.LocaleData.Add(GetKeyFor(AssociatedTypesTextKey, key), value.Replace("Association", "")));
         }
         

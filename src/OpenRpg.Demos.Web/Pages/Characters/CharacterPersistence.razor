@@ -3,12 +3,11 @@
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Persistence.Characters
 @using Newtonsoft.Json
-@using OpenRpg.Core.Stats.Populators
 @using OpenRpg.Genres.Extensions
-
+@using OpenRpg.Genres.Populators.Entity.Stats
 @inject DemoCharacterBuilder CharacterBuilder;
 @inject ICharacterMapper CharacterMapper;
-@inject IStatPopulator StatPopulator;
+@inject IEntityStatPopulator StatPopulator;
 
 <Markdown>
    #### Character Persistence

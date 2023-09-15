@@ -1,5 +1,4 @@
 using OpenRpg.Core.Races;
-using OpenRpg.Core.Stats.Variables;
 using OpenRpg.Data;
 using OpenRpg.Data.Conventions.Extensions;
 using OpenRpg.Genres.Persistence.Characters;

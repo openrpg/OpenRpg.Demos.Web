@@ -2,18 +2,18 @@
 
 @using OpenRpg.Combat.Attacks
 @using OpenRpg.Combat.Processors.Attacks
-@using OpenRpg.Core.Stats.Populators
-@using OpenRpg.Demos.Infrastructure.Locale
+@using OpenRpg.Core.Stats.Entity
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Extensions
+@using OpenRpg.Genres.Populators.Entity.Stats
 @using OpenRpg.Localization.Data.Extensions
 @using OpenRpg.Localization.Data.Repositories
 
 @inject DemoCharacterBuilder CharacterBuilder
 @inject IAttackGenerator AttackGenerator
-@inject IAttackProcessor AttackProcessor
+@inject IAttackProcessor<IEntityStatsVariables> AttackProcessor
 @inject ILocaleRepository LocaleRepository
-@inject IStatPopulator StatPopulator;
+@inject IEntityStatPopulator StatPopulator;
 
 <Markdown>
     ## Defending

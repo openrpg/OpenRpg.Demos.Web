@@ -1,13 +1,13 @@
 ﻿@page "/combat/buffs"
 
 @using OpenRpg.Combat.Effects
-@using OpenRpg.Genres.Fantasy.Types
 @using System.Reactive.Linq
 @using System.Reactive.Disposables
 @using OpenRpg.AdviceEngine.Extensions
 @using OpenRpg.Combat.Extensions
 @using OpenRpg.Core.Extensions
 @using OpenRpg.Core.Utils
+@using OpenRpg.Genres.Fantasy.Types
 
 @inject IRandomizer Randomizer;
 
@@ -140,7 +140,7 @@
       NameLocaleId = "Poison I",
       DescriptionLocaleId = "Applies a slight poison over time",
       Duration = 5, Frequency = 1, MaxStack = 2,
-      EffectType = EffectTypes.DarkDamageAmount,
+      EffectType = FantasyEffectTypes.DarkDamageAmount,
       Potency = 2.0f
    };
    
@@ -150,7 +150,7 @@
       NameLocaleId = "Poison II",
       DescriptionLocaleId = "Applies a moderate poison over time",
       Duration = 5, Frequency = 1, MaxStack = 2,
-      EffectType = EffectTypes.DarkDamageAmount,
+      EffectType = FantasyEffectTypes.DarkDamageAmount,
       Potency = 4.0f
    };
    
@@ -160,7 +160,7 @@
       NameLocaleId = "Regen I",
       DescriptionLocaleId = "Applies a slight heal over time",
       Duration = 10, Frequency = 1.5f,
-      EffectType = EffectTypes.HealthRestoreAmount,
+      EffectType = FantasyEffectTypes.HealthRestoreAmount,
       Potency = 5.0f
    };
    
@@ -170,7 +170,7 @@
       NameLocaleId = "Regen II",
       DescriptionLocaleId = "Applies a moderate heal over time",
       Duration = 10, Frequency = 1.5f,
-      EffectType = EffectTypes.HealthRestoreAmount,
+      EffectType = FantasyEffectTypes.HealthRestoreAmount,
       Potency = 10.0f
    };
    
@@ -180,7 +180,7 @@
       NameLocaleId = "Protection I",
       DescriptionLocaleId = "Improves protection for a short period",
       Duration = 5,
-      EffectType = EffectTypes.DefenseBonusAmount,
+      EffectType = FantasyEffectTypes.DefenseBonusAmount,
       Potency = 5.0f
    };
 

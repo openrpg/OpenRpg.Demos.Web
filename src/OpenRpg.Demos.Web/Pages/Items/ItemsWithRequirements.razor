@@ -8,12 +8,13 @@
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Types
+@using OpenRpg.Genres.Populators.Entity.Stats
 @using OpenRpg.Items
 @using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Templates
 
 @inject DemoCharacterBuilder CharacterBuilder;
-@inject IStatPopulator StatPopulator;
+@inject IEntityStatPopulator StatPopulator;
 
 <Markdown>
     ## Requirements In General
@@ -119,18 +120,18 @@
             Id = 1,
             NameLocaleId = "Staff Of Hitting",
             DescriptionLocaleId = "A staff for hitting things, got gold bits on but still looks rubbish",
-            ItemType = ItemTypes.GenericWeapon,
+            ItemType = FantasyItemTypes.GenericWeapon,
             Requirements = new[]
             {
-                new Requirement {RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 10 }
+                new Requirement {RequirementType = FantasyRequirementTypes.StrengthRequirement, AssociatedValue = 10 }
                 },
             Effects = new[]
             {
-                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 30.0f },
-                new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 3.0f }
+                new Effect { EffectType = FantasyEffectTypes.DamageBonusAmount, Potency = 30.0f },
+                new Effect { EffectType = FantasyEffectTypes.StrengthBonusAmount, Potency = 3.0f }
             }
         };
-        template.Variables.QualityType(ItemQualityTypes.UncommonQuality);
+        template.Variables.QualityType(FantasyItemQualityTypes.UncommonQuality);
         template.Variables.Value(150);
         template.Variables.AssetCode("staff");
 
@@ -147,21 +148,21 @@
             Id = 1,
             NameLocaleId = "Wizardy Wand",
             DescriptionLocaleId = "A super special wand with some gem on the end that can only be used by the strongest of wizardy woos",
-            ItemType = ItemTypes.GenericWeapon,
+            ItemType = FantasyItemTypes.GenericWeapon,
             Requirements = new[]
             {
-                new Requirement { RequirementType = RequirementTypes.ClassRequirement, AssociatedId = ClassTypeLookups.Mage },
-                new Requirement { RequirementType = RequirementTypes.LevelRequirement, AssociatedValue = 3 },
+                new Requirement { RequirementType = FantasyRequirementTypes.ClassRequirement, AssociatedId = ClassTypeLookups.Mage },
+                new Requirement { RequirementType = FantasyRequirementTypes.LevelRequirement, AssociatedValue = 3 },
                 },
             Effects = new[]
             {
-                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 15.0f },
-                new Effect { EffectType = EffectTypes.DarkDamageAmount, Potency = 30.0f },
-                new Effect { EffectType = EffectTypes.IntelligenceBonusAmount, Potency = 5.0f },
-                new Effect { EffectType = EffectTypes.MagicBonusAmount, Potency = 40.0f }
+                new Effect { EffectType = FantasyEffectTypes.DamageBonusAmount, Potency = 15.0f },
+                new Effect { EffectType = FantasyEffectTypes.DarkDamageAmount, Potency = 30.0f },
+                new Effect { EffectType = FantasyEffectTypes.IntelligenceBonusAmount, Potency = 5.0f },
+                new Effect { EffectType = FantasyEffectTypes.MagicBonusAmount, Potency = 40.0f }
             }
         };
-        template.Variables.QualityType(ItemQualityTypes.RareQuality);
+        template.Variables.QualityType(FantasyItemQualityTypes.RareQuality);
         template.Variables.Value(300);
         template.Variables.AssetCode("wand");
 
@@ -179,33 +180,33 @@
             Id = 1,
             NameLocaleId = "Sword For The Strong",
             DescriptionLocaleId = "A sword that can only unlock its full power for those with high strength",
-            ItemType = ItemTypes.GenericWeapon,
+            ItemType = FantasyItemTypes.GenericWeapon,
             Requirements = new[]
             {
-                new Requirement { RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 8 },
+                new Requirement { RequirementType = FantasyRequirementTypes.StrengthRequirement, AssociatedValue = 8 },
             },
             Effects = new[]
             {
-                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 20 },
-                new Effect { EffectType = EffectTypes.DefenseBonusAmount, Potency = 5.0f, Requirements = new []
+                new Effect { EffectType = FantasyEffectTypes.DamageBonusAmount, Potency = 20 },
+                new Effect { EffectType = FantasyEffectTypes.DefenseBonusAmount, Potency = 5.0f, Requirements = new []
             {
-                    new Requirement{RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 9 }
+                    new Requirement{RequirementType = FantasyRequirementTypes.StrengthRequirement, AssociatedValue = 9 }
                 }},
-                new Effect { EffectType = EffectTypes.DefenseBonusAmount, Potency = 7.5f, Requirements = new []
+                new Effect { EffectType = FantasyEffectTypes.DefenseBonusAmount, Potency = 7.5f, Requirements = new []
             {
-                    new Requirement{RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 10 }
+                    new Requirement{RequirementType = FantasyRequirementTypes.StrengthRequirement, AssociatedValue = 10 }
                 }},
-                new Effect { EffectType = EffectTypes.DefenseBonusAmount, Potency = 10.0f, Requirements = new []
+                new Effect { EffectType = FantasyEffectTypes.DefenseBonusAmount, Potency = 10.0f, Requirements = new []
             {
-                    new Requirement{RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 11 }
+                    new Requirement{RequirementType = FantasyRequirementTypes.StrengthRequirement, AssociatedValue = 11 }
                 }},
-                new Effect { EffectType = EffectTypes.DefenseBonusAmount, Potency = 12.5f, Requirements = new []
+                new Effect { EffectType = FantasyEffectTypes.DefenseBonusAmount, Potency = 12.5f, Requirements = new []
             {
-                    new Requirement{RequirementType = RequirementTypes.StrengthRequirement, AssociatedValue = 12 }
+                    new Requirement{RequirementType = FantasyRequirementTypes.StrengthRequirement, AssociatedValue = 12 }
                 }},
             }
         };
-        template.Variables.QualityType(ItemQualityTypes.EpicQuality);
+        template.Variables.QualityType(FantasyItemQualityTypes.EpicQuality);
         template.Variables.Value(1000);
         template.Variables.AssetCode("sword");
 

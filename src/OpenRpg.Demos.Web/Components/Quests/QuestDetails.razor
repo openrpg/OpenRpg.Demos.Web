@@ -4,11 +4,12 @@
 @using OpenRpg.Data
 @using OpenRpg.Data.Conventions.Extensions
 @using OpenRpg.Genres.Characters
+@using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Genres.Types
 @using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Templates
 @using OpenRpg.Items.Variables
-@using RewardTypes = OpenRpg.Genres.Fantasy.Types.RewardTypes
+@using OpenRpg.Quests.Types
 
 @inject IRepository Repository
 
@@ -32,7 +33,7 @@
             <h2 class="title is-6 has-text-dark">Items Provided</h2>
             @foreach (var gift in Quest.Gifts)
             {
-                if (gift.RewardType == RewardTypes.ItemReward)
+                if (gift.RewardType == FantasyRewardTypes.ItemReward)
                 {
                     <ItemIcon Item="GetItemFor(gift.AssociatedId, gift.AssociatedValue)" Character="Character"></ItemIcon>
                 }
@@ -66,15 +67,15 @@
             <h2 class="title is-6 has-text-dark">Rewards</h2>
             @foreach (var reward in Quest.Rewards)
             {
-                if (reward.RewardType == RewardTypes.ItemReward)
+                if (reward.RewardType == FantasyRewardTypes.ItemReward)
                 {
                     <ItemIcon Item="GetItemFor(reward.AssociatedId, reward.AssociatedValue)" Character="Character"></ItemIcon>
                 }
-                else if (reward.RewardType == RewardTypes.CurrencyReward)
+                else if (reward.RewardType == FantasyRewardTypes.CurrencyReward)
                 {
                     <div class="subtitle is-6 has-text-dark">@(reward.AssociatedValue) Gold</div>
                 }
-                else if (reward.RewardType == RewardTypes.ExperienceReward)
+                else if (reward.RewardType == FantasyRewardTypes.ExperienceReward)
                 {
                     <div class="subtitle is-6 has-text-dark">@(reward.AssociatedValue) Experience</div>
                 }

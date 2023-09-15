@@ -22,11 +22,11 @@ namespace OpenRpg.Demos.Infrastructure.Data
         {
             var effects = new[]
             {
-                new Effect {Potency = 2, EffectType = EffectTypes.StrengthBonusAmount},
-                new Effect {Potency = 2, EffectType = EffectTypes.ConstitutionBonusAmount},
-                new Effect {Potency = 5, EffectType = EffectTypes.DamageBonusAmount},
-                new Effect {Potency = 5, EffectType = EffectTypes.DefenseBonusAmount},
-                new Effect {Potency = 30, EffectType = EffectTypes.HealthBonusAmount}
+                new Effect {Potency = 2, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+                new Effect {Potency = 2, EffectType = FantasyEffectTypes.ConstitutionBonusAmount},
+                new Effect {Potency = 5, EffectType = FantasyEffectTypes.DamageBonusAmount},
+                new Effect {Potency = 5, EffectType = FantasyEffectTypes.DefenseBonusAmount},
+                new Effect {Potency = 30, EffectType = FantasyEffectTypes.HealthBonusAmount}
             };
 
             var classTemplate = new DefaultClassTemplate
@@ -44,10 +44,10 @@ namespace OpenRpg.Demos.Infrastructure.Data
         {
             var effects = new[]
             {
-                new Effect {Potency = 4, EffectType = EffectTypes.IntelligenceBonusAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.DarkDamageAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.DarkDefenseAmount},
-                new Effect {Potency = 30, EffectType = EffectTypes.MagicBonusAmount}
+                new Effect {Potency = 4, EffectType = FantasyEffectTypes.IntelligenceBonusAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.DarkDamageAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.DarkDefenseAmount},
+                new Effect {Potency = 30, EffectType = FantasyEffectTypes.MagicBonusAmount}
             };
 
             var classTemplate = new DefaultClassTemplate

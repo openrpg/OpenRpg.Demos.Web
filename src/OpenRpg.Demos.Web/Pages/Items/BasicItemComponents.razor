@@ -1,11 +1,5 @@
 @page "/items/basic-components"
-
-@using OpenRpg.Core.Common
-@using OpenRpg.Core.Classes
 @using OpenRpg.Core.Effects
-@using OpenRpg.Core.Modifications
-@using OpenRpg.Core.Races
-@using OpenRpg.Core.Requirements
 @using OpenRpg.Demos.Infrastructure.Extensions
 @using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Items
@@ -145,13 +139,13 @@
             Id = 1,
             NameLocaleId = "Sword",
             DescriptionLocaleId = "A really bad looking sword, can slay things though",
-            ItemType = ItemTypes.GenericWeapon,
+            ItemType = FantasyItemTypes.GenericWeapon,
             Effects = new []
             {
-                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 30.0f }
+                new Effect { EffectType = FantasyEffectTypes.DamageBonusAmount, Potency = 30.0f }
             }
         };
-        template.Variables.QualityType(ItemQualityTypes.JunkQuality);
+        template.Variables.QualityType(FantasyItemQualityTypes.JunkQuality);
         template.Variables.Value(10);
         template.Variables.AssetCode("sword");
 
@@ -165,11 +159,11 @@
     {
         var swordEffects = new[]
         {
-            new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 765.5f },
-            new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 20.0f },
-            new Effect { EffectType = EffectTypes.DamageBonusPercentage, Potency = 10.0f },
-            new Effect { EffectType = EffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
-            new Effect { EffectType = EffectTypes.DarkDefenseAmount, Potency = 15.0f }
+            new Effect { EffectType = FantasyEffectTypes.DamageBonusAmount, Potency = 765.5f },
+            new Effect { EffectType = FantasyEffectTypes.StrengthBonusAmount, Potency = 20.0f },
+            new Effect { EffectType = FantasyEffectTypes.DamageBonusPercentage, Potency = 10.0f },
+            new Effect { EffectType = FantasyEffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
+            new Effect { EffectType = FantasyEffectTypes.DarkDefenseAmount, Potency = 15.0f }
         };
 
         var template = new DefaultItemTemplate
@@ -177,10 +171,10 @@
             Id = 2,
             NameLocaleId = "Super Sword",
             DescriptionLocaleId = "So fancy it could slice through stone",
-            ItemType = ItemTypes.GenericWeapon,
+            ItemType = FantasyItemTypes.GenericWeapon,
             Effects = swordEffects
         };
-        template.Variables.QualityType(ItemQualityTypes.EpicQuality);
+        template.Variables.QualityType(FantasyItemQualityTypes.EpicQuality);
         template.Variables.Value(10000);
         template.Variables.AssetCode("sword");
 

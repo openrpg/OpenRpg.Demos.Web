@@ -23,13 +23,13 @@ namespace OpenRpg.Demos.Infrastructure.Data
         {
             var effects = new[]
             {
-                new Effect {Potency = 10, EffectType = EffectTypes.AllAttributeBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.DamageBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.DefenseBonusAmount},
-                new Effect {Potency = 1, EffectType = EffectTypes.DarkDamageAmount},
-                new Effect {Potency = 5, EffectType = EffectTypes.DarkDefenseAmount},
-                new Effect {Potency = 80, EffectType = EffectTypes.HealthBonusAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.MagicBonusAmount}
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.AllAttributeBonusAmount},
+                new Effect {Potency = 8, EffectType = FantasyEffectTypes.DamageBonusAmount},
+                new Effect {Potency = 8, EffectType = FantasyEffectTypes.DefenseBonusAmount},
+                new Effect {Potency = 1, EffectType = FantasyEffectTypes.DarkDamageAmount},
+                new Effect {Potency = 5, EffectType = FantasyEffectTypes.DarkDefenseAmount},
+                new Effect {Potency = 80, EffectType = FantasyEffectTypes.HealthBonusAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.MagicBonusAmount}
             };
 
             var raceTemplate = new DefaultRaceTemplate
@@ -47,18 +47,18 @@ namespace OpenRpg.Demos.Infrastructure.Data
         {
             var effects = new[]
             {
-                new Effect {Potency = 8, EffectType = EffectTypes.StrengthBonusAmount},
-                new Effect {Potency = 12, EffectType = EffectTypes.DexterityBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.ConstitutionBonusAmount},
-                new Effect {Potency = 12, EffectType = EffectTypes.IntelligenceBonusAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.WisdomBonusAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.CharismaBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.DamageBonusAmount},
-                new Effect {Potency = 7, EffectType = EffectTypes.DefenseBonusAmount},
-                new Effect {Potency = 5, EffectType = EffectTypes.DarkDamageAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.DarkDefenseAmount},
-                new Effect {Potency = 70, EffectType = EffectTypes.HealthBonusAmount},
-                new Effect {Potency = 30, EffectType = EffectTypes.MagicBonusAmount}
+                new Effect {Potency = 8, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+                new Effect {Potency = 12, EffectType = FantasyEffectTypes.DexterityBonusAmount},
+                new Effect {Potency = 8, EffectType = FantasyEffectTypes.ConstitutionBonusAmount},
+                new Effect {Potency = 12, EffectType = FantasyEffectTypes.IntelligenceBonusAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.WisdomBonusAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.CharismaBonusAmount},
+                new Effect {Potency = 8, EffectType = FantasyEffectTypes.DamageBonusAmount},
+                new Effect {Potency = 7, EffectType = FantasyEffectTypes.DefenseBonusAmount},
+                new Effect {Potency = 5, EffectType = FantasyEffectTypes.DarkDamageAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.DarkDefenseAmount},
+                new Effect {Potency = 70, EffectType = FantasyEffectTypes.HealthBonusAmount},
+                new Effect {Potency = 30, EffectType = FantasyEffectTypes.MagicBonusAmount}
             };
 
             var raceTemplate = new DefaultRaceTemplate
@@ -76,16 +76,16 @@ namespace OpenRpg.Demos.Infrastructure.Data
         {
             var effects = new[]
             {
-                new Effect {Potency = 12, EffectType = EffectTypes.StrengthBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.DexterityBonusAmount},
-                new Effect {Potency = 12, EffectType = EffectTypes.ConstitutionBonusAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.IntelligenceBonusAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.WisdomBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.CharismaBonusAmount},
-                new Effect {Potency = 8, EffectType = EffectTypes.DamageBonusAmount},
-                new Effect {Potency = 10, EffectType = EffectTypes.DefenseBonusAmount},
-                new Effect {Potency = 100, EffectType = EffectTypes.HealthBonusAmount},
-                new Effect {Potency = -1, EffectType = EffectTypes.DarkDefenseAmount},
+                new Effect {Potency = 12, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+                new Effect {Potency = 8, EffectType = FantasyEffectTypes.DexterityBonusAmount},
+                new Effect {Potency = 12, EffectType = FantasyEffectTypes.ConstitutionBonusAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.IntelligenceBonusAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.WisdomBonusAmount},
+                new Effect {Potency = 8, EffectType = FantasyEffectTypes.CharismaBonusAmount},
+                new Effect {Potency = 8, EffectType = FantasyEffectTypes.DamageBonusAmount},
+                new Effect {Potency = 10, EffectType = FantasyEffectTypes.DefenseBonusAmount},
+                new Effect {Potency = 100, EffectType = FantasyEffectTypes.HealthBonusAmount},
+                new Effect {Potency = -1, EffectType = FantasyEffectTypes.DarkDefenseAmount},
 
             };
 

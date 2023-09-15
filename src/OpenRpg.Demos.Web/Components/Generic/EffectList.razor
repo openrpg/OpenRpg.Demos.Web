@@ -4,7 +4,6 @@
 @using OpenRpg.Genres.Fantasy.Types
 @using System.Reflection
 @using OpenRpg.Core.Requirements
-@using OpenRpg.Demos.Infrastructure.Locale
 @using OpenRpg.Demos.Web.Extensions
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Extensions
@@ -48,7 +47,7 @@
     protected override void OnInitialized()
     {
         // You could easily add other types in if you had custom ones
-        _percentageEffectTypeCache = GetAllPercentageEffectTypeIds(typeof(EffectTypes));
+        _percentageEffectTypeCache = GetAllPercentageEffectTypeIds(typeof(FantasyEffectTypes));
         base.OnInitialized();
     }
 

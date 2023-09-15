@@ -7,7 +7,6 @@ using OpenRpg.Demos.Infrastructure.Lookups;
 using OpenRpg.Genres.Fantasy.Types;
 using OpenRpg.Items.Extensions;
 using OpenRpg.Items.Templates;
-using ItemTypes = OpenRpg.Genres.Fantasy.Types.ItemTypes;
 
 namespace OpenRpg.Demos.Infrastructure.Data
 {
@@ -31,15 +30,15 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 Id = ItemTemplateLookups.Sword,
                 NameLocaleId = "Sword",
                 DescriptionLocaleId = "A really bad looking sword, can slay things though",
-                ItemType = ItemTypes.GenericWeapon,
+                ItemType = FantasyItemTypes.GenericWeapon,
                 ModificationAllowances = new ModificationAllowance[0],
                 Requirements = new Requirement[0],
                 Effects = new[]
                 {
-                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 30.0f }
+                new Effect { EffectType = FantasyEffectTypes.DamageBonusAmount, Potency = 30.0f }
             }
             };
-            template.Variables.QualityType(ItemQualityTypes.JunkQuality);
+            template.Variables.QualityType(FantasyItemQualityTypes.JunkQuality);
             template.Variables.Value(10);
             template.Variables.AssetCode("sword");
 
@@ -50,11 +49,11 @@ namespace OpenRpg.Demos.Infrastructure.Data
         {
             var swordEffects = new[]
             {
-                new Effect { EffectType = EffectTypes.DamageBonusAmount, Potency = 765.5f },
-                new Effect { EffectType = EffectTypes.StrengthBonusAmount, Potency = 20.0f },
-                new Effect { EffectType = EffectTypes.DamageBonusPercentage, Potency = 10.0f },
-                new Effect { EffectType = EffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
-                new Effect { EffectType = EffectTypes.DarkDefenseAmount, Potency = 15.0f }
+                new Effect { EffectType = FantasyEffectTypes.DamageBonusAmount, Potency = 765.5f },
+                new Effect { EffectType = FantasyEffectTypes.StrengthBonusAmount, Potency = 20.0f },
+                new Effect { EffectType = FantasyEffectTypes.DamageBonusPercentage, Potency = 10.0f },
+                new Effect { EffectType = FantasyEffectTypes.ConstitutionBonusAmount, Potency = 15.0f },
+                new Effect { EffectType = FantasyEffectTypes.DarkDefenseAmount, Potency = 15.0f }
             };
 
             var template = new DefaultItemTemplate
@@ -62,12 +61,12 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 Id = ItemTemplateLookups.SuperSword,
                 NameLocaleId = "Super Sword",
                 DescriptionLocaleId = "So fancy it could slice through stone",
-                ItemType = ItemTypes.GenericWeapon,
+                ItemType = FantasyItemTypes.GenericWeapon,
                 ModificationAllowances = new ModificationAllowance[0],
                 Requirements = new Requirement[0],
                 Effects = swordEffects
             };
-            template.Variables.QualityType(ItemQualityTypes.EpicQuality);
+            template.Variables.QualityType(FantasyItemQualityTypes.EpicQuality);
             template.Variables.Value(10000);
             template.Variables.AssetCode("sword");
             
@@ -81,15 +80,15 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 Id = ItemTemplateLookups.HealingPotion,
                 NameLocaleId = "Healing Potion",
                 DescriptionLocaleId = "A sketchy looking potion, lets hope it heals you",
-                ItemType = ItemTypes.Potions,
+                ItemType = FantasyItemTypes.Potions,
                 ModificationAllowances = new ModificationAllowance[0],
                 Requirements = new Requirement[0],
                 Effects = new[]
                 {
-                new Effect { EffectType = EffectTypes.HealthRestoreAmount, Potency = 30.0f }
+                new Effect { EffectType = FantasyEffectTypes.HealthRestoreAmount, Potency = 30.0f }
             }
             };
-            template.Variables.QualityType(ItemQualityTypes.UncommonQuality);
+            template.Variables.QualityType(FantasyItemQualityTypes.UncommonQuality);
             template.Variables.Value(20);
             template.Variables.MaxStacks(5);
             template.Variables.AssetCode("potion");
@@ -104,15 +103,15 @@ namespace OpenRpg.Demos.Infrastructure.Data
                 Id = ItemTemplateLookups.JunkPotion,
                 NameLocaleId = "Junk Potion Combi-Deal",
                 DescriptionLocaleId = "Who knows whats in this...",
-                ItemType = ItemTypes.Potions,
+                ItemType = FantasyItemTypes.Potions,
                 ModificationAllowances = new ModificationAllowance[0],
                 Requirements = new Requirement[0],
                 Effects = new[]
                 {
-                new Effect { EffectType = EffectTypes.HealthRestoreAmount, Potency = -5.0f }
+                new Effect { EffectType = FantasyEffectTypes.HealthRestoreAmount, Potency = -5.0f }
             }
             };
-            template.Variables.QualityType(ItemQualityTypes.JunkQuality);
+            template.Variables.QualityType(FantasyItemQualityTypes.JunkQuality);
             template.Variables.Value(0);
             template.Variables.MaxStacks(5);
             template.Variables.AssetCode("potion-2");

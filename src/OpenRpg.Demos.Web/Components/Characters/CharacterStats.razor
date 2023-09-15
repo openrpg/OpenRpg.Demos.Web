@@ -1,5 +1,5 @@
 @using OpenRpg.Core.Stats
-@using OpenRpg.Core.Stats.Variables
+@using OpenRpg.Core.Stats.Entity
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Extensions
 
@@ -42,5 +42,5 @@
 
 @code {
     [Parameter]
-    public IStatsVariables Stats { get; set; }
+    public IEntityStatsVariables Stats { get; set; }
 }

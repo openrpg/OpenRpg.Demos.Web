@@ -2,13 +2,13 @@
 
 @using OpenRpg.Core.Effects
 @using OpenRpg.Core.Races
-@using OpenRpg.Genres.Fantasy.Types
 @using OpenRpg.Core.Classes
 @using OpenRpg.Core.State.Entity
-@using OpenRpg.Core.Stats.Variables
+@using OpenRpg.Core.Stats.Entity
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Fantasy.Stats
+@using OpenRpg.Genres.Fantasy.Types
 
 <Markdown>
     ## Character Stats Components
@@ -237,7 +237,7 @@
 
     public class StatsCharacter : BasicCharacterComponents.SimpleCharacter
     {
-        public IStatsVariables Stats { get; set; } = new DefaultStatsVariables();
+        public IEntityStatsVariables Stats { get; set; } = new DefaultEntityStatsVariables();
         public IEntityStateVariables State { get; set; } = new DefaultEntityStateVariables();
     }
 
@@ -269,7 +269,7 @@
 
         
         
-        ManualStatsExample.Stats = new DefaultStatsVariables();
+        ManualStatsExample.Stats = new DefaultEntityStatsVariables();
         ManualStatsExample.Stats.MaxHealth(100);
         ManualStatsExample.State.Health(50);
         ManualStatsExample.Stats.MaxMagic(10);
@@ -291,26 +291,26 @@
     {
         var raceEffects = new[]
         {
-      new Effect {Potency = 8, EffectType = EffectTypes.StrengthBonusAmount},
-      new Effect {Potency = 11, EffectType = EffectTypes.DexterityBonusAmount},
-      new Effect {Potency = 12, EffectType = EffectTypes.IntelligenceBonusAmount},
-      new Effect {Potency = 12, EffectType = EffectTypes.WisdomBonusAmount},
-      new Effect {Potency = 12, EffectType = EffectTypes.CharismaBonusAmount},
-      new Effect {Potency = 6, EffectType = EffectTypes.DamageBonusAmount},
-      new Effect {Potency = 5, EffectType = EffectTypes.DefenseBonusAmount},
-      new Effect {Potency = 1, EffectType = EffectTypes.DarkDamageAmount},
-      new Effect {Potency = 5, EffectType = EffectTypes.DarkDefenseAmount},
-      new Effect {Potency = 50, EffectType = EffectTypes.HealthBonusAmount},
-      new Effect {Potency = 10, EffectType = EffectTypes.MagicBonusAmount}
+      new Effect {Potency = 8, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+      new Effect {Potency = 11, EffectType = FantasyEffectTypes.DexterityBonusAmount},
+      new Effect {Potency = 12, EffectType = FantasyEffectTypes.IntelligenceBonusAmount},
+      new Effect {Potency = 12, EffectType = FantasyEffectTypes.WisdomBonusAmount},
+      new Effect {Potency = 12, EffectType = FantasyEffectTypes.CharismaBonusAmount},
+      new Effect {Potency = 6, EffectType = FantasyEffectTypes.DamageBonusAmount},
+      new Effect {Potency = 5, EffectType = FantasyEffectTypes.DefenseBonusAmount},
+      new Effect {Potency = 1, EffectType = FantasyEffectTypes.DarkDamageAmount},
+      new Effect {Potency = 5, EffectType = FantasyEffectTypes.DarkDefenseAmount},
+      new Effect {Potency = 50, EffectType = FantasyEffectTypes.HealthBonusAmount},
+      new Effect {Potency = 10, EffectType = FantasyEffectTypes.MagicBonusAmount}
     };
 
         var classEffects = new[]
         {
-      new Effect {Potency = 3, EffectType = EffectTypes.StrengthBonusAmount},
-      new Effect {Potency = 1, EffectType = EffectTypes.DexterityBonusAmount},
-      new Effect {Potency = 4, EffectType = EffectTypes.DamageBonusAmount},
-      new Effect {Potency = 3, EffectType = EffectTypes.DefenseBonusAmount},
-      new Effect {Potency = 50, EffectType = EffectTypes.HealthBonusAmount}
+      new Effect {Potency = 3, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+      new Effect {Potency = 1, EffectType = FantasyEffectTypes.DexterityBonusAmount},
+      new Effect {Potency = 4, EffectType = FantasyEffectTypes.DamageBonusAmount},
+      new Effect {Potency = 3, EffectType = FantasyEffectTypes.DefenseBonusAmount},
+      new Effect {Potency = 50, EffectType = FantasyEffectTypes.HealthBonusAmount}
     };
 
         var hobbitRace = new DefaultRaceTemplate { NameLocaleId = "Hobbit", Effects = raceEffects };
@@ -318,9 +318,9 @@
 
         var characterSpecificEffects = new[]
         {
-      new Effect {Potency = 6, EffectType = EffectTypes.WisdomBonusAmount},
-      new Effect {Potency = 2, EffectType = EffectTypes.CharismaBonusAmount},
-      new Effect {Potency = 20, EffectType = EffectTypes.DarkDefenseAmount}
+      new Effect {Potency = 6, EffectType = FantasyEffectTypes.WisdomBonusAmount},
+      new Effect {Potency = 2, EffectType = FantasyEffectTypes.CharismaBonusAmount},
+      new Effect {Potency = 20, EffectType = FantasyEffectTypes.DarkDefenseAmount}
     };
 
         AutoStatsExample.NameLocaleId = "Frodo Baggins";
