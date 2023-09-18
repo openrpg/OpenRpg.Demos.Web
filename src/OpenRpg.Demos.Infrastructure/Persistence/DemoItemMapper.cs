@@ -16,6 +16,6 @@ public class DemoItemMapper : ItemMapper
     public override IItemTemplate GetItemTemplateFor(int itemTemplateId)
     { return Repository.Get<IItemTemplate>(itemTemplateId); }
 
-    public override IModification GetModificationsFor(int modificationId)
-    { return Repository.Get<IModification>(modificationId); }
+    public override IModificationTemplate GetModificationsFor(int modificationId)
+    { return Repository.Get<IModificationTemplate>(modificationId); }
 }

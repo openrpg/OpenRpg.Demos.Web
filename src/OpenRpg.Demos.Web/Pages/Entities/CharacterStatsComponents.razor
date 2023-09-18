@@ -1,9 +1,10 @@
-﻿@page "/characters/stats-components"
+﻿@page "/entities/stats-components"
 
 @using OpenRpg.Core.Effects
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Classes
-@using OpenRpg.Core.State.Entity
+@using OpenRpg.Core.Entity
+@using OpenRpg.Core.Extensions
 @using OpenRpg.Core.Stats.Entity
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Fantasy.Extensions
@@ -11,7 +12,7 @@
 @using OpenRpg.Genres.Fantasy.Types
 
 <Markdown>
-    ## Character Stats Components
+    ## Stats Components
     So now we have covered the race/class aspects of a character there is some other stuff to cover, such as *STATS*!
 
     Stats can store anything specific to your character, a common example would be *strength*, *dexterity* etc but it can
@@ -31,16 +32,8 @@
             `SimpleCharacter` and add stats.
 
             ```csharp
-            public class StatsCharacter : SimpleCharacter
-            {
-                public IStatsVariables Stats { get; set; } = new DefaultStatsVariables();
-            }
-            ```
-
-            So lets set them manually and see what happens
-
-            ```csharp
-            var character = new StatsCharacter{ /* Setup as Frodo */ };
+            var character = new DefaultEntity();
+            
             character.Stats.MaxHealth(100);
             character.Stats.MaxMagic(10);
             character.Stats.Strength(11);
@@ -58,7 +51,7 @@
     </div>
     <div class="column is-half">
         <CardSection>
-            <CharacterDetails Name="@ManualStatsExample.NameLocaleId" RaceTemplate="@ManualStatsExample.Race" Class="@ManualStatsExample.Class" />
+            <CharacterDetails Name="@ManualStatsExample.NameLocaleId" RaceTemplate="@ManualStatsExample.Variables.Race()" Class="@ManualStatsExample.Variables.Class()" />
             <br />
             <CharacterVitals Stats="@ManualStatsExample.Stats" />
             <br />
@@ -76,28 +69,6 @@
 
     > So for example you can have your race and class contain effects which should be used to calculate your characters
     core stats. When doing things this way its expected that you already have your data setup (i.e using the editor or similar).
-
-    #### Update existing character
-    To start with lets update our character to allow for effects on the character itself (there are other ways to do this,
-    but lets keep it simple), we will need one `Effects` property to provide ALL effects for the character, and one `CustomEffects`
-    that we can populate with per character bonus effects.
-
-    ```csharp
-    public class AutoStatsCharacter : StatsCharacter, IHasEffects
-    {
-        public IEnumerable&lt;Effect&gt; CustomEffects { get; set; } = new Effect[0];
-        public IEnumerable&lt;Effect&gt; Effects =&gt; GetAllEffects();
-
-        public IEnumerable&lt;Effect&gt; GetAllEffects()
-        {
-            var effectList = new List&lt;Effect&gt;();
-            effectList.AddRange(CustomEffects);
-            effectList.AddRange(Race.Effects);
-            effectList.AddRange(Class.ClassTemplate.Effects);
-            return effectList;
-        }
-    }
-    ```
 </Markdown>
 <br />
 <Markdown>
@@ -132,7 +103,7 @@
     };
 
     var hobbitRace = new DefaultRaceTemplate { NameLocaleId = "Hobbit", Effects = raceEffects };
-    var fighterClass = new DefaultClassTemplate {NameLocaleId = "Fighter", Effects = classEffects};
+    var fighterClass = new DefaultClassTemplate {NameLocaleId = "Fighter", Effects = classEffects };
     ```
 </Markdown>
 <br />
@@ -143,25 +114,16 @@
             However as we have put effects on the character too this allows us to give each character some unique stats like so.
 
             ```csharp
-            var characterSpecificEffects = new[]
-            {
-                new Effect {Potency = 6, EffectType = EffectTypes.WisdomBonusAmount},
-                new Effect {Potency = 2, EffectType = EffectTypes.CharismaBonusAmount},
-                new Effect {Potency = 20, EffectType = EffectTypes.DarkDefenseAmount}
-            };
-
-            var character = new AutoStatsCharacter{ /* Setup as Frodo */ };
-            character.CustomEffects = characterSpecificEffects;
-            character.Race = hobbitRace;
-            character.Class = new DefaultCharacterClass(1, fighterClass);
+            character.Variables.Race(hobbitRace);
+            character.Variables.Class(new DefaultCharacterClass(fighterClass));
             ```
 
             Now we are in a position to auto generate our stats, you can do this any way you want but the `OpenRpg.Fantasy` library
             comes with a default implementation to auto generate core and combat related stats based off effects.
 
             ```csharp
-            var statsCalculator = new FantasyStatsPopulator();
-            character.Stats = statsCalculator.ComputeStats(AutoStatsExample.Effects.ToArray());
+            var statsPoulator = new FantasyStatsPopulator();
+            statsPoulator.Populate(character.Stats, character.GetEffects().ToArray());
             ```
 
             As you can see we compute the stats for the character and assign them, there is also an added effect output section
@@ -185,7 +147,7 @@
     </div>
     <div class="column is-half">
         <CardSection>
-            <CharacterDetails Name="@AutoStatsExample.NameLocaleId" RaceTemplate="@AutoStatsExample.Race" Class="@AutoStatsExample.Class" />
+            <CharacterDetails Name="@AutoStatsExample.NameLocaleId" RaceTemplate="@AutoStatsExample.Variables.Race()" Class="@AutoStatsExample.Variables.Class()" />
             <br />
             <CharacterVitals Stats="@AutoStatsExample.Stats" />
             <br />
@@ -194,21 +156,17 @@
             <div class="columns">
                 <div class="column has-text-centered">
                     <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
-                    <EffectList Effects="@AutoStatsExample.Race.Effects.ToArray()" />
+                    <EffectList Effects="@AutoStatsExample.Variables.Race().Effects.ToArray()" />
                 </div>
                 <div class="column has-text-centered">
                     <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
-                    <EffectList Effects="@AutoStatsExample.Class.ClassTemplate.Effects.ToArray()" />
-                </div>
-                <div class="column has-text-centered">
-                    <h4 class="subtitle mb-2 has-text-dark">Character Effects</h4>
-                    <EffectList Effects="@AutoStatsExample.CustomEffects.ToArray()" />
+                    <EffectList Effects="@AutoStatsExample.Variables.Class().Template.Effects.ToArray()" />
                 </div>
             </div>
         </CardSection>
         <br />
         <CardSection>
-            <CharacterDetails Name="@AutoStatsExample2.NameLocaleId" RaceTemplate="@AutoStatsExample2.Race" Class="@AutoStatsExample2.Class" />
+            <CharacterDetails Name="@AutoStatsExample2.NameLocaleId" RaceTemplate="@AutoStatsExample2.Variables.Race()" Class="@AutoStatsExample2.Variables.Class()" />
             <br />
             <CharacterVitals Stats="@AutoStatsExample2.Stats" />
             <br />
@@ -217,15 +175,11 @@
             <div class="columns">
                 <div class="column has-text-centered">
                     <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
-                    <EffectList Effects="@AutoStatsExample2.Race.Effects.ToArray()" />
+                    <EffectList Effects="@AutoStatsExample2.Variables.Race().Effects.ToArray()" />
                 </div>
                 <div class="column has-text-centered">
                     <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
-                    <EffectList Effects="@AutoStatsExample2.Class.ClassTemplate.Effects.ToArray()" />
-                </div>
-                <div class="column has-text-centered">
-                    <h4 class="subtitle mb-2 has-text-dark">Character Effects</h4>
-                    <EffectList Effects="@AutoStatsExample2.CustomEffects.ToArray()" />
+                    <EffectList Effects="@AutoStatsExample2.Variables.Class().Template.Effects.ToArray()" />
                 </div>
             </div>
         </CardSection>
@@ -234,40 +188,22 @@
 
 
 @code {
-
-    public class StatsCharacter : BasicCharacterComponents.SimpleCharacter
-    {
-        public IEntityStatsVariables Stats { get; set; } = new DefaultEntityStatsVariables();
-        public IEntityStateVariables State { get; set; } = new DefaultEntityStateVariables();
-    }
-
-    public class AutoStatsCharacter : StatsCharacter, IHasEffects
-    {
-        public IEnumerable<Effect> CustomEffects { get; set; } = new Effect[0];
-        public IEnumerable<Effect> Effects => GetAllEffects();
-
-        public IEnumerable<Effect> GetAllEffects()
-        {
-            var effectList = new List<Effect>();
-            effectList.AddRange(CustomEffects);
-            effectList.AddRange(Race.Effects);
-            effectList.AddRange(Class.ClassTemplate.Effects);
-            return effectList;
-        }
-    }
-
-    private StatsCharacter ManualStatsExample = new StatsCharacter();
-    private AutoStatsCharacter AutoStatsExample = new AutoStatsCharacter();
-    private AutoStatsCharacter AutoStatsExample2 = new AutoStatsCharacter();
+    private DefaultEntity ManualStatsExample = new DefaultEntity();
+    private DefaultEntity AutoStatsExample = new DefaultEntity();
+    private DefaultEntity AutoStatsExample2 = new DefaultEntity();
 
     protected void SetupManualStats()
     {
         ManualStatsExample.NameLocaleId = "Frodo Baggins";
 
-        ManualStatsExample.Race = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
-        ManualStatsExample.Class = new DefaultClass(1, new DefaultClassTemplate { NameLocaleId = "Fighter" });
-
+        var hobbitRace = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
+        var fighterClass = new DefaultClassTemplate { Id = 1, NameLocaleId = "Fighter" };
         
+        ManualStatsExample.Variables.Race(hobbitRace);
+
+        var manualStatsExampleClass = new DefaultClass(fighterClass);
+        manualStatsExampleClass.Variables.Level(1);
+        ManualStatsExample.Variables.Class(manualStatsExampleClass);
         
         ManualStatsExample.Stats = new DefaultEntityStatsVariables();
         ManualStatsExample.Stats.MaxHealth(100);
@@ -324,18 +260,16 @@
     };
 
         AutoStatsExample.NameLocaleId = "Frodo Baggins";
-        AutoStatsExample.CustomEffects = characterSpecificEffects;
-        AutoStatsExample.Race = hobbitRace;
-        AutoStatsExample.Class = new DefaultClass(1, fighterClass);
+        AutoStatsExample.Variables.Race(hobbitRace);
+        AutoStatsExample.Variables.Class(new DefaultClass(fighterClass));
 
         AutoStatsExample2.NameLocaleId = "Peregrin Took";
-        AutoStatsExample2.Race = hobbitRace;
-        AutoStatsExample2.Class = new DefaultClass(1, fighterClass);
-
+        AutoStatsExample.Variables.Race(hobbitRace);
+        AutoStatsExample.Variables.Class(new DefaultClass(fighterClass));
+        
         var statsCalculator = new FantasyStatsPopulator();
-
-        statsCalculator.Populate(AutoStatsExample.Stats, AutoStatsExample.Effects.ToArray(), null);
-        statsCalculator.Populate(AutoStatsExample2.Stats, AutoStatsExample2.Effects.ToArray(), null);
+        statsCalculator.Populate(AutoStatsExample.Stats, AutoStatsExample.GetEffects().ToArray(), null);
+        statsCalculator.Populate(AutoStatsExample2.Stats, AutoStatsExample.GetEffects().ToArray(), null);
     }
 
     protected override void OnInitialized()

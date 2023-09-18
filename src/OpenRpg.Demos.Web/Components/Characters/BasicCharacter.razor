@@ -1,9 +1,10 @@
 @using OpenRpg.Genres.Characters
+@using OpenRpg.Core.Extensions
 <CardSection>
     <div class="container">
         @if (Character != null)
         {
-            <CharacterDetails Name="@Character.NameLocaleId" RaceTemplate="@Character.Race" Class="@Character.Class" />
+            <CharacterDetails Name="@Character.NameLocaleId" RaceTemplate="@Character.Variables.Race()" Class="@Character.Variables.Class()" />
             <br/>
             <CharacterVitals Stats="@Character.Stats" State="@Character.State" />
             <br/>
@@ -12,11 +13,11 @@
             <div class="columns">
                 <div class="column has-text-centered">
                     <h4 class="subtitle mb-2 has-text-dark has-text-centered">Race Effects</h4>
-                    <EffectList Effects="@Character.Race.Effects.ToArray()" />
+                    <EffectList Effects="@Character.Variables.Race().Effects.ToArray()" />
                 </div>
                 <div class="column has-text-centered">
                     <h4 class="subtitle mb-2 has-text-dark">Class Effects</h4>
-                    <EffectList Effects="@Character.Class.ClassTemplate.Effects.ToArray()" />
+                    <EffectList Effects="@Character.Variables.Class().Template.Effects.ToArray()" />
                 </div>
             </div>
         }

@@ -23,13 +23,11 @@
             <li style="list-style: none;">
                 <span class="@(IsRequirementMet(requirement) ? "has-text-success" : "has-text-danger")">
                     @if (requirement.RequirementType == FantasyRequirementTypes.ClassRequirement)
-                    {<span>@(Repository.Get<IClassTemplate>(requirement.AssociatedId).NameLocaleId) Class Required</span>}
+                    {<span>Level @(requirement.AssociatedValue) @(Repository.Get<IClassTemplate>(requirement.AssociatedId).NameLocaleId) Class Required</span>}
                     else if (requirement.RequirementType == FantasyRequirementTypes.RaceRequirement)
                     {<span>@(Repository.Get<IRaceTemplate>(requirement.AssociatedId).NameLocaleId) Race Required</span>}
                     else if (requirement.RequirementType == FantasyRequirementTypes.StrengthRequirement)
                     {<span>@(requirement.AssociatedValue) Strength Required</span>}
-                    else if (requirement.RequirementType == FantasyRequirementTypes.LevelRequirement)
-                    {<span>Level @(requirement.AssociatedValue) Required</span>}
                     @* Lots of other checks would go here *@
                 </span>
             </li>

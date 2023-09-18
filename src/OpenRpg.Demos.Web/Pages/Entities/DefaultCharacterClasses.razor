@@ -1,9 +1,10 @@
-﻿@page "/characters/default-character"
+﻿@page "/entities/default-character"
 
 @using OpenRpg.Core.Races
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Core.Classes
+@using OpenRpg.Core.Extensions
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Populators.Entity.Stats
 @inject DemoCharacterBuilder CharacterBuilder;
@@ -152,8 +153,8 @@
     {
         _manualCharacter = new DefaultCharacter();
         _manualCharacter.NameLocaleId = "John Doe";
-        _manualCharacter.Race = new DefaultRaceTemplate { NameLocaleId = "Human"};
-        _manualCharacter.Class = new DefaultClass(3, new DefaultClassTemplate { NameLocaleId = "Fighter"});
+        _manualCharacter.Variables.Race(new DefaultRaceTemplate { NameLocaleId = "Human" });
+        _manualCharacter.Variables.Class(new DefaultClass(new DefaultClassTemplate { NameLocaleId = "Fighter"}));
 
         _manualCharacter.Stats.MaxHealth(100);
         _manualCharacter.State.Health(50);
