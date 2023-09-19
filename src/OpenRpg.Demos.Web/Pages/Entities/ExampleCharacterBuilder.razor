@@ -1,4 +1,4 @@
-﻿@page "/characters/builder"
+﻿@page "/entities/builder"
 
 @using RandomNameGenerator
 @using OpenRpg.Genres.Characters
@@ -154,7 +154,7 @@
     {
         var builder = CharacterBuilder.CreateNew()
             .WithRaceId(_raceId)
-            .WithClassId(_classId)
+            .WithClassId(_classId, 1)
             .WithName(_name);
 
         if (_genderId == 1)

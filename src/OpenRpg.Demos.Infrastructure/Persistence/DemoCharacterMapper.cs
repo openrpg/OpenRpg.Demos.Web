@@ -13,7 +13,7 @@ public class DemoCharacterMapper : CharacterMapper
 {
     public IRepository Repository { get; }
 
-    public DemoCharacterMapper(IItemMapper itemMapper, IClassMapper classMapper, IEquipmentMapper equipmentMapper, IInventoryMapper inventoryMapper, IRepository repository) : base(itemMapper, classMapper, equipmentMapper, inventoryMapper)
+    public DemoCharacterMapper(IItemMapper itemMapper, IClassMapper classMapper, IMultiClassMapper multiClassMapper, IEquipmentMapper equipmentMapper, IInventoryMapper inventoryMapper, IRepository repository) : base(itemMapper, classMapper, multiClassMapper, equipmentMapper, inventoryMapper)
     { Repository = repository; }
 
     public override IRaceTemplate GetRaceTemplateFor(int raceTemplateId)

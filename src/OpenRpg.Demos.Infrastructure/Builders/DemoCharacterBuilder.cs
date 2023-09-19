@@ -29,7 +29,7 @@ namespace OpenRpg.Demos.Infrastructure.Builders
             
             if (_raceId == 0) { _raceId = Randomizer.TakeRandomFrom(raceData).Id; }
             if (_classId == 0) { _classId = Randomizer.TakeRandomFrom(classData).Id; }
-            if (_genderId == 0) { _genderId = Randomizer.Random(1,2); }
+            if (_genderId == 0) { _genderId = (byte)Randomizer.Random(1,2); }
             if (_classLevels == 0) { _classLevels = Randomizer.Random(1,5); }
             if (string.IsNullOrEmpty(_name)) { _name = NameGenerator.Generate(_genderId == 1 ? Gender.Male : Gender.Female); }
         }

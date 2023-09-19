@@ -1,11 +1,12 @@
 @using OpenRpg.Core.Races
 @using OpenRpg.Core.Classes
+@using OpenRpg.Core.Extensions
 
 <div class="has-text-centered">
     <h2 class="title has-text-dark">@(Name ?? "Unnamed Person")</h2>
     @if(@Class != null)
     {
-    <h3 class="subtitle has-text-dark">@($"Level {Class?.Level.ToString() ?? "1"} {RaceTemplate?.NameLocaleId ?? "Unknown Race"} {Class?.ClassTemplate?.NameLocaleId ?? "Unknown Class"}")</h3>
+    <h3 class="subtitle has-text-dark">@($"Level {Class?.Variables.Level().ToString() ?? "1"} {RaceTemplate?.NameLocaleId ?? "Unknown Race"} {Class?.Template?.NameLocaleId ?? "Unknown Class"}")</h3>
     }
     @if(@Classes != null)
     {
@@ -14,7 +15,7 @@
         @foreach (var _class in @Classes)
          {
              <div class="column">
-                 <TagLabel Label="@($"Level {_class?.Level.ToString() ?? "1"}")" Content="@($"{_class?.ClassTemplate?.NameLocaleId ?? "Unknown Class"}")" Centered="true"></TagLabel>
+                 <TagLabel Label="@($"Level {_class?.Variables.Level().ToString() ?? "1"}")" Content="@($"{_class?.Template?.NameLocaleId ?? "Unknown Class"}")" Centered="true"></TagLabel>
              </div>
          }
         </div>
