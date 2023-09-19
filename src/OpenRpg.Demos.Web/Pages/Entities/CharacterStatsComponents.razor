@@ -10,6 +10,7 @@
 @using OpenRpg.Genres.Fantasy.Extensions
 @using OpenRpg.Genres.Fantasy.Stats
 @using OpenRpg.Genres.Fantasy.Types
+@using OpenRpg.Combat.Extensions
 
 <Markdown>
     ## Stats Components
@@ -135,11 +136,10 @@
 
             #### Building other characters
 
-            Now that we have re-usable races and classes lets just make a Pippin character too using only base stats from race and class,
-            you should notice that Frodo has a higher *wis* and *cha* than Pippin as well as higher *mdef*.
-
+            Now that we have re-usable races and classes lets just make a Pippin character too using only base stats from race and class.
+            
             As you can see it all works fine and if you were to have a database full of available races/classes you could quickly put together
-            many characters quickly.
+            many characters quickly, as well as adding custom variables which hold effects to give more variety to the created entities.
             
             > Its also worth noting here that the design may not be great, but in the real world you will probably be making UIs in Unity
             or unreal etc, so keep in mind this is just a barebones output to show how the view can be driven by the data.
@@ -188,6 +188,7 @@
 
 
 @code {
+        public const int CustomEffectsKey = 1000;
     private DefaultEntity ManualStatsExample = new DefaultEntity();
     private DefaultEntity AutoStatsExample = new DefaultEntity();
     private DefaultEntity AutoStatsExample2 = new DefaultEntity();
@@ -196,14 +197,11 @@
     {
         ManualStatsExample.NameLocaleId = "Frodo Baggins";
 
-        var hobbitRace = new DefaultRaceTemplate { NameLocaleId = "Hobbit" };
+        var hobbitRace = new DefaultRaceTemplate { Id = 1,  NameLocaleId = "Hobbit" };
         var fighterClass = new DefaultClassTemplate { Id = 1, NameLocaleId = "Fighter" };
         
         ManualStatsExample.Variables.Race(hobbitRace);
-
-        var manualStatsExampleClass = new DefaultClass(fighterClass);
-        manualStatsExampleClass.Variables.Level(1);
-        ManualStatsExample.Variables.Class(manualStatsExampleClass);
+        ManualStatsExample.Variables.Class(new DefaultClass(fighterClass));
         
         ManualStatsExample.Stats = new DefaultEntityStatsVariables();
         ManualStatsExample.Stats.MaxHealth(100);
@@ -227,45 +225,38 @@
     {
         var raceEffects = new[]
         {
-      new Effect {Potency = 8, EffectType = FantasyEffectTypes.StrengthBonusAmount},
-      new Effect {Potency = 11, EffectType = FantasyEffectTypes.DexterityBonusAmount},
-      new Effect {Potency = 12, EffectType = FantasyEffectTypes.IntelligenceBonusAmount},
-      new Effect {Potency = 12, EffectType = FantasyEffectTypes.WisdomBonusAmount},
-      new Effect {Potency = 12, EffectType = FantasyEffectTypes.CharismaBonusAmount},
-      new Effect {Potency = 6, EffectType = FantasyEffectTypes.DamageBonusAmount},
-      new Effect {Potency = 5, EffectType = FantasyEffectTypes.DefenseBonusAmount},
-      new Effect {Potency = 1, EffectType = FantasyEffectTypes.DarkDamageAmount},
-      new Effect {Potency = 5, EffectType = FantasyEffectTypes.DarkDefenseAmount},
-      new Effect {Potency = 50, EffectType = FantasyEffectTypes.HealthBonusAmount},
-      new Effect {Potency = 10, EffectType = FantasyEffectTypes.MagicBonusAmount}
-    };
+          new Effect {Potency = 8, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+          new Effect {Potency = 11, EffectType = FantasyEffectTypes.DexterityBonusAmount},
+          new Effect {Potency = 12, EffectType = FantasyEffectTypes.IntelligenceBonusAmount},
+          new Effect {Potency = 12, EffectType = FantasyEffectTypes.WisdomBonusAmount},
+          new Effect {Potency = 12, EffectType = FantasyEffectTypes.CharismaBonusAmount},
+          new Effect {Potency = 6, EffectType = FantasyEffectTypes.DamageBonusAmount},
+          new Effect {Potency = 5, EffectType = FantasyEffectTypes.DefenseBonusAmount},
+          new Effect {Potency = 1, EffectType = FantasyEffectTypes.DarkDamageAmount},
+          new Effect {Potency = 5, EffectType = FantasyEffectTypes.DarkDefenseAmount},
+          new Effect {Potency = 50, EffectType = FantasyEffectTypes.HealthBonusAmount},
+          new Effect {Potency = 10, EffectType = FantasyEffectTypes.MagicBonusAmount}
+        };
 
         var classEffects = new[]
         {
-      new Effect {Potency = 3, EffectType = FantasyEffectTypes.StrengthBonusAmount},
-      new Effect {Potency = 1, EffectType = FantasyEffectTypes.DexterityBonusAmount},
-      new Effect {Potency = 4, EffectType = FantasyEffectTypes.DamageBonusAmount},
-      new Effect {Potency = 3, EffectType = FantasyEffectTypes.DefenseBonusAmount},
-      new Effect {Potency = 50, EffectType = FantasyEffectTypes.HealthBonusAmount}
-    };
+          new Effect {Potency = 3, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+          new Effect {Potency = 1, EffectType = FantasyEffectTypes.DexterityBonusAmount},
+          new Effect {Potency = 4, EffectType = FantasyEffectTypes.DamageBonusAmount},
+          new Effect {Potency = 3, EffectType = FantasyEffectTypes.DefenseBonusAmount},
+          new Effect {Potency = 50, EffectType = FantasyEffectTypes.HealthBonusAmount}
+        };
 
         var hobbitRace = new DefaultRaceTemplate { NameLocaleId = "Hobbit", Effects = raceEffects };
         var fighterClass = new DefaultClassTemplate { NameLocaleId = "Fighter", Effects = classEffects };
-
-        var characterSpecificEffects = new[]
-        {
-      new Effect {Potency = 6, EffectType = FantasyEffectTypes.WisdomBonusAmount},
-      new Effect {Potency = 2, EffectType = FantasyEffectTypes.CharismaBonusAmount},
-      new Effect {Potency = 20, EffectType = FantasyEffectTypes.DarkDefenseAmount}
-    };
 
         AutoStatsExample.NameLocaleId = "Frodo Baggins";
         AutoStatsExample.Variables.Race(hobbitRace);
         AutoStatsExample.Variables.Class(new DefaultClass(fighterClass));
 
         AutoStatsExample2.NameLocaleId = "Peregrin Took";
-        AutoStatsExample.Variables.Race(hobbitRace);
-        AutoStatsExample.Variables.Class(new DefaultClass(fighterClass));
+        AutoStatsExample2.Variables.Race(hobbitRace);
+        AutoStatsExample2.Variables.Class(new DefaultClass(fighterClass));
         
         var statsCalculator = new FantasyStatsPopulator();
         statsCalculator.Populate(AutoStatsExample.Stats, AutoStatsExample.GetEffects().ToArray(), null);

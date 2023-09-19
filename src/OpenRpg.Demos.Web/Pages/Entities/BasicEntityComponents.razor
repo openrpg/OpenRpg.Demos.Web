@@ -74,7 +74,6 @@
           SimpleExample.Variables.Race(hobbitRace);
   
           var level1Fighter = new DefaultClass(fighterClass);
-          level1Fighter.Variables.Level(1);
           SimpleExample.Variables.Class(level1Fighter);
           ```
       </Markdown>
@@ -107,7 +106,6 @@
       multiClass.AddClass(level2Fighter);
 
       var level1Wraith = new DefaultClass(wraithClass);
-      level1Wraith.Variables.Level(1);
       multiClass.AddClass(level1Wraith);
 
       var level3RingBearer = new DefaultClass(ringBearerClass);
@@ -146,7 +144,6 @@
         SimpleExample.Variables.Race(hobbitRace);
 
         var level1Fighter = new DefaultClass(fighterClass);
-        level1Fighter.Variables.Level(1);
         SimpleExample.Variables.Class(level1Fighter);
 
         var wraithClass = new DefaultClassTemplate { Id = 2, NameLocaleId = "Wraith" };
@@ -161,7 +158,6 @@
         multiClass.AddClass(level2Fighter);
         
         var level1Wraith = new DefaultClass(wraithClass);
-        level1Wraith.Variables.Level(1);
         multiClass.AddClass(level1Wraith);
         
         var level3RingBearer = new DefaultClass(ringBearerClass);

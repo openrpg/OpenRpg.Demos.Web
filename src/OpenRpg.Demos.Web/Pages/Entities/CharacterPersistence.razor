@@ -3,6 +3,9 @@
 @using OpenRpg.Genres.Characters
 @using OpenRpg.Genres.Persistence.Characters
 @using Newtonsoft.Json
+@using Newtonsoft.Json.Linq
+@using OpenRpg.Core.Classes
+@using OpenRpg.Core.Types
 @using OpenRpg.Genres.Extensions
 @using OpenRpg.Genres.Populators.Entity.Stats
 @inject DemoCharacterBuilder CharacterBuilder;
@@ -129,7 +132,13 @@
 <Markdown>
     #### Persisting Other Things
     
-    Now we have covered characters we can also persist other things in isolation, like Items, Inventories etc.
+    Now we have covered characters we can also persist other things on the entity, like Equipment, Inventories etc.
+    
+    > One thing worth noting is that because we have extensible `object` fields on the `Variables` the serialization
+    > frameworks may not know how to deserialize the data. In this example we have told `JSON.NET` to keep the type
+    > information for any fields that are of type `object` so it knows how to deserialize them, but for maximum
+    > compatability and control you can work out what parts of a character you will want to persist and can put
+    > them into strongly typed structures rather than how it is done here.
     
     The same approach can be taken for anything, just take the runtime object, extract the State from it into a new 
     object and then write a mapper to rehydrate the data.
@@ -144,6 +153,11 @@
     
     protected override void OnInitialized()
     {
+        _jsonSettings = new JsonSerializerSettings()
+        {
+            TypeNameHandling = TypeNameHandling.Objects
+        };
+        
         RandomizeCharacter();
         ReloadCharacterFromData();
         
@@ -155,19 +169,18 @@
         _randomCharacter = CharacterBuilder.CreateNew().Build();
         StatPopulator.Populate(_randomCharacter.Stats, _randomCharacter.GetEffects().ToArray(), null);
         PersistCharacter();
-        StateHasChanged();
     }
     
     public void PersistCharacter()
     {
         var characterData = _randomCharacter.ToDataModel();
-        _persistedData = JsonConvert.SerializeObject(characterData, Formatting.Indented);
+        _persistedData = JsonConvert.SerializeObject(characterData, Formatting.Indented, _jsonSettings);
         StateHasChanged();
     }
 
     public void ReloadCharacterFromData()
     {
-        var data = JsonConvert.DeserializeObject<CharacterData>(_persistedData);
+        var data = JsonConvert.DeserializeObject<CharacterData>(_persistedData, _jsonSettings);
         _regeneratedCharacter = CharacterMapper.Map(data);
         StatPopulator.Populate(_regeneratedCharacter.Stats, _regeneratedCharacter.GetEffects().ToArray(), null);
         StateHasChanged();

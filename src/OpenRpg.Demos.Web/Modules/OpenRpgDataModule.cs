@@ -1,4 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
 using OpenRpg.Core.Classes;
 using OpenRpg.Core.Races;
 using OpenRpg.Data;
@@ -33,6 +32,7 @@ namespace OpenRpg.Demos.Web.Modules
             services.AddSingleton<IEquipmentMapper, FantasyEquipmentMapper>();
             services.AddSingleton<IInventoryMapper, InventoryMapper>();
             services.AddSingleton<IClassMapper, DemoClassMapper>();
+            services.AddSingleton<IMultiClassMapper, MultiClassMapper>();
             services.AddSingleton<ICharacterMapper, DemoCharacterMapper>();
             services.AddSingleton<DemoCharacterBuilder>();
         }
