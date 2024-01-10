@@ -1,18 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
+    <LangVersion>12</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
     <PackageReference Include="OpenRpg.Cards" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Core" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Data" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Data.InMemory" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.32.113" />
-    <PackageReference Include="OpenRpg.Items" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Localization" Version="0.31.233" />
+    <PackageReference Include="OpenRpg.Core" Version="0.31.235" />
+    <PackageReference Include="OpenRpg.Data" Version="0.31.235" />
+    <PackageReference Include="OpenRpg.Data.InMemory" Version="0.31.235" />
+    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.32.115" />
+    <PackageReference Include="OpenRpg.Items" Version="0.31.235" />
+    <PackageReference Include="OpenRpg.Localization" Version="0.31.235" />
     <PackageReference Include="RandomNameGenerator" Version="1.0.4" />
   </ItemGroup>
 
