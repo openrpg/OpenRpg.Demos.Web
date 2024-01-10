@@ -116,7 +116,7 @@
         var added = _inventory.AddItem(item);
         if (!added)
         {
-            var options = new { message = $"Can't Add {item.ItemTemplate.NameLocaleId}, Not enough slots", type = "is-danger", position = "center" };
+            var options = new { message = $"Can't Add {item.Template.NameLocaleId}, Not enough slots", type = "is-danger", position = "center" };
             await JSRuntime.InvokeVoidAsync("bulmaToast.toast", options);
         }
     }
@@ -133,7 +133,7 @@
     {
         return new DefaultItem
         {
-            ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.Sword)
+            Template = Repository.Get<IItemTemplate>(ItemTemplateLookups.Sword)
         };
     }
 
@@ -141,7 +141,7 @@
     {
         return new DefaultItem
         {
-            ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.SuperSword)
+            Template = Repository.Get<IItemTemplate>(ItemTemplateLookups.SuperSword)
         };
     }
 
@@ -149,7 +149,7 @@
     {
         var item = new DefaultItem
         {
-            ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.HealingPotion)
+            Template = Repository.Get<IItemTemplate>(ItemTemplateLookups.HealingPotion)
         };
 
         item.Variables.Amount(1);
@@ -160,7 +160,7 @@
     {
         var item = new DefaultItem
         {
-            ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.JunkPotion)
+            Template = Repository.Get<IItemTemplate>(ItemTemplateLookups.JunkPotion)
         };
 
         item.Variables.Amount(3);

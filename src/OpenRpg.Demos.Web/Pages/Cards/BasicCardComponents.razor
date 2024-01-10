@@ -120,13 +120,13 @@
         template.Variables.Value(10);
         template.Variables.AssetCode("sword");
 
-        var item = new DefaultItem { ItemTemplate = template };
+        var item = new DefaultItem { Template = template };
         return new EquipmentCard(item);
     }
 
     private IEnumerable<ICard> MakeExampleCards()
     {
-        var potion = new DefaultItem {ItemTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.HealingPotion)};
+        var potion = new DefaultItem {Template = Repository.Get<IItemTemplate>(ItemTemplateLookups.HealingPotion)};
         yield return new ItemCard(potion);
         yield return _rubbishSwordCard;
         yield return new ClassCard(Repository.Get<IClassTemplate>(ClassTypeLookups.Fighter));

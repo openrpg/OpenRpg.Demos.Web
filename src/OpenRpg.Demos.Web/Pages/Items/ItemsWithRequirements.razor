@@ -58,7 +58,7 @@
     So we have 2 bits of code running here, one is:
 
     ```csharp
-    var areRequirementsMet = RequirementsChecker.AreRequirementsMet(Character, Item.ItemTemplate);
+    var areRequirementsMet = RequirementsChecker.AreRequirementsMet(Character, Item.Template);
     ```
 
     This is an extension method that checks the item templates requirements against the character and if not met you get the red
@@ -137,7 +137,7 @@
 
         return new DefaultItem
         {
-            ItemTemplate = template
+            Template = template
         };
     }
 
@@ -167,7 +167,7 @@
 
         return new DefaultItem
         {
-            ItemTemplate = template,
+            Template = template,
             Modifications = new IModificationTemplate[0],
         };
     }
@@ -211,7 +211,7 @@
 
         return new DefaultItem
         {
-            ItemTemplate = template
+            Template = template
         };
     }
 
