@@ -1,12 +1,9 @@
-@using OpenRpg.Items
 @using OpenRpg.Items.Extensions
 @using OpenRpg.Items.Types
-@using OpenRpg.Genres.Fantasy.Requirements
-@using OpenRpg.Core.Variables
 @using OpenRpg.Demos.Infrastructure.Extensions
 @using OpenRpg.Genres.Characters
-@using OpenRpg.Genres.Requirements
-@using OpenRpg.Localization.Data.Repositories
+@using OpenRpg.Items.TradeSkills
+@using OpenRpg.Items.TradeSkills.Extensions
 
 <figure class="item-icon image is-64x64 item-border with-rounding item-quality-@(_itemQualityTypeId)">
     <img src="images/items/@(Item.Template.Variables.AssetCode()).png">
@@ -19,7 +16,7 @@
 @code {
 
     [Parameter]
-    public IItem Item { get; set; }
+    public TradeSkillItemEntry Item { get; set; }
 
     [Parameter]
     public ICharacter Character { get; set; }

@@ -7,16 +7,17 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-    <PackageReference Include="OpenRpg.Cards" Version="0.33.239" />
-    <PackageReference Include="OpenRpg.Core" Version="0.33.239" />
-    <PackageReference Include="OpenRpg.CurveFunctions" Version="0.33.239" />
-    <PackageReference Include="OpenRpg.Data" Version="0.33.239" />
-    <PackageReference Include="OpenRpg.Data.InMemory" Version="0.33.239" />
-    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.33.119" />
-    <PackageReference Include="OpenRpg.Items" Version="0.33.239" />
-    <PackageReference Include="OpenRpg.Localization" Version="0.33.239" />
-    <PackageReference Include="OpenRpg.Quests" Version="0.33.239" />
+    <PackageReference Include="OpenRpg.Cards" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Core" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.CurveFunctions" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Data" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Data.InMemory" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.33.129" />
+    <PackageReference Include="OpenRpg.Items" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Localization" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Quests" Version="0.33.248" />
     <PackageReference Include="RandomNameGenerator" Version="1.0.4" />
+    <PackageReference Include="System.Reactive" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
