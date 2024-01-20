@@ -6,6 +6,21 @@
 @ability-card-color: rgba(142, 68, 173,1.0);
 @spell-card-color: rgba(44, 62, 80,1.0);
 
+a[disabled] {
+    pointer-events: none;
+    cursor: default;
+}
+
+.has-disabled-border
+{
+    border: 2px solid #f00;
+}
+
+.has-enabled-border
+{
+    border: 2px solid #0f0;
+}
+
 .with-rounding
 {
     border-radius: 0.25em;
@@ -63,7 +78,7 @@ ul.menu-list li.has-text-light {
 }
 
 .item-quality-1 { border-color: #9d9d9d; }
-.item-quality-2 { border-color: #ffffff; }
+.item-quality-2 { border-color: #000000; }
 .item-quality-3 { border-color: #1eff00; }
 .item-quality-4 { border-color: #0070dd; }
 .item-quality-5 { border-color: #0070dd; }
@@ -75,7 +90,7 @@ ul.menu-list li.has-text-light {
 
 
 .title.item-quality-1 { color: #9d9d9d !important; }
-.title.item-quality-2 { color: #ffffff !important; }
+.title.item-quality-2 { color: #000000 !important; }
 .title.item-quality-3 { color: #1eff00 !important; }
 .title.item-quality-4 { color: #0070dd !important; }
 .title.item-quality-5 { color: #0070dd !important; }

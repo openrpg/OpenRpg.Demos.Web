@@ -138,7 +138,7 @@
         var potionTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.HealingPotion);
         return new DefaultItem
         {
-            ItemTemplate = potionTemplate,
+            Template = potionTemplate,
             Variables = new DefaultItemVariables()
         };
     }
@@ -148,7 +148,7 @@
         var potionTemplate = Repository.Get<IItemTemplate>(ItemTemplateLookups.Sword);
         return new DefaultItem
         {
-            ItemTemplate = potionTemplate,
+            Template = potionTemplate,
             Variables = new DefaultItemVariables()
         };
     }

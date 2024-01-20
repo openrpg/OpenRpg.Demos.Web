@@ -93,7 +93,7 @@
         var template = Repository.Get<IItemTemplate>(itemId);
         var item = new DefaultItem
         {
-            ItemTemplate = template,
+            Template = template,
             Variables = new DefaultItemVariables()
         };
         item.Variables.Amount(itemAmount);

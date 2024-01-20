@@ -81,26 +81,26 @@
     ```csharp
     var raceEffects = new[]
     {
-        new Effect {Potency = 8, EffectType = EffectTypes.StrengthBonusAmount},
-        new Effect {Potency = 11, EffectType = EffectTypes.DexterityBonusAmount},
-        new Effect {Potency = 12, EffectType = EffectTypes.IntelligenceBonusAmount},
-        new Effect {Potency = 12, EffectType = EffectTypes.WisdomBonusAmount},
-        new Effect {Potency = 12, EffectType = EffectTypes.CharismaBonusAmount},
-        new Effect {Potency = 6, EffectType = EffectTypes.DamageAmount},
-        new Effect {Potency = 5, EffectType = EffectTypes.DefenseAmount},
-        new Effect {Potency = 1, EffectType = EffectTypes.DarkDamageAmount},
-        new Effect {Potency = 5, EffectType = EffectTypes.DarkDefenseAmount},
-        new Effect {Potency = 50, EffectType = EffectTypes.HealthBonusAmount},
-        new Effect {Potency = 10, EffectType = EffectTypes.MagicBonusAmount}
+        new Effect {Potency = 8, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+        new Effect {Potency = 11, EffectType = FantasyEffectTypes.DexterityBonusAmount},
+        new Effect {Potency = 12, EffectType = FantasyEffectTypes.IntelligenceBonusAmount},
+        new Effect {Potency = 12, EffectType = FantasyEffectTypes.WisdomBonusAmount},
+        new Effect {Potency = 12, EffectType = FantasyEffectTypes.CharismaBonusAmount},
+        new Effect {Potency = 6, EffectType = FantasyEffectTypes.DamageAmount},
+        new Effect {Potency = 5, EffectType = FantasyEffectTypes.DefenseAmount},
+        new Effect {Potency = 1, EffectType = FantasyEffectTypes.DarkDamageAmount},
+        new Effect {Potency = 5, EffectType = FantasyEffectTypes.DarkDefenseAmount},
+        new Effect {Potency = 50, EffectType = FantasyEffectTypes.HealthBonusAmount},
+        new Effect {Potency = 10, EffectType = FantasyEffectTypes.MagicBonusAmount}
     };
 
     var classEffects = new[]
     {
-        new Effect {Potency = 3, EffectType = EffectTypes.StrengthBonusAmount},
-        new Effect {Potency = 1, EffectType = EffectTypes.DexterityBonusAmount},
-        new Effect {Potency = 50, EffectType = EffectTypes.HealthBonusAmount},
-        new Effect {Potency = 4, EffectType = EffectTypes.PureDamageAmount},
-        new Effect {Potency = 3, EffectType = EffectTypes.PureDefenseAmount}
+        new Effect {Potency = 3, EffectType = FantasyEffectTypes.StrengthBonusAmount},
+        new Effect {Potency = 1, EffectType = FantasyEffectTypes.DexterityBonusAmount},
+        new Effect {Potency = 50, EffectType = FantasyEffectTypes.HealthBonusAmount},
+        new Effect {Potency = 4, EffectType = FantasyEffectTypes.PureDamageAmount},
+        new Effect {Potency = 3, EffectType = FantasyEffectTypes.PureDefenseAmount}
     };
 
     var hobbitRace = new DefaultRaceTemplate { NameLocaleId = "Hobbit", Effects = raceEffects };

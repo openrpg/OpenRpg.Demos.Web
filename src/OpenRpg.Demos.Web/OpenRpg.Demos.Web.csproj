@@ -1,32 +1,34 @@
 <Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>12</LangVersion>
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Blazor-ApexCharts" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.10" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.10" PrivateAssets="all" />
+    <PackageReference Include="Blazor-ApexCharts" Version="2.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebView" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenRpg.AdviceEngine" Version="0.24.34" />
-    <PackageReference Include="OpenRpg.Cards" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.CurveFunctions" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Genres" Version="0.32.113" />
-    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.32.113" />
+    <PackageReference Include="OpenRpg.Cards" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.CurveFunctions" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Genres" Version="0.33.129" />
+    <PackageReference Include="OpenRpg.Genres.Fantasy" Version="0.33.129" />
     <PackageReference Include="RandomNameGenerator" Version="1.0.4" />
-    <PackageReference Include="System.Net.Http.Json" Version="7.0.1" />
+    <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="OpenRpg.Combat" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Core" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Data" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Items" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Localization" Version="0.31.233" />
-    <PackageReference Include="OpenRpg.Quests" Version="0.31.233" />
+    <PackageReference Include="OpenRpg.Combat" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Core" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Data" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Items" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Localization" Version="0.33.248" />
+    <PackageReference Include="OpenRpg.Quests" Version="0.33.248" />
   </ItemGroup>
 
   <ItemGroup>

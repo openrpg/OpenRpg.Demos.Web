@@ -14,6 +14,8 @@ using OpenRpg.Genres.Persistence.Items;
 using OpenRpg.Genres.Persistence.Items.Equipment;
 using OpenRpg.Genres.Persistence.Items.Inventory;
 using OpenRpg.Items.Templates;
+using OpenRpg.Items.TradeSkills.Crafting;
+using OpenRpg.Items.TradeSkills.Gathering;
 using OpenRpg.Localization.Data.DataSources;
 using OpenRpg.Localization.Data.Repositories;
 
@@ -39,10 +41,14 @@ namespace OpenRpg.Demos.Web.Modules
 
         public InMemoryDataSource GenerateDataSource()
         {
+            var itemTemplateGenerator = new ItemTemplateDataGenerator();
+            var itemTemplateList = itemTemplateGenerator.GenerateData().ToList();
             var data = new Dictionary<Type, Dictionary<object, object>>();
             data.Add(typeof(IRaceTemplate), new RaceTemplateDataGenerator().GenerateDictionary());
             data.Add(typeof(IClassTemplate), new ClassTemplateDataGenerator().GenerateDictionary());
-            data.Add(typeof(IItemTemplate), new ItemTemplateDataGenerator().GenerateDictionary());
+            data.Add(typeof(IItemTemplate), itemTemplateGenerator.GenerateDictionary());
+            data.Add(typeof(ItemGatheringTemplate), new GatheringTemplateDataGenerator(itemTemplateList).GenerateDictionary());
+            data.Add(typeof(ItemCraftingTemplate), new CraftingTemplateDataGenerator(itemTemplateList).GenerateDictionary());
             return new InMemoryDataSource(data);
         }
 
