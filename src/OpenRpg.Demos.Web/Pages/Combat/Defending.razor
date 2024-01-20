@@ -92,6 +92,26 @@
     so for example if someone has a `-1 Dark Defense` and they are hit with `1 Dark Damage` this 1 damage becomes 2 after defending because we
     need to account for the amplification of weaknesses. So the total damage done here should be `2 Dark Damage`
 </Markdown>
+<br />
+
+<Markdown>
+    ## Applying Damage
+    So we now know how to do an attack, and how to apply that attack to a target to work out how much damage the target 
+    would receive you also need to be able to apply all the damages to the target in question.
+    
+    On face value you may be thinking "this is really simple, why cant this all be done in the processor", but its actually
+    not that simple. I mean it could be, if you have a simple scenario, but what if you have a game where you have the notion
+    of shields which need to be depleted before you remove health, or you have a custom bit of code which means the main
+    player only takes 50% damage compared to NPCs etc.
+    
+    Now with this being said there is a quick "Just apply the damage to the target" helper method in the `OpenRpg.Genres`
+    library that lets you do `myEntity.State.ApplyDamageToTarget(theProcessedAttack);` which will simply take all the damages
+    contained within the processed attack and just apply it to the `Health` in the `State`.
+    
+    However if you need something more complicated you can just take the collection of `Damage` objects inside the 
+    processed attack and apply them to the health however you see fit.
+</Markdown>
+
 @code {
 
     public ICharacter _attackingCharacter, _defendingCharacter;

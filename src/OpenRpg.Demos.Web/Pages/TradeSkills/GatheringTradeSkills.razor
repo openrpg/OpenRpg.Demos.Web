@@ -141,6 +141,29 @@
     </div>
 </div>
 
+<Markdown>
+    ## How are the skill points working?
+    
+    This is completely open for you to handle however you want, but out the box we have the notion of a `TradeSkillCalculator`
+    which will basically take the current skill value and the target skill level. It then works out based off the configuration
+    provided if the current skill is in the ballpark to gain skill points from the action.
+    
+    There is also a `CanUseSkill` method which lets you provide the same values and indicate if you are proficient enough
+    to use the trade skill (be it gathering or crafting). This can be used instead of the explicit requirement, but if you
+    would rather not use explicit requirements you can just rely upon this method instead.
+    
+    > One thing to think about is some gathering/crafting stuff may be gated on other requirements too, so while it 
+    > may seem attractive to not use requirements and instead just use the `CanUseSkill` check, but that wont factor
+    > in any requirements, so its more flexible to just rely upon requirements.
+    
+    As with everything there is a separation between data and logic, so you can compose your gathering and crafting
+    logic however you want, and in some cases you may actually have multiple outputs per gathering, or you may end
+    up having more complex requirements which require you to have custom `Variables` on the trade skill, so keep that
+    in mind.
+
+</Markdown>
+<br />
+
 @code {
 
     public ItemGatheringTemplate CopperOreGatheringTemplate { get; set; }
